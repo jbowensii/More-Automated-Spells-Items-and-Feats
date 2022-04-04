@@ -1,0 +1,23 @@
+{
+    "name": "masif_0-1-0",
+    "title": "More Automated Spells Items and Feats",
+    "description": "A module containing the exported More Automated Spells Items and Feats compendium.",
+    "version": "0.1.0",
+    "library": "false",
+    "manifestPlusVersion": "0.1.0",
+    "minimumCoreVersion": "9",
+    "compatibleCoreVersion": "9",
+    "author": "jbowens #0415 (Discord)",
+    "packs": [
+        {
+            "type": "Item",
+            "label": "More Automated Spells Items and Feats",
+            "module": "masif_0-1-0",
+            "path": "packs/world-more-automated-spells-items-and-feats-1649102239992.db",
+            "name": "world-more-automated-spells-items-and-feats-1649102239992"
+        }
+    ],
+    "url": "https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git",
+    "manifest": "https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/download/0.1.0/module.json",
+    "download": "https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/download/0.1.0/module.zip"
+}
