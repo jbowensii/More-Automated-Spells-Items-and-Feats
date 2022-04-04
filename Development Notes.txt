@@ -1,0 +1,67 @@
+MacroPass Documentation:
+
+    On Use Macro:           on
+                            off
+
+    ItemMacro (workflow):   preItemRoll
+                            templatePlaced
+                            preambleComplete
+                            preItemRoll
+                            preSaves
+                            postSaves
+                            preDamageApplication
+                            preActiveEffects
+                            postActiveEffects
+
+
+
+                            postTargeting
+                            preAttack
+                            preCheckHits
+                            postAttack
+                            preSave
+                            postSave
+                            preDamage
+                            postDamage
+                            preDamageApplication
+                            preActiveEffects
+                            postActiveEffects
+                            All
+
+
+
+ERROR:
+Toll of the Dead? - check 
+Uncaught (in promise) Error: Sequencer | EffectManager | object must be instance of PlaceableObject or of type string
+
+
+This gives advantage to an attack if placed on a monster
+Guiding Bolt
+flags.midi-qol.grants.advantage.attack.all    Custom   1  
+
+
+
+
+
+Channel Divinity: x Turn Undead
+                  - Inspiring Smite
+                  x Peerless Athlete
+                  n Primal Strike
+                  n Primal Transform
+                  - Arcane Recovery
+                  x Step of the night
+                  x Vigilant Blessing
+                  x ASSIT ACTION - ADVANTAGE 1 attack
+                    Scorcery Points Usages
+                    Uncanny Dodge - check 
+                  x Virtrolic Sphere - check (moon beam like)
+
+NOTES:
+The data layout can be a bit confusing, the whole document piece is to facilitate the data base management and most of the time you can ignore it. The one case where it can bite you is when you do fromUuid(uuid) you get back the document version of the object. For tokens the tokens document class is TokenDocument, for actors and items it is Actor and Item - hence the special casing for token documents (sometimes).
+Foundry store lots of references from one thing to another to make navigation easy.
+
+So actor.items.getName("Longsword").parent will get you back to where you started.  It's generally not copies but references to the object and there is only one copy of the object. actor.data, item.data is the actual data for the object and actor.data._source is the information stored in the database. [Some of the data in the actor/item is always calculated when the actor/item is updated and never store in the data base]
+For the console _token refers to the currently selected token. So you can do _token.actor to look at the actor data, then navigate through _token.actor.data.data to get to what you want, so
+_token.actor.data.data.details.type will get the actor type field. 
+The labels are not a great thing to match on, since they are localised to the language the game is run in and hence can change.
+

@@ -1,0 +1,210 @@
+{
+  "name": "Maneuvers: Disarming Attack",
+  "type": "feat",
+  "img": "systems/dnd5e/icons/skills/red_13.jpg",
+  "data": {
+    "description": {
+      "value": "<h2><strong>USEAGE :</strong> <span style=\"color:#169179\">ACTIVATE AFTER ATTACK<br /></span></h2>\n<p>This Maneuver must be activated AFTER the character makes an attack and knows that a HIT was successful.  On a failed save, this item will put a marker on the target to remind the GM the actor has been disarmed, since there is no disarmed convenient effect .  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n<p> </p>\n<h2><strong>MANEUVER DESCRIPTION: </strong></h2>\n<p>When you hit a creature with a weapon attack, you can expend one superiority die to attempt to disarm the target, forcing it to drop one item of your choice that it’s holding. You add the superiority die to the attack’s damage roll, and the target must make a Strength saving throw. On a failed save, it drops the object you choose. The object lands at its feet.</p>",
+      "chat": "<p>When you hit a creature with a weapon attack, you can expend one superiority die to attempt to knock the target down. You add the superiority die to the attack’s damage roll, and if the target is Large or smaller, it must make a Strength saving throw. On a failed save, you knock the target @Compendium[dnd5e.rules.ZkXz0qdkNBkKE6tN]{prone}.</p><h3>Summary</h3>When you hit with a weapon attack, you can expend one superiority die to add the total to the damage roll, and if the target is Large or smaller, it must make a STR saving throw (DC +16). On failure, you knock the target @Compendium[dnd5e.rules.Prone]{prone}.",
+      "unidentified": ""
+    },
+    "source": "PHB [v1.0]",
+    "activation": {
+      "type": "special",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": "inst"
+    },
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "attribute",
+      "target": "resources.primary.value",
+      "amount": 1
+    },
+    "ability": "str",
+    "actionType": "save",
+    "attackBonus": "0",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "0 + @flags.dae.SuperiorityDie[Superiority]",
+          ""
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "str",
+      "dc": null,
+      "scaling": "str"
+    },
+    "requirements": "Fighter: Battlemaster",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "effects": [
+    {
+      "_id": "z6c1xhx4agrwbd3z",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "systems/dnd5e/icons/skills/weapon_04.jpg",
+      "label": "Maneuvers: Disarming Attack",
+      "origin": "Actor.67GUmdTadYmGXD8W.Item.uIJSbACjp9yNcSdf",
+      "transfer": false,
+      "flags": {
+        "core": {
+          "statusId": "Convenient Effect: Disarmed"
+        },
+        "dae": {
+          "stackable": "none",
+          "durationExpression": "",
+          "macroRepeat": "none",
+          "specialDuration": [],
+          "transfer": false
+        },
+        "ActiveAuras": {
+          "isAura": false,
+          "aura": "None",
+          "radius": null,
+          "alignment": "",
+          "type": "",
+          "ignoreSelf": false,
+          "height": false,
+          "hidden": false,
+          "displayTemp": false,
+          "hostile": false,
+          "onlyOnce": false
+        }
+      },
+      "tint": null,
+      "selectedKey": "data.cargo.crew"
+    }
+  ],
+  "flags": {
+    "ddbimporter": {
+      "id": "53570",
+      "entityTypeId": "222216831",
+      "componentId": 22,
+      "componentTypeId": 258900837,
+      "class": "Fighter",
+      "subclass": "Battle Master",
+      "importId": "ye6nz9f4x9n3v7lu",
+      "ignoreIcon": true,
+      "ignoreItemImport": true,
+      "retainResourceConsumption": true
+    },
+    "infusions": {
+      "infused": false
+    },
+    "obsidian": {
+      "source": {
+        "type": "class",
+        "text": "Fighter"
+      }
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "midi-qol": {
+      "effectActivation": false,
+      "onUseMacroName": ""
+    },
+    "midiProperties": {
+      "nodam": false,
+      "halfdam": false,
+      "fulldam": true,
+      "rollOther": false,
+      "critOther": false,
+      "concentration": false,
+      "magicdam": false,
+      "magiceffect": false,
+      "toggleEffect": false
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Maneuvers: Trip Attack",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        }
+      }
+    },
+    "favtab": {
+      "isFavorite": true
+    },
+    "scene-packer": {
+      "hash": "7b9791b6112136b29b4e8c994128cb2c291d9f0f",
+      "sourceId": "Item.5cSuGBzN19wZLwFK"
+    },
+    "core": {
+      "sourceId": "Item.bpSu08y0CydFPHEi"
+    },
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "9.255",
+      "systemVersion": "1.5.7"
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "name": "Maneuvers: Brace",
+  "type": "feat",
+  "img": "systems/dnd5e/icons/skills/yellow_37.jpg",
+  "data": {
+    "description": {
+      "value": "<h2><strong>USEAGE :</strong> <span style=\"color:#169179\">ACTIVATE BEFORE ATTACK<br /></span></h2>\n<p>This Maneuver must be activated BEFORE the character makes an attack.  This will setup any bonuses and effects on the TARGET character.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n<p> </p>\n<h2><strong>MANEUVER DESCRIPTION: </strong></h2>\n<p>When a creature you can see moves into the reach you have with the melee weapon you’re wielding, you can use your reaction to expend one superiority die and make one attack against the creature, using that weapon. If the attack hits, add the superiority die to the weapon’s damage roll.</p>",
+      "chat": "<p>When a creature you can see moves into the reach you have with the melee weapon you’re wielding, you can use your reaction to expend one superiority die and make one attack against the creature, using that weapon. If the attack hits, add the superiority die to the weapon’s damage roll.</p>",
+      "unidentified": ""
+    },
+    "source": "PHB [v1.0]",
+    "activation": {
+      "type": "reactionmanual",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "attribute",
+      "target": "resources.primary.value",
+      "amount": 1
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Fighter: Battlemaster",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": null
+  },
+  "effects": [
+    {
+      "_id": "wkpprdr3mk9xsqnb",
+      "changes": [
+        {
+          "key": "data.bonuses.mwak.damage",
+          "mode": 2,
+          "value": "@flags.dae.SuperiorityDie",
+          "priority": "20"
+        },
+        {
+          "key": "data.bonuses.rwak.damage",
+          "mode": 2,
+          "value": "@flags.dae.SuperiorityDie",
+          "priority": "20"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "rounds": 1,
+        "startTime": null
+      },
+      "icon": "systems/dnd5e/icons/skills/yellow_37.jpg",
+      "label": "Maneuvers: Brace",
+      "origin": "Actor.67GUmdTadYmGXD8W.Item.5iFlJVD10sudUgOQ",
+      "transfer": false,
+      "flags": {
+        "core": {
+          "statusId": ""
+        },
+        "dae": {
+          "stackable": "none",
+          "durationExpression": "",
+          "macroRepeat": "none",
+          "specialDuration": [
+            "1Attack:mwak",
+            "1Attack:rwak"
+          ],
+          "transfer": false
+        },
+        "ActiveAuras": {
+          "isAura": false,
+          "aura": "None",
+          "radius": null,
+          "alignment": "",
+          "type": "",
+          "ignoreSelf": false,
+          "height": false,
+          "hidden": false,
+          "displayTemp": false,
+          "hostile": false,
+          "onlyOnce": false
+        }
+      },
+      "tint": null,
+      "selectedKey": [
+        "data.bonuses.mwak.damage",
+        "data.bonuses.rwak.damage"
+      ]
+    }
+  ],
+  "flags": {
+    "ddbimporter": {
+      "id": "2439086",
+      "entityTypeId": "222216831",
+      "componentId": 1306902,
+      "componentTypeId": 258900837,
+      "class": "Fighter",
+      "subclass": "Battle Master",
+      "importId": "28pyz8r4w0vt0973"
+    },
+    "infusions": {
+      "infused": false
+    },
+    "obsidian": {
+      "source": {
+        "type": "class",
+        "text": "Fighter"
+      }
+    },
+    "scene-packer": {
+      "hash": "11c19c0a02f88f560fb903f7933bed67bb5ef17d",
+      "sourceId": "Item.xi3icVYvbWQIOaZw"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "midi-qol": {
+      "effectActivation": false
+    },
+    "midiProperties": {
+      "nodam": false,
+      "fulldam": false,
+      "halfdam": false,
+      "rollOther": false,
+      "critOther": false,
+      "magicdam": false,
+      "magiceffect": false,
+      "concentration": false,
+      "toggleEffect": false
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "favtab": {
+      "isFavorite": true
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Maneuvers: Brace",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        }
+      }
+    },
+    "core": {
+      "sourceId": "Item.BYW8Ciw9YoYj97zI"
+    },
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "9.255",
+      "systemVersion": "1.5.7"
+    }
+  }
+}
