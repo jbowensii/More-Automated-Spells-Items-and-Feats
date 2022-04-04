@@ -65,3 +65,6 @@ For the console _token refers to the currently selected token. So you can do _to
 _token.actor.data.data.details.type will get the actor type field. 
 The labels are not a great thing to match on, since they are localised to the language the game is run in and hence can change.
 
+GIT NOTES:
+- VIDEO: https://www.youtube.com/watch?v=raM_Z0e7ov8
+- 
