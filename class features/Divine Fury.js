@@ -1,8 +1,10 @@
 /*****
-Divine Fury | Auto Divine Fury
+Divine Fury | Auto Divine Fury  [there are two items to make this function]
+
+NOTE: I used Tom Posney's MIDI-QOL Sneak Attack / Auto Sneak Attack as a templete for this
 
 USEAGE : PASSIVE
-PLease place these two items on a Barbarian Zealot
+Please place these two items on a Barbarian Zealot
  
 MANEUVER DESCRIPTION:
 Starting when you choose this path at 3rd level, you can channel divine fury into your 

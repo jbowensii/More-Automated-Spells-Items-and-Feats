@@ -71,3 +71,15 @@ GIT NOTES:
 > git add .
 > git commit -a -m'comments here'
 > git push -u origin master
+
+
+SETTING UP ITEMS INFO DROPDOWN
+
+<details>
+<summary>More Details</summary>
+<p>&nbsp;</p>
+<p>version 0.5    March 30 2022 </p>
+<p>jbowens #0415 (Discord) </p>
+<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git </p>
+<p>&nbsp;</p>
+</details>
