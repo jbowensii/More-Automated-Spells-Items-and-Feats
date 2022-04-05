@@ -8,6 +8,8 @@ It does not do anything directly but is a helper effect to determine the Battle 
 MANEUVER DESCRIPTION:
 You learn maneuvers that are fueled by superiority dice. 
 Maneuvers enhance an attack in some way. You have 5d8 superiority dice per short rest.
+
+v0.6 March 25 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0] === "on") {

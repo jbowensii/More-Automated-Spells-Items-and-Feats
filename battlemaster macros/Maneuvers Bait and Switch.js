@@ -11,6 +11,8 @@ When you’re within 5 feet of a creature on your turn, you can expend one super
 provided you spend at least 5 feet of movement and the creature is willing and isn’t incapacitated. 
 This movement doesn’t provoke opportunity attacks.  Roll the superiority die. Until the start of your next turn, 
 you or the other creature (your choice) gains a bonus to AC equal to the number rolled.
+
+v0.7 March 26 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 // Activate on preActiveEffects

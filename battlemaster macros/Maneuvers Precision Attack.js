@@ -10,6 +10,8 @@ MANEUVER DESCRIPTION:
 When you make a weapon attack roll against a creature, you can expend one superiority die 
 to add it to the roll. You can use this maneuver before or after making the attack roll, 
 but before any effects of the attack are applied.
+
+v0.8 March 28 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
 

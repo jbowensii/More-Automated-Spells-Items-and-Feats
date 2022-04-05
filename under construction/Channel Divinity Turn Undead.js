@@ -1,21 +1,37 @@
 /*****
-    place 30' radius effect centered on ACTOR
-    Target all UNDEAD creatures in that radius
-    Setup save... Roll save...  
-    if Success: nothing happens
-    if Failure: Mark TURNED (CE)
-                duration: 1 min or until first damage done to the creature
-                if cleric level > 16 ... CR <= 4 DEAD else
-                  if cleric level > 13 ... CR <= 3 DEAD else
-                    if cleric level > 10 ... CR <= 2 DEAD else
-                      if cleric level > 7 ... CR <= 1 DEAD else
-                        if cleric level >4 ... CR <= 1/2 DEAD
+Cleric: Turn Undead
+
+USEAGE : ACTIVATE TO CHANNEL DIVINITY : TURN UNDEAD
+Click on this item to activate the turn undead.  
+Please remember to setup usage consumption in the itme itself.  
+ 
+MANEUVER DESCRIPTION:
+As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that 
+can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its 
+saving throw, it is turned for 1 minute or until it takes any damage.
+
+A turned creature must spend its turns trying to move as far away from you as it can, and it can’t 
+willingly move to a space within 30 feet of you. It also can’t take reactions. For its action, it 
+can use only the Dash action or try to escape from an effect that prevents it from moving. If there’s 
+nowhere to move, the creature can use the Dodge action.
+
+Starting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the 
+creature is instantly destroyed if its challenge rating is at or below a certain 
+threshold, as shown in the Destroy Undead algorithm below:
+
+if cleric level > 16 ... CR <= 4 DEAD else
+    if cleric level > 13 ... CR <= 3 DEAD else
+        if cleric level > 10 ... CR <= 2 DEAD else
+            if cleric level > 7 ... CR <= 1 DEAD else
+                if cleric level >4 ... CR <= 1/2 DEAD
+                        
+v0.5 March 30 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "preambleComplete") {
     let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     console.log ("MACRO TEST | STARTING TARGETS: %O",workflow.targets);
-    // I am stealing the activation condition as a string for the creature type I want to hit
+    // I am using the activation condition field on the item itself to store the creature type I want to hit
     const activationCondition = args[0].itemData.data.activation.condition.toLowerCase();
     for (let target of workflow.targets) {
         let creatureType = target.actor.data.data.details.type;
@@ -29,7 +45,7 @@ if (args[0].macroPass === "preambleComplete") {
     const pcActor = workflow.actor;
     console.log ("MACRO TEST | REMOVED ALL NON UNDEAD TARGETS: %O",workflow.targets);
 
-    // set CR to destory
+    // set CR to destory based on the algorithm above
     let crDestroy = 0.0;
     if (workflow.targets.size === 0) return;
     const actorClass = testClass(pcActor, "cleric", null, 1);
@@ -40,7 +56,7 @@ if (args[0].macroPass === "preambleComplete") {
                 else if (actorClass.levels > 7) crDestroy = 1;
                     else if (actorClass.levels > 4) crDestroy = 0.5;
     
-    // set HP = 0 for all targets of the CR or less
+    // set HP = 0 for all targets of the CR or less, remember to save the actor document 
     let target = null;
     for (target of workflow.targets) 
         if (target.document._actor.data._source.data.details.cr <= crDestroy) {

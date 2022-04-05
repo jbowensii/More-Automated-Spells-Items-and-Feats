@@ -11,6 +11,8 @@ MANEUVER DESCRIPTION:
 Immediately after you hit a creature with a melee attack on your turn, you can expend one superiority die 
 and then try to grapple the target as a bonus action (see the Player’s Handbook for rules on grappling). 
 Add the superiority die to your Strength (Athletics) check.
+
+v0.5 March 31 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "preSaves")  {

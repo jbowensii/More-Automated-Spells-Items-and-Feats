@@ -12,6 +12,8 @@ MANEUVER DESCRIPTION:
 When you make a melee weapon attack on your turn, you can expend one 
 superiority die to increase your reach for that attack by 5 feet. 
 If you hit, you add the superiority die to the attack’s damage roll.
+
+v0.4 March 31 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 // Activate on preActiveEffects

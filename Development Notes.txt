@@ -67,4 +67,7 @@ The labels are not a great thing to match on, since they are localised to the la
 
 GIT NOTES:
 - VIDEO: https://www.youtube.com/watch?v=raM_Z0e7ov8
-- 
+> git branch -M master
+> git add .
+> git commit -a -m'comments here'
+> git push -u origin master
