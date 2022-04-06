@@ -29,7 +29,6 @@ COMMON LOG TESTS
 
 
 ERROR:
-Toll of the Dead? - check 
 Uncaught (in promise) Error: Sequencer | EffectManager | object must be instance of PlaceableObject or of type string
 
 
@@ -40,19 +39,14 @@ flags.midi-qol.grants.advantage.attack.all    Custom   1
 
 
 
+Things I want to Automate
+  - Inspiring Smite
+  n Primal Strike
+  n Primal Transform
+  - Arcane Recovery
+  Scorcery Points Usages
+  Uncanny Dodge - check 
 
-Channel Divinity: x Turn Undead
-                  - Inspiring Smite
-                  x Peerless Athlete
-                  n Primal Strike
-                  n Primal Transform
-                  - Arcane Recovery
-                  x Step of the night
-                  x Vigilant Blessing
-                  x ASSIT ACTION - ADVANTAGE 1 attack
-                    Scorcery Points Usages
-                    Uncanny Dodge - check 
-                  x Virtrolic Sphere - check (moon beam like)
 
 NOTES:
 The data layout can be a bit confusing, the whole document piece is to facilitate the data base management and most of the time you can ignore it. The one case where it can bite you is when you do fromUuid(uuid) you get back the document version of the object. For tokens the tokens document class is TokenDocument, for actors and items it is Actor and Item - hence the special casing for token documents (sometimes).
@@ -66,6 +60,7 @@ The labels are not a great thing to match on, since they are localised to the la
 GIT NOTES:
 - VIDEO: https://www.youtube.com/watch?v=raM_Z0e7ov8
 > git branch -M master
+> git pull 
 > git add .
 > git commit -a -m'comments here'
 > git push -u origin master
