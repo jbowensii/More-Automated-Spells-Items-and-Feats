@@ -4,11 +4,11 @@
   "img": "systems/dnd5e/icons/items/inventory/dice.jpg",
   "data": {
     "description": {
-      "value": "<h2><strong>USEAGE :</strong> <span style=\"color:#169179\">PASSIVE<br /></span></h2>\n<p>This item must be on the character for Manuevers to function.  It does not do anything directly but is a helper effect to determine the Battle Master Hit Die (d8, d10, d12) based on level.</p>\n<p> </p>\n<h2><strong>MANEUVER DESCRIPTION: </strong></h2>\n<p>You learn maneuvers that are fueled by superiority dice. Maneuvers enhance an attack in some way. You have 5d8 superiority dice per short rest.</p>",
+      "value": "<p>You learn maneuvers that are fueled by superiority dice. Maneuvers enhance an attack in some way. You have 5d8 superiority dice per short rest.</p>\n<p> </p>\n<details>\n<summary><strong>USEAGE: </strong> <span style=\"color:#169179\">PASSIVE</span></summary>\n<p>This item must be on the character for Manuevers to function.  It does not do anything directly but is a helper effect to determine the Battle Master Hit Die (d8, d10, d12) based on level.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 March 15 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "You learn maneuvers that are fueled by superiority dice. Maneuvers enhance an attack in some way. You have 5d8 superiority dice per short rest.",
       "unidentified": ""
     },
-    "source": "PHB [v0.4]",
+    "source": "PHB p74",
     "activation": {
       "type": "",
       "cost": 0,
@@ -267,8 +267,8 @@
       "sorting": "l"
     },
     "scene-packer": {
-      "hash": "7a31cb6ded78cf6bdc1492bd93e9d6957e79d2c3",
-      "sourceId": "Item.u8BB6DnRUIPAdtxQ"
+      "hash": "4318a5ba46d261a2092cfaa7aa7253d9765a2bec",
+      "sourceId": "Item.TkgfmxIAo13fsCKt"
     },
     "core": {
       "sourceId": "Item.8gdA6c8j5GnkX33K"
@@ -282,7 +282,7 @@
           "author": "ldRsJ6Yp5qPydWA1",
           "img": "icons/svg/dice-target.svg",
           "scope": "global",
-          "command": "/*****\nFighter Battlemaster : Superiority Die\n\nUSEAGE : PASSIVE\nThis item must be on the character for Manuevers to function.  \nIt does not do anything directly but is a helper effect to determine the Battle Master Hit Die (d8, d10, d12) based on level.\n \nMANEUVER DESCRIPTION:\nYou learn maneuvers that are fueled by superiority dice. \nManeuvers enhance an attack in some way. You have 5d8 superiority dice per short rest.\n*****/\n\n\nconst pcActor = await fromUuid(args[args.length - 1].actorUuid);\nlet fighterLevel = testClass (pcActor, \"fighter\", \"Battle Master\", 3)?.levels ?? 0;\nif (!fighterLevel) return;\nif (args[0] === \"on\") {\n    let flagData;\n    if (fighterLevel > 17) flagData = \"1d12\";\n    else if (fighterLevel > 9) flagData = \"1d10\";\n    else if (fighterLevel > 0) flagData = \"1d8\";\n    pcActor.setFlag(\"dae\", \"SuperiorityDie\", flagData)    \n\n} else if (args[0] === \"off\") {\n    pcActor.unsetFlag(\"dae\", \"SuperiorityDie\");\n}\n\n// Test PC Class, Subclass and Class Level\n// RETURN the class object (TRUE) or null (FALSE)\nfunction testClass (testActor, className, subClassName, levels) {\n    let theClass = testActor.data.data.classes[className] ;\n    if (theClass) {\n        if ((levels > 0) && (theClass.levels >= levels)) {\n            if (subClassName === null || (theClass.subclass === subClassName)) {\n                return theClass;\n            }\n        }\n    }\n    return null;\n}",
+          "command": "/*****\nFighter Battlemaster : Superiority Die\n\nUSEAGE : PASSIVE\nThis item must be on the character for Manuevers to function.  \nIt does not do anything directly but is a helper effect to determine the Battle Master Hit Die (d8, d10, d12) based on level.\n \nMANEUVER DESCRIPTION:\nYou learn maneuvers that are fueled by superiority dice. \nManeuvers enhance an attack in some way. You have 5d8 superiority dice per short rest.\n\nv0.6 March 25 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0] === \"on\") {\n    const pcActor = await fromUuid(args[args.length - 1].actorUuid);\n    let fighterLevel = testClass (pcActor, \"fighter\", \"Battle Master\", 3)?.levels ?? 0;\n    if (!fighterLevel) {\n        ui.notifications.error(\"You are not a fighter battle master of at least 3rd level.\");\n        return;\n    }\n    let flagData;\n    if (fighterLevel > 17) flagData = \"+ 1d12\";\n    else if (fighterLevel > 9) flagData = \"+ 1d10\";\n    else if (fighterLevel > 0) flagData = \"+ 1d8\";\n    pcActor.setFlag(\"dae\", \"SuperiorityDie\", flagData)    \n\n} else if (args[0] === \"off\") {\n    pcActor.unsetFlag(\"dae\", \"SuperiorityDie\");\n}\n\n// Test PC Class, Subclass and Class Level\n// RETURN the class object (TRUE) or null (FALSE)\nfunction testClass (testActor, className, subClassName, levels) {\n    let theClass = testActor.data.data.classes[className] ;\n    if (theClass) {\n        if ((levels > 0) && (theClass.levels >= levels)) {\n            if (subClassName === null || (theClass.subclass === subClassName)) {\n                return theClass;\n            }\n        }\n    }\n    return null;\n}",
           "folder": null,
           "sort": 0,
           "permission": {
@@ -300,6 +300,7 @@
     },
     "favtab": {
       "isFavorite": true
-    }
+    },
+    "cf": null
   }
 }

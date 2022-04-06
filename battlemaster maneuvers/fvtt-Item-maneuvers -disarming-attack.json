@@ -4,11 +4,11 @@
   "img": "systems/dnd5e/icons/skills/red_13.jpg",
   "data": {
     "description": {
-      "value": "<h2><strong>USEAGE :</strong> <span style=\"color:#169179\">ACTIVATE AFTER ATTACK<br /></span></h2>\n<p>This Maneuver must be activated AFTER the character makes an attack and knows that a HIT was successful.  On a failed save, this item will put a marker on the target to remind the GM the actor has been disarmed, since there is no disarmed convenient effect .  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n<p> </p>\n<h2><strong>MANEUVER DESCRIPTION: </strong></h2>\n<p>When you hit a creature with a weapon attack, you can expend one superiority die to attempt to disarm the target, forcing it to drop one item of your choice that it’s holding. You add the superiority die to the attack’s damage roll, and the target must make a Strength saving throw. On a failed save, it drops the object you choose. The object lands at its feet.</p>",
+      "value": "<p>When you hit a creature with a weapon attack, you can expend one superiority die to attempt to disarm the target, forcing it to drop one item of your choice that it’s holding. You add the superiority die to the attack’s damage roll, and the target must make a Strength saving throw. On a failed save, it drops the object you choose. The object lands at its feet.</p>\n<p> </p>\n<details>\n<summary><strong>USEAGE: </strong><span style=\"color:#169179\">ACTIVATE AFTER ATTACK</span></summary>\n<p>This Maneuver must be activated AFTER the character makes an attack and knows that a HIT was successful.  On a failed save, this item will put a marker on the target to remind the GM the actor has been disarmed, since there is no disarmed convenient effect .  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 March 15 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "<p>When you hit a creature with a weapon attack, you can expend one superiority die to attempt to knock the target down. You add the superiority die to the attack’s damage roll, and if the target is Large or smaller, it must make a Strength saving throw. On a failed save, you knock the target @Compendium[dnd5e.rules.ZkXz0qdkNBkKE6tN]{prone}.</p><h3>Summary</h3>When you hit with a weapon attack, you can expend one superiority die to add the total to the damage roll, and if the target is Large or smaller, it must make a STR saving throw (DC +16). On failure, you knock the target @Compendium[dnd5e.rules.Prone]{prone}.",
       "unidentified": ""
     },
-    "source": "PHB [v1.0]",
+    "source": "PHB p74",
     "activation": {
       "type": "special",
       "cost": null,
@@ -36,7 +36,7 @@
     },
     "consume": {
       "type": "attribute",
-      "target": "resources.primary.value",
+      "target": "",
       "amount": 1
     },
     "ability": "str",
@@ -194,12 +194,13 @@
       "isFavorite": true
     },
     "scene-packer": {
-      "hash": "7b9791b6112136b29b4e8c994128cb2c291d9f0f",
-      "sourceId": "Item.5cSuGBzN19wZLwFK"
+      "hash": "e0fb50d5171dbf31e8e306c5f1a383d993f33e96",
+      "sourceId": "Item.oZ6kWR7PZOrrdwZX"
     },
     "core": {
       "sourceId": "Item.bpSu08y0CydFPHEi"
     },
+    "cf": null,
     "exportSource": {
       "world": "test",
       "system": "dnd5e",

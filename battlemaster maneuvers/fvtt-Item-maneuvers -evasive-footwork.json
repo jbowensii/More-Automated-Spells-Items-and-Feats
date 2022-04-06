@@ -4,11 +4,11 @@
   "img": "systems/dnd5e/icons/skills/shadow_11.jpg",
   "data": {
     "description": {
-      "value": "<h2><strong>USEAGE :</strong> <span style=\"color:#169179\">ACTIVATE ANYTIME</span></h2>\n<p>This is a utility Maneuver and can be used whenever your character can take an action.  This will setup any bonuses and effects on the TARGET actor.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n<p> </p>\n<h2><strong>MANEUVER DESCRIPTION: </strong></h2>\n<p>When you move, you can expend one superiority die, rolling the die and adding the number rolled to your <a class=\"tooltip-hover rule-tooltip\" href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/step-by-step-characters#ArmorClass\" data-tooltip-href=\"//www.dndbeyond.com/rules/57-tooltip?disable-webm=1&amp;disable-webm=1\">AC</a> until you stop moving.</p>",
+      "value": "<p>When you move, you can expend one superiority die, rolling the die and adding the number rolled to your <a class=\"tooltip-hover rule-tooltip\" href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/step-by-step-characters#ArmorClass\" data-tooltip-href=\"//www.dndbeyond.com/rules/57-tooltip?disable-webm=1&amp;disable-webm=1\">AC</a> until you stop moving.</p>\n<p> </p>\n<details>\n<summary><strong>USEAGE: </strong> <span style=\"color:#169179\">ACTIVATE ANYTIME</span></summary>\n<p>This is a utility Maneuver and can be used whenever your character can take an action.  This will setup any bonuses and effects on the TARGET actor.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 March 18 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "<p>When a creature you can see moves into the reach you have with the melee weapon you’re wielding, you can use your reaction to expend one superiority die and make one attack against the creature, using that weapon. If the attack hits, add the superiority die to the weapon’s damage roll.</p>",
       "unidentified": ""
     },
-    "source": "PHB [v1.0]",
+    "source": "PHB p74",
     "activation": {
       "type": "special",
       "cost": null,
@@ -36,7 +36,7 @@
     },
     "consume": {
       "type": "attribute",
-      "target": "resources.primary.value",
+      "target": "",
       "amount": 1
     },
     "ability": "",
@@ -134,8 +134,8 @@
       }
     },
     "scene-packer": {
-      "hash": "505295d026810dd5bde759a5ac9c7c24c514db3c",
-      "sourceId": "Item.3xZl6rsPFjdVlmsx"
+      "hash": "e9ce1b58d7a7a3c00df4c66bf7da0485c6369b25",
+      "sourceId": "Item.0Agsno0Youq8dQj7"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -200,6 +200,7 @@
     "core": {
       "sourceId": "Item.QCt9G1ryLky9enrK"
     },
+    "cf": null,
     "exportSource": {
       "world": "test",
       "system": "dnd5e",

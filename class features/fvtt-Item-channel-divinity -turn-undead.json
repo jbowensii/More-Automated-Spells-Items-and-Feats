@@ -1,0 +1,183 @@
+{
+  "name": "Channel Divinity: Turn Undead",
+  "type": "feat",
+  "img": "icons/magic/holy/barrier-shield-winged-blue.webp",
+  "data": {
+    "description": {
+      "value": "<p data-content-chunk-id=\"c555ff21-2d21-4512-af3e-64d83e2424c7\">As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage.</p>\n<p data-content-chunk-id=\"160cc2d8-290d-41a4-9d8b-2cad06f691cd\">A turned creature must spend its turns trying to move as far away from you as it can, and it can’t willingly move to a space within 30 feet of you. It also can’t take reactions. For its action, it can use only the <a class=\"tooltip-hover action-tooltip\" href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/combat#Dash\" data-tooltip-href=\"//www.dndbeyond.com/actions/4-tooltip?disable-webm=1&amp;disable-webm=1\">Dash</a> action or try to escape from an effect that prevents it from moving. If there’s nowhere to move, the creature can use the <a class=\"tooltip-hover action-tooltip\" href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/combat#Dodge\" data-tooltip-href=\"//www.dndbeyond.com/actions/6-tooltip?disable-webm=1&amp;disable-webm=1\">Dodge</a> action.</p>\n<p data-content-chunk-id=\"a9da483d-3673-4ec3-a835-25db85a1ab54\">Starting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the creature is instantly destroyed if its challenge rating is at or below a certain threshold, as shown in the Destroy Undead table.</p>\n<div class=\"table-overflow-wrapper\">\n<table class=\"table-compendium table--left-col2\" style=\"width:100%\" data-content-chunk-id=\"35a0a521-3137-432c-af7b-2dee8086cb32\"><caption id=\"DestroyUndeadTable\" class=\"compendium-hr heading-anchor\">Destroy Undead</caption>\n<thead>\n<tr>\n<th style=\"width:32.13%\">Cleric Level</th>\n<th style=\"width:67.87%\">Destroys Undead of CR...</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"width:32.13%\">5th</td>\n<td style=\"width:67.87%\">1/2 or lower</td>\n</tr>\n<tr>\n<td style=\"width:32.13%\">8th</td>\n<td style=\"width:67.87%\">1 or lower</td>\n</tr>\n<tr>\n<td style=\"width:32.13%\">11th</td>\n<td style=\"width:67.87%\">2 or lower</td>\n</tr>\n<tr>\n<td style=\"width:32.13%\">14th</td>\n<td style=\"width:67.87%\">3 or lower</td>\n</tr>\n<tr>\n<td style=\"width:32.13%\">17th</td>\n<td style=\"width:67.87%\">4 or lower</td>\n</tr>\n</tbody>\n</table>\n</div>\n<h3 id=\"DivineIntervention\" class=\"compendium-hr heading-anchor\" data-content-chunk-id=\"80ac5852-a984-4e93-a31d-5a0a61f7bf34\"></h3>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v0.8 April 4 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB p194",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": "undead"
+    },
+    "duration": {
+      "value": null,
+      "units": "inst"
+    },
+    "target": {
+      "value": 30,
+      "width": null,
+      "units": "ft",
+      "type": "creature"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "spec"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "attribute",
+      "target": "",
+      "amount": 1
+    },
+    "ability": "",
+    "actionType": "other",
+    "attackBonus": "0",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "wis",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Cleric",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "effects": [
+    {
+      "_id": "3adv1867dmy3nrmn",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": 60
+      },
+      "icon": "systems/dnd5e/icons/skills/yellow_19.jpg",
+      "label": "Channel Divinity: Turn Undead",
+      "origin": "Actor.4okcHmPmM1iBwyFs.Item.0Gd8ADfg2sOZyTyq",
+      "transfer": true,
+      "flags": {
+        "core": {
+          "statusId": ""
+        },
+        "dae": {
+          "stackable": "none",
+          "durationExpression": "",
+          "macroRepeat": "none",
+          "specialDuration": [],
+          "transfer": true
+        },
+        "ActiveAuras": {
+          "isAura": false,
+          "aura": "None",
+          "radius": null,
+          "alignment": "",
+          "type": "",
+          "ignoreSelf": false,
+          "height": false,
+          "hidden": false,
+          "displayTemp": false,
+          "hostile": false,
+          "onlyOnce": false
+        }
+      },
+      "tint": null
+    }
+  ],
+  "flags": {
+    "scene-packer": {
+      "hash": "8981ae4b8cec9cb279dc27e994a7a513190837ed",
+      "sourceId": "Item.rrThGAVfh4DuJyIN"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "midi-qol": {
+      "effectActivation": false,
+      "forceCEOff": false,
+      "onUseMacroName": "[all]ItemMacro"
+    },
+    "midiProperties": {
+      "nodam": false,
+      "fulldam": false,
+      "halfdam": false,
+      "rollOther": false,
+      "critOther": false,
+      "magicdam": false,
+      "magiceffect": false,
+      "concentration": false,
+      "toggleEffect": false
+    },
+    "core": {
+      "sourceId": "Item.r5SIR5IwtjxLYHvO"
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Channel Divinity: Turn Undead",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "/*****\nCleric: Turn Undead\n\nUSEAGE : ACTIVATE TO CHANNEL DIVINITY : TURN UNDEAD\nClick on this item to activate the turn undead.  \nPlease remember to setup usage consumption in the itme itself.  \n \nMANEUVER DESCRIPTION:\nAs an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that \ncan see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its \nsaving throw, it is turned for 1 minute or until it takes any damage.\n\nA turned creature must spend its turns trying to move as far away from you as it can, and it can’t \nwillingly move to a space within 30 feet of you. It also can’t take reactions. For its action, it \ncan use only the Dash action or try to escape from an effect that prevents it from moving. If there’s \nnowhere to move, the creature can use the Dodge action.\n\nStarting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the \ncreature is instantly destroyed if its challenge rating is at or below a certain \nthreshold, as shown in the Destroy Undead algorithm below:\n\nif cleric level > 16 ... CR <= 4 DEAD else\n    if cleric level > 13 ... CR <= 3 DEAD else\n        if cleric level > 10 ... CR <= 2 DEAD else\n            if cleric level > 7 ... CR <= 1 DEAD else\n                if cleric level >4 ... CR <= 1/2 DEAD\n                        \nv0.8 April 4 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"preambleComplete\") {\n    let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    console.log (\"MACRO TEST | STARTING TARGETS: %O\",workflow.targets);\n    // I am stealing the activation condition as a string for the creature type I want to hit\n    const activationCondition = args[0].itemData.data.activation.condition.toLowerCase();\n    for (let target of workflow.targets) {\n        let creatureType = target.actor.data.data.details.type;\n        if ((creatureType === null) || (creatureType === undefined))    // that is not a creature\n            workflow.targets.delete(target);\n        else if (!([creatureType.value.toLowerCase(), creatureType.subtype.toLowerCase()].includes(activationCondition.toLowerCase()))) {\n            console.log (\"MACRO TEST | REMOVE TARGET: %O %s\", target, creatureType);\n            workflow.targets.delete(target);\n        }\n        game.user.updateTokenTargets(Array.from(workflow.targets).map(t=>t.id));\n    }\n} else if (args[0].macroPass === \"postActiveEffects\") {\n    let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    const pcActor = workflow.actor;\n    console.log (\"MACRO TEST | REMOVED ALL NON UNDEAD TARGETS: %O\",workflow.targets);\n\n    // set CR to destory\n    let crDestroy = 0.0;\n    if (workflow.targets.size === 0) return;\n    const actorClass = testClass(pcActor, \"cleric\", null, 1);\n    if (!actorClass) return;\n    if (actorClass.levels > 16) crDestroy = 4;\n        else if (actorClass.levels > 13) crDestroy = 3;\n            else if (actorClass.levels > 10) crDestroy = 2;\n                else if (actorClass.levels > 7) crDestroy = 1;\n                    else if (actorClass.levels > 4) crDestroy = 0.5;\n    \n    // set HP = 0 for all targets of the CR or less\n    let target = null;\n    for (target of workflow.targets) \n        if (target.document._actor.data._source.data.details.cr <= crDestroy) {\n            console.log (\"MACRO TEST | DESTROY TARGET: %O %d\",target, target.document._actor.data._source.data.details.cr);\n            await target.actor.update({\"data.attributes.hp.value\": 0});\n        }\n} \n\n// Test PC Class, Subclass and Class Level, RETURN the class object or null\nfunction testClass (testActor, className, subClassName, levels) {\n    let theClass = testActor.data.data.classes[className] ;\n    if (theClass) {\n        if ((levels > 0) && (theClass.levels >= levels)) {\n            if (subClassName === null || (theClass.subclass === subClassName)) {\n                return theClass;\n            }\n        }\n    }\n    return null;\n}",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        }
+      }
+    },
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "9.255",
+      "systemVersion": "1.5.7"
+    },
+    "cf": null
+  }
+}

@@ -4,11 +4,11 @@
   "img": "systems/dnd5e/icons/skills/yellow_37.jpg",
   "data": {
     "description": {
-      "value": "<h2><strong>USEAGE :</strong> <span style=\"color:#169179\">ACTIVATE BEFORE ATTACK<br /></span></h2>\n<p>This Maneuver must be activated BEFORE the character makes an attack.  This will setup any bonuses and effects on the TARGET character.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.  After the first to hit, target the second Target and activate this Maneuver to apply the damage.  To Hit on the second target is manual.</p>\n<p> </p>\n<h2><strong>MANEUVER DESCRIPTION: </strong></h2>\n<p>When you hit a creature with a melee weapon attack, you can expend one superiority die to attempt to damage another creature with the same attack. Choose another creature within 5 feet of the original target and within your reach. If the original attack roll would hit the second creature, it takes damage equal to the number you roll on your superiority die. The damage is of the same type dealt by the original attack.</p>",
+      "value": "<p>When you hit a creature with a melee weapon attack, you can expend one superiority die to attempt to damage another creature with the same attack. Choose another creature within 5 feet of the original target and within your reach. If the original attack roll would hit the second creature, it takes damage equal to the number you roll on your superiority die. The damage is of the same type dealt by the original attack.</p>\n<p> </p>\n<details>\n<summary><strong>USEAGE: </strong> <span style=\"color:#169179\">ACTIVATE BEFORE ATTACK</span></summary>\n<p>This Maneuver must be activated BEFORE the character makes an attack.  This will setup any bonuses and effects on the TARGET character.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.  After the first to hit, target the second Target and activate this Maneuver to apply the damage.  To Hit on the second target is manual.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v0.8 March 23 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "<p>When a creature you can see moves into the reach you have with the melee weapon you’re wielding, you can use your reaction to expend one superiority die and make one attack against the creature, using that weapon. If the attack hits, add the superiority die to the weapon’s damage roll.</p>",
       "unidentified": ""
     },
-    "source": "PHB [v0.8]",
+    "source": "PHB p74",
     "activation": {
       "type": "special",
       "cost": null,
@@ -36,7 +36,7 @@
     },
     "consume": {
       "type": "attribute",
-      "target": "resources.primary.value",
+      "target": "",
       "amount": 1
     },
     "ability": "",
@@ -90,8 +90,8 @@
       }
     },
     "scene-packer": {
-      "hash": "aecc6e09e4b9f211fcb064e05adf3cb4e64d8e72",
-      "sourceId": "Item.577ykfpRcBNfwH25"
+      "hash": "c6f45f1516fe482c38d06fd238fc278a41514e9c",
+      "sourceId": "Item.urXGxhkDCTviMECs"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -156,6 +156,7 @@
     "core": {
       "sourceId": "Item.QCt9G1ryLky9enrK"
     },
+    "cf": null,
     "exportSource": {
       "world": "test",
       "system": "dnd5e",

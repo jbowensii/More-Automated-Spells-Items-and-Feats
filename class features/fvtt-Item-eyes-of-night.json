@@ -1,16 +1,16 @@
 {
-  "name": "Maneuvers: Maneuvering Attack",
+  "name": "Eyes of Night",
   "type": "feat",
-  "img": "systems/dnd5e/icons/skills/red_13.jpg",
+  "img": "systems/dnd5e/icons/skills/shadow_17.jpg",
   "data": {
     "description": {
-      "value": "<p>When you hit a creature with a weapon attack, you can expend one superiority die to maneuver one of your comrades into a more advantageous position. You add the superiority die to the attack’s damage roll, and you choose a friendly creature who can see or hear you. That creature can use its reaction to move up to half its speed without provoking opportunity attacks from the target of your attack.</p>\n<p> </p>\n<details>\n<summary><strong>USEAGE: </strong> <span style=\"color:#169179\">ACTIVATE AFTER ATTACK<br /></span></summary>\n<p>This Maneuver must be activated AFTER the character makes an attack and knows that a HIT was successful.  This will activate any bonuses, saves, effects and extra damage to the TARGET.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.  This provides half normal movement bonus so the target of the REACTION can move half thier movement manually without disrupting thier movement on their turn.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v0.8 March 19 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "chat": "<p>When a creature you can see moves into the reach you have with the melee weapon you’re wielding, you can use your reaction to expend one superiority die and make one attack against the creature, using that weapon. If the attack hits, add the superiority die to the weapon’s damage roll.</p>",
+      "value": "<p>You can see through the deepest gloom. You have darkvision out to a range of 300 feet. In that radius, you can see in dim light as if it were bright light and in darkness as if it were dim light. </p>\n<details>\n<summary>VERSION INFO</summary>\n<p>v0.5 April 2 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "As an action, you can share your 300 ft. @Compendium[dnd5e.rules.Darkvision]{darkvision} with up to +4 willing creatures you can see within 10 ft. of you, lasting for 1 hour. Once you share it, you can’t do so again until you finish a long rest, unless you expend a spell slot of any level to share it again.\n<details>\n  <summary>\n    More Details\n  </summary>\n  <p>\n    </p><p><em>1st-level Twilight Domain feature</em></p>\n<p>You can see through the deepest gloom. You have @Compendium[dnd5e.rules.10RNSKCH2hTja3DG]{darkvision} out to a range of 300 feet. In that radius, you can see in dim light as if it were bright light and in darkness as if it were dim light.</p>\n<p>As an action, you can magically share the @Compendium[dnd5e.rules.10RNSKCH2hTja3DG]{darkvision} of this feature with willing creatures you can see within 10 feet of you, up to a number of creatures equal to your Wisdom modifier (minimum of one creature). The shared @Compendium[dnd5e.rules.10RNSKCH2hTja3DG]{darkvision} lasts for 1 hour. Once you share it, you can’t do so again until you finish a long rest, unless you expend a spell slot of any level to share it again.</p>\n  <p></p>\n</details>",
       "unidentified": ""
     },
-    "source": "PHB p74",
+    "source": "TCoE p34",
     "activation": {
-      "type": "special",
+      "type": "none",
       "cost": null,
       "condition": ""
     },
@@ -22,12 +22,12 @@
       "value": null,
       "width": null,
       "units": "",
-      "type": "creature"
+      "type": "self"
     },
     "range": {
       "value": null,
       "long": null,
-      "units": ""
+      "units": "ft"
     },
     "uses": {
       "value": null,
@@ -35,9 +35,9 @@
       "per": ""
     },
     "consume": {
-      "type": "attribute",
+      "type": "",
       "target": "",
-      "amount": 1
+      "amount": null
     },
     "ability": "",
     "actionType": "",
@@ -57,7 +57,7 @@
       "dc": null,
       "scaling": "spell"
     },
-    "requirements": "Fighter: Battlemaster",
+    "requirements": "Cleric Twilight Domain",
     "recharge": {
       "value": null,
       "charged": false
@@ -66,24 +66,23 @@
   },
   "effects": [
     {
-      "_id": "51gy6rzi5b0s0bws",
+      "_id": "WysKNsnpbFv2ZWLB",
       "changes": [
         {
-          "key": "data.attributes.movement.walk",
-          "mode": 1,
-          "value": "1.5",
-          "priority": "20"
+          "key": "ATL.dimSight",
+          "mode": 2,
+          "value": "300",
+          "priority": "40"
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null,
-        "turns": 1
+        "startTime": null
       },
-      "icon": "systems/dnd5e/icons/skills/armor_01.jpg",
-      "label": "Maneuvers: Maneuvering Attack",
-      "origin": "Actor.67GUmdTadYmGXD8W.Item.hkchEm8jxUTaR2Ng",
-      "transfer": false,
+      "icon": "systems/dnd5e/icons/skills/shadow_17.jpg",
+      "label": "Eyes of Night",
+      "origin": "Item.BsbEEhiIUMijPdYz",
+      "transfer": true,
       "flags": {
         "core": {
           "statusId": ""
@@ -93,7 +92,7 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [],
-          "transfer": false
+          "transfer": true
         },
         "ActiveAuras": {
           "isAura": false,
@@ -110,18 +109,28 @@
         }
       },
       "tint": null,
-      "selectedKey": "data.attributes.movement.walk"
+      "selectedKey": "ATL.dimSight"
     }
   ],
   "flags": {
     "ddbimporter": {
-      "id": "2439086",
+      "id": "2409717",
       "entityTypeId": "222216831",
-      "componentId": 1306902,
-      "componentTypeId": 258900837,
-      "class": "Fighter",
-      "subclass": "Battle Master",
-      "importId": "28pyz8r4w0vt0973"
+      "componentId": 2996540,
+      "componentTypeId": 12168134,
+      "class": "Cleric",
+      "subclass": "Twilight Domain",
+      "dndbeyond": {
+        "levelScale": null,
+        "levelScales": [],
+        "limitedUse": [
+          {
+            "level": null,
+            "uses": 1
+          }
+        ]
+      },
+      "importId": "iyl0evwnfwrvm9lh"
     },
     "infusions": {
       "infused": false
@@ -129,12 +138,12 @@
     "obsidian": {
       "source": {
         "type": "class",
-        "text": "Fighter"
+        "text": "Cleric"
       }
     },
     "scene-packer": {
-      "hash": "19dcf6a3b8ec8dbeccffa242cc1b49eb4e531a9e",
-      "sourceId": "Item.KjTLhybpukJ2crTS"
+      "hash": "d415c4a3a1dbb0bb0aefa7968a3ea4ef097b55ed",
+      "sourceId": "Item.PCAu9fa2ZxyDpBxZ"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -174,14 +183,11 @@
       "rechargeUnit": "r1",
       "sorting": "l"
     },
-    "favtab": {
-      "isFavorite": true
-    },
     "itemacro": {
       "macro": {
         "data": {
           "_id": null,
-          "name": "Maneuvers: Brace",
+          "name": "Eyes of Night",
           "type": "script",
           "author": "ldRsJ6Yp5qPydWA1",
           "img": "icons/svg/dice-target.svg",
@@ -197,7 +203,7 @@
       }
     },
     "core": {
-      "sourceId": "Item.QCt9G1ryLky9enrK"
+      "sourceId": "Item.BsbEEhiIUMijPdYz"
     },
     "cf": null,
     "exportSource": {

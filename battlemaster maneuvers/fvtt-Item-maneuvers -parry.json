@@ -4,11 +4,11 @@
   "img": "systems/dnd5e/icons/skills/blue_10.jpg",
   "data": {
     "description": {
-      "value": "<p>When another creature damages you with a melee attack, you can use your reaction and expend one superiority die to reduce the damage by the number you roll on your superiority die + your Dexterity modifier.</p><h3>Summary</h3>When another creature damages you with a melee attack, you can use your reaction and expend one superiority die to reduce the damage by the number you roll on your superiority die +2.",
+      "value": "<p>When another creature damages you with a melee attack, you can use your reaction and expend one superiority die to reduce the damage by the number you roll on your superiority die + your Dexterity modifier.</p>\n<p> </p>\n<details>\n<summary><strong>USEAGE: </strong> <span style=\"color:#169179\">AUTOMATED</span></summary>\n<p>This is a automated Maneuver, place it on the character sheet and it will come up in the MIDI-QOL reaction workflow without manual activation.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 March 19 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "<p>When another creature damages you with a melee attack, you can use your reaction and expend one superiority die to reduce the damage by the number you roll on your superiority die + your Dexterity modifier.</p><h3>Summary</h3>When another creature damages you with a melee attack, you can use your reaction and expend one superiority die to reduce the damage by the number you roll on your superiority die +2.",
       "unidentified": ""
     },
-    "source": "PHB [v1.0]",
+    "source": "PHB p74",
     "activation": {
       "type": "reactiondamage",
       "cost": 1,
@@ -36,7 +36,7 @@
     },
     "consume": {
       "type": "attribute",
-      "target": "resources.primary.value",
+      "target": "",
       "amount": 1
     },
     "ability": "",
@@ -198,8 +198,8 @@
       }
     },
     "scene-packer": {
-      "hash": "77372699a9914ccbd819a36648c8ea52f9c6a60e",
-      "sourceId": "Item.P9HUkDlIlVJxYPUb"
+      "hash": "3e659331907d6029f32c75a29614708be4111080",
+      "sourceId": "Item.4FlohGjVZrvP5pM9"
     },
     "core": {
       "sourceId": "Item.7129rM93Fl9drjmu"
@@ -209,6 +209,7 @@
       "system": "dnd5e",
       "coreVersion": "9.255",
       "systemVersion": "1.5.7"
-    }
+    },
+    "cf": null
   }
 }

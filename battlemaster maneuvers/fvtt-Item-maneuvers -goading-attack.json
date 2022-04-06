@@ -4,11 +4,11 @@
   "img": "systems/dnd5e/icons/skills/red_13.jpg",
   "data": {
     "description": {
-      "value": "<h2><strong>USEAGE :</strong> <span style=\"color:#169179\">ACTIVATE AFTER ATTACK<br /></span></h2>\n<p>This Maneuver must be activated AFTER the character makes an attack and knows that a HIT was successful.  This will activate any bonuses, saves, effects and extra damage to the TARGET.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.  If the target fails the WIS save, an empty effect will be placed on the TARGET.  This effect is to remind the GM that attacks against all but the goading actor are at disadvantage.  </p>\n<p> </p>\n<h2><strong>MANEUVER DESCRIPTION: </strong></h2>\n<p>When you hit a creature with a weapon attack, you can expend one superiority die to attempt to goad the target into attacking you. You add the superiority die to the attack’s damage roll, and the target must make a Wisdom saving throw. On a failed save, the target has <a class=\"tooltip-hover rule-tooltip\" href=\"https://www.dndbeyond.com/sources/basic-rules/using-ability-scores#AdvantageandDisadvantage\" data-tooltip-href=\"//www.dndbeyond.com/rules/98-tooltip?disable-webm=1&amp;disable-webm=1\">disadvantage</a> on all attack rolls against targets other than you until the end of your next turn.</p>",
+      "value": "<p>When you hit a creature with a weapon attack, you can expend one superiority die to attempt to goad the target into attacking you. You add the superiority die to the attack’s damage roll, and the target must make a Wisdom saving throw. On a failed save, the target has <a class=\"tooltip-hover rule-tooltip\" href=\"https://www.dndbeyond.com/sources/basic-rules/using-ability-scores#AdvantageandDisadvantage\" data-tooltip-href=\"//www.dndbeyond.com/rules/98-tooltip?disable-webm=1&amp;disable-webm=1\">disadvantage</a> on all attack rolls against targets other than you until the end of your next turn.</p>\n<p> </p>\n<details>\n<summary><strong>USEAGE: </strong><span style=\"color:#169179\">ACTIVATE AFTER ATTACK</span></summary>\n<p>*** This Maneuver is incomplete ***</p>\n<p>This Maneuver must be activated AFTER the character makes an attack and knows that a HIT was successful.  This will activate any bonuses, saves, effects and extra damage to the TARGET.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.  If the target fails the WIS save, an empty effect will be placed on the TARGET.  This effect is to remind the GM that attacks against all but the goading actor are at disadvantage. </p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v0.1 March 18 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "<p>When you hit a creature with a weapon attack, you can expend one superiority die to attempt to knock the target down. You add the superiority die to the attack’s damage roll, and if the target is Large or smaller, it must make a Strength saving throw. On a failed save, you knock the target @Compendium[dnd5e.rules.ZkXz0qdkNBkKE6tN]{prone}.</p><h3>Summary</h3>When you hit with a weapon attack, you can expend one superiority die to add the total to the damage roll, and if the target is Large or smaller, it must make a STR saving throw (DC +16). On failure, you knock the target @Compendium[dnd5e.rules.Prone]{prone}.",
       "unidentified": ""
     },
-    "source": "PHB [v1.0]",
+    "source": "PHB p74",
     "activation": {
       "type": "special",
       "cost": null,
@@ -36,7 +36,7 @@
     },
     "consume": {
       "type": "attribute",
-      "target": "resources.primary.value",
+      "target": "",
       "amount": 1
     },
     "ability": "str",
@@ -195,12 +195,13 @@
       "isFavorite": true
     },
     "scene-packer": {
-      "hash": "ec8913fb10aa50458a93abbaf1e0a52e89c81c62",
-      "sourceId": "Item.lJ5VHEdKbeDmnAB0"
+      "hash": "f45d6542904911ee119f7a5b6ba9147d2b271496",
+      "sourceId": "Item.KCv8UzHzTw6Fr6Nu"
     },
     "core": {
       "sourceId": "Item.bpSu08y0CydFPHEi"
     },
+    "cf": null,
     "exportSource": {
       "world": "test",
       "system": "dnd5e",

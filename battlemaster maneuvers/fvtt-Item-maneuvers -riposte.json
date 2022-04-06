@@ -4,11 +4,11 @@
   "img": "systems/dnd5e/icons/skills/yellow_37.jpg",
   "data": {
     "description": {
-      "value": "<h2><strong>USEAGE :</strong> <span style=\"color:#169179\">ACTIVATE BEFORE ATTACK<br /></span></h2>\n<p>This Maneuver must be activated BEFORE the character makes an attack.  This will setup any bonuses and effects on the TARGET character.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n<p> </p>\n<h2><strong>MANEUVER DESCRIPTION: </strong></h2>\n<p>When a creature misses you with a melee attack, you can use your reaction and expend one superiority die to make a melee weapon attack against the creature. If you hit, you add the superiority die to the attack’s damage roll.</p>\n<p> </p>\n<p> </p>",
+      "value": "<p>When a creature misses you with a melee attack, you can use your reaction and expend one superiority die to make a melee weapon attack against the creature. If you hit, you add the superiority die to the attack’s damage roll.</p>\n<p> </p>\n<details>\n<summary><strong>USEAGE: </strong> <span style=\"color:#169179\">ACTIVATE BEFORE ATTACK</span></summary>\n<p>This Maneuver must be activated BEFORE the character makes an attack.  This will setup any bonuses and effects on the TARGET character.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 March 22 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "When a creature misses you with a melee attack, you can use your reaction and expend one superiority die to make a melee weapon attack against it (add the superiority die to the attack’s damage roll on hit).\n<details>\n  <summary>\n    More Details\n  </summary>\n  <p>\n    </p><p>When a creature misses you with a melee attack, you can use your reaction and expend one superiority die to make a melee weapon attack against the creature. If you hit, you add the superiority die to the attack’s damage roll.</p>\n  <p></p>\n</details>",
       "unidentified": ""
     },
-    "source": "PHB [v1.0]",
+    "source": "PHB p74",
     "activation": {
       "type": "reactionmanual",
       "cost": 1,
@@ -36,7 +36,7 @@
     },
     "consume": {
       "type": "attribute",
-      "target": "resources.primary.value",
+      "target": "",
       "amount": 1
     },
     "ability": "",
@@ -145,8 +145,8 @@
       }
     },
     "scene-packer": {
-      "hash": "76dfd0b8e1673c778db3335ef8a3aaf2ce8598d3",
-      "sourceId": "Item.UrXD4OA2iFIxpYjL"
+      "hash": "52101b20b23ac37624201c421d204b0cca54c841",
+      "sourceId": "Item.kS8XpfRhbrLJe7Vq"
     },
     "favtab": {
       "isFavorite": true
@@ -212,6 +212,7 @@
     "core": {
       "sourceId": "Item.UEksWqqwtvXm3oXs"
     },
+    "cf": null,
     "exportSource": {
       "world": "test",
       "system": "dnd5e",

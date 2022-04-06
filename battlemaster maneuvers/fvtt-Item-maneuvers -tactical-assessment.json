@@ -4,11 +4,11 @@
   "img": "systems/dnd5e/icons/skills/shadow_11.jpg",
   "data": {
     "description": {
-      "value": "<h2><strong>USEAGE :</strong> <span style=\"color:#169179\">ACTIVATE ANYTIME</span></h2>\n<p>This is a utility Maneuver and can be used whenever your character can take an action.  This will setup any bonuses and effects on the TARGET actor.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n<p> </p>\n<h2><strong>MANEUVER DESCRIPTION: </strong></h2>\n<p>When you make an Intelligence (<a class=\"tooltip-hover skill-tooltip\" href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/using-ability-scores#Investigation\" data-tooltip-href=\"//www.dndbeyond.com/skills/8-tooltip?disable-webm=1&amp;disable-webm=1\">Investigation</a>), an Intelligence (<a class=\"tooltip-hover skill-tooltip\" href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/using-ability-scores#History\" data-tooltip-href=\"//www.dndbeyond.com/skills/7-tooltip?disable-webm=1&amp;disable-webm=1\">History</a>), or a Wisdom (<a class=\"tooltip-hover skill-tooltip\" href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/using-ability-scores#Insight\" data-tooltip-href=\"//www.dndbeyond.com/skills/12-tooltip?disable-webm=1&amp;disable-webm=1\">Insight</a>) check, you can expend one superiority die and add the superiority die to the ability check.</p>",
+      "value": "<p>When you make an Intelligence (<a class=\"tooltip-hover skill-tooltip\" href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/using-ability-scores#Investigation\" data-tooltip-href=\"//www.dndbeyond.com/skills/8-tooltip?disable-webm=1&amp;disable-webm=1\">Investigation</a>), an Intelligence (<a class=\"tooltip-hover skill-tooltip\" href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/using-ability-scores#History\" data-tooltip-href=\"//www.dndbeyond.com/skills/7-tooltip?disable-webm=1&amp;disable-webm=1\">History</a>), or a Wisdom (<a class=\"tooltip-hover skill-tooltip\" href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/using-ability-scores#Insight\" data-tooltip-href=\"//www.dndbeyond.com/skills/12-tooltip?disable-webm=1&amp;disable-webm=1\">Insight</a>) check, you can expend one superiority die and add the superiority die to the ability check.</p>\n<p> </p>\n<details>\n<summary><strong>USEAGE: </strong> <span style=\"color:#169179\">ACTIVATE ANYTIME</span></summary>\n<p>This is a utility Maneuver and can be used whenever your character can take an action.  This will setup any bonuses and effects on the TARGET actor.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 March 28 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "<p>When a creature you can see moves into the reach you have with the melee weapon you’re wielding, you can use your reaction to expend one superiority die and make one attack against the creature, using that weapon. If the attack hits, add the superiority die to the weapon’s damage roll.</p>",
       "unidentified": ""
     },
-    "source": "TCoE [v1.0]",
+    "source": "TCoE p42",
     "activation": {
       "type": "special",
       "cost": null,
@@ -36,7 +36,7 @@
     },
     "consume": {
       "type": "attribute",
-      "target": "resources.primary.value",
+      "target": "",
       "amount": 1
     },
     "ability": "",
@@ -152,8 +152,8 @@
       }
     },
     "scene-packer": {
-      "hash": "1124feb835ad8c32a878cab9fe1083c0e5428c9b",
-      "sourceId": "Item.WCvb5EWWco7xXi0V"
+      "hash": "d9077e25366c8917f0c7c72758637f925dc34c6c",
+      "sourceId": "Item.K437hwJSCu74dkwg"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -218,6 +218,7 @@
     "core": {
       "sourceId": "Item.QCt9G1ryLky9enrK"
     },
+    "cf": null,
     "exportSource": {
       "world": "test",
       "system": "dnd5e",

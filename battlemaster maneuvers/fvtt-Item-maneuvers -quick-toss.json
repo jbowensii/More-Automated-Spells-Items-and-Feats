@@ -4,11 +4,11 @@
   "img": "systems/dnd5e/icons/skills/yellow_37.jpg",
   "data": {
     "description": {
-      "value": "<h2><strong>USEAGE :</strong> <span style=\"color:#169179\">ACTIVATE BEFORE ATTACK<br /></span></h2>\n<p>This Maneuver must be activated BEFORE the character makes an attack.  This will setup any bonuses and effects on the TARGET character.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.  This bonus is added to the next ranged weapon attack, it is up to the player/GM to make sure the weapon is thrown and not shot.</p>\n<p> </p>\n<h2><strong>MANEUVER DESCRIPTION: </strong></h2>\n<p>As a bonus action, you can expend one superiority die and make a ranged attack with a weapon that has the <a href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/equipment#WeaponProperties\" data-tooltip-href=\"//www.dndbeyond.com/weapon-properties/10-tooltip?disable-webm=1&amp;disable-webm=1\">thrown</a> property. You can draw the weapon as part of making this attack. If you hit, add the superiority die to the weapon’s damage roll.</p>",
+      "value": "<p>As a bonus action, you can expend one superiority die and make a ranged attack with a weapon that has the <a href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/equipment#WeaponProperties\" data-tooltip-href=\"//www.dndbeyond.com/weapon-properties/10-tooltip?disable-webm=1&amp;disable-webm=1\">thrown</a> property. You can draw the weapon as part of making this attack. If you hit, add the superiority die to the weapon’s damage roll.</p>\n<p> </p>\n<details>\n<summary><strong>USEAGE: </strong> <span style=\"color:#169179\">ACTIVATE BEFORE ATTACK</span></summary>\n<p>This Maneuver must be activated BEFORE the character makes an attack.  This will setup any bonuses and effects on the TARGET character.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.  This bonus is added to the next ranged weapon attack, it is up to the player/GM to make sure the weapon is thrown and not shot.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v0.8 March 28 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "<p>When a creature you can see moves into the reach you have with the melee weapon you’re wielding, you can use your reaction to expend one superiority die and make one attack against the creature, using that weapon. If the attack hits, add the superiority die to the weapon’s damage roll.</p>",
       "unidentified": ""
     },
-    "source": "TCoE [v0.8]",
+    "source": "TCoE p42",
     "activation": {
       "type": "bonus",
       "cost": 1,
@@ -135,8 +135,8 @@
       }
     },
     "scene-packer": {
-      "hash": "e8f5bf3e88cf0304dd9356afe9bfea030f747510",
-      "sourceId": "Item.3gbD3WirHFbMOUPA"
+      "hash": "d6e2e3e3ec0680f98c67d84cf5f9e5987a6b0bd9",
+      "sourceId": "Item.pLOSsrOMjMMGW3Qq"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -201,6 +201,7 @@
     "core": {
       "sourceId": "Item.QCt9G1ryLky9enrK"
     },
+    "cf": null,
     "exportSource": {
       "world": "test",
       "system": "dnd5e",

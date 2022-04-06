@@ -1,0 +1,180 @@
+{
+  "name": "Vigilant Blessing",
+  "type": "feat",
+  "img": "systems/dnd5e/icons/skills/light_06.jpg",
+  "data": {
+    "description": {
+      "value": "<p>The night has taught you to be vigilant. As an action, you give one creature you touch (including possibly yourself) advantage on the next initiative roll the creature makes. This benefit ends immediately after the roll or if you use this feature again.</p>\n<details>\n<summary>VERSION INFO</summary>\n<p>v0.5 April 2 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "TCoE p34",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Cleric Twilight Domain",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "effects": [
+    {
+      "_id": "7BtDouaCOCQRMIQi",
+      "changes": [
+        {
+          "key": "flags.dnd5e.initiativeAdv",
+          "mode": 0,
+          "value": "1",
+          "priority": "20"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "systems/dnd5e/icons/skills/light_06.jpg",
+      "label": "Vigilant Blessing",
+      "origin": "Item.ece8DHmOzO5m70tX",
+      "transfer": false,
+      "flags": {
+        "core": {
+          "statusId": ""
+        },
+        "dae": {
+          "stackable": "none",
+          "durationExpression": "",
+          "macroRepeat": "none",
+          "specialDuration": [
+            "turnStartSource"
+          ],
+          "transfer": false
+        },
+        "ActiveAuras": {
+          "isAura": false,
+          "aura": "None",
+          "radius": null,
+          "alignment": "",
+          "type": "",
+          "ignoreSelf": false,
+          "height": false,
+          "hidden": false,
+          "displayTemp": false,
+          "hostile": false,
+          "onlyOnce": false
+        }
+      },
+      "tint": null,
+      "selectedKey": "flags.dnd5e.initiativeAdv"
+    }
+  ],
+  "flags": {
+    "ddbimporter": {
+      "id": 2996547,
+      "data": {
+        "id": 2996547,
+        "name": "Vigilant Blessing",
+        "prerequisite": null,
+        "description": "<p><em>1st-level Twilight Domain feature</em></p>\r\n<p>The night has taught you to be vigilant. As an action, you give one creature you touch (including possibly yourself) advantage on the next initiative roll the creature makes. This benefit ends immediately after the roll or if you use this feature again.</p>",
+        "requiredLevel": 1,
+        "displayOrder": 4
+      },
+      "version": "2.9.8",
+      "featureId": 2996547,
+      "requiredLevel": 1,
+      "prerequisite": null,
+      "class": "Twilight Domain",
+      "classId": 654582,
+      "subClass": "Twilight Domain"
+    },
+    "obsidian": {
+      "source": {
+        "type": "class",
+        "text": "Twilight Domain"
+      }
+    },
+    "core": {
+      "sourceId": "Compendium.world.ddb-class-features.M3GMQIicjInJPUhD"
+    },
+    "scene-packer": {
+      "hash": "c62a651949a29e5043a559a6978d78f501cb3247",
+      "sourceId": "Item.IML9DQXEKmLWsAiu"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "cf": null,
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "9.255",
+      "systemVersion": "1.5.7"
+    }
+  }
+}
