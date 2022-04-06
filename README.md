@@ -145,6 +145,7 @@ AUTOMATED is just as it sounds, these will appear if you are using MIDI-QOL, DAE
 Things I am still working on / Known Issues:
 
 - Fighter Maneuver Lunging Attack: This is not yet compatible with midi-qol range checking, awaiting a possible fix
-- Fighter Maneuver Goading Attack: Still working on a viable solution, suggestions welcome
+- Fighter Maneuver Goading Attack: attack places effect disadv on all attacks, places marker on actor to give advantage to anyone with the goading marker (CANCEL OUT)
+- Fighter Maneuver Pushing Attack: Check for wall collission 
 
 DISCORD (jbowens#0415)
