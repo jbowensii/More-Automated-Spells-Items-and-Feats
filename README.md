@@ -11,7 +11,7 @@ I started automating the Fighter Battlemaster Maneuvers and just kept on going I
 
 One day, I hope that the More Automated Spells Items and Feats (MASIF) becomes a massive collection of automated items for FoundryVTT D&D5e.
 
-Latest module manifest: https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/latest/download/module.zip
+Latest module manifest: https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/latest/download/module.json
 
 <details>
 <summary> PREAMBLE </summary>
@@ -41,14 +41,47 @@ So before I explain how to setup and use these scripts, a shout out to Tom Posne
 
 Once the compendium module is installed you can import one of the items into your game.  Most of them are completely setup from the start and can be dropped on the appropriate character and just function.  
 
+<img width="233" alt="image" src="https://user-images.githubusercontent.com/76136571/161750222-0040e632-682c-46d2-b618-37924df4a61f.png">
+<img width="275" alt="image" src="https://user-images.githubusercontent.com/76136571/161781725-f7503eb7-7a27-41b4-b26d-0f03234e1040.png">
+
 Occassionaly there will be notes in the description that instruct you HOW and WHEN to use the item to automate your game play. 
 
-Sometimes there is even more setup like linking those items to a character sheet resource.  
+<img width="554" alt="image" src="https://user-images.githubusercontent.com/76136571/161777420-071b1894-8a1d-4546-b587-a7fac64d3aa4.png">
 
-If you have a character that runs out of resources, might I suggest the module 5e Sheet Resource Plus ... https://github.com/ardittristan/5eSheet-resourcesPlus
+Sometimes there is even more setup like linking those items to a character sheet resources.  
+
+<img width="569" alt="image" src="https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png">
+
+If you have a character sheet runs out of resource spaces, might I suggest the module 5e Sheet Resource Plus ... https://github.com/ardittristan/5eSheet-resourcesPlus
+    
+<img width="415" alt="image" src="https://user-images.githubusercontent.com/76136571/161781506-a938a292-2be8-4f9f-bb3c-21911904fe08.png">
+
 <p>&nbsp;</p>
 </details>
 
+<details>
+<summary> AUTOMATIONS IN THE MODULE </summary>
+
+- Divine Fury, Auto Divine Fury
+    
+- Channel Divinity: Turn Undead
+    
+- Eyes of the Night / Gift of the Eyes of the Night
+    
+- 23 Fighter: Battlemaster Maneuvers and support item(s)
+    
+- Peerless Athlete
+    
+- Steps of the Night
+    
+- Vigilant Blessing
+    
+- Help Action
+    
+- Vitrolic Sphere (with automatic DoT Damage) 
+    
+</details>
+    
 <details>
 <summary> BATTLEMASTER MANEUVER SETUP </summary>
 <p>&nbsp;</p>
