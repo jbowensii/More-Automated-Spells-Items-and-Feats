@@ -146,6 +146,6 @@ Things I am still working on / Known Issues:
 
 - Fighter Maneuver Lunging Attack: This is not yet compatible with midi-qol range checking, awaiting a possible fix
 - Fighter Maneuver Goading Attack: attack places effect disadv on all attacks, places marker on actor to give advantage to anyone with the goading marker (CANCEL OUT)
-- Fighter Maneuver Pushing Attack: Check for wall collission 
+- Fighter Maneuver Pushing Attack: Check for wall collission, make sure selected and targeted are not the same 1 creature 1 pc
 
 DISCORD (jbowens#0415)
