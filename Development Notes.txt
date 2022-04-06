@@ -7,26 +7,24 @@ MacroPass Documentation:
                             templatePlaced
                             preambleComplete
                             preItemRoll
-                            preSaves
-                            postSaves
+                            preSave
+                            postSave
                             preDamageApplication
                             preActiveEffects
                             postActiveEffects
-
+                            preDamageRoll
+                            postDamageRoll
 
 
                             postTargeting
                             preAttack
                             preCheckHits
                             postAttack
-                            preSave
-                            postSave
-                            preDamage
-                            postDamage
-                            preDamageApplication
-                            preActiveEffects
-                            postActiveEffects
-                            All
+                            
+
+COMMON LOG TESTS
+- console.log("ARGS %O  Macropass %s",args[0],args[0].macroPass);
+- console.log("PC ACTOR %O",pcActor);
 
 
 
@@ -75,11 +73,22 @@ GIT NOTES:
 
 SETTING UP ITEMS INFO DROPDOWN
 
+<p>&nbsp;</p>
 <details>
-<summary>More Details</summary>
-<p>&nbsp;</p>
-<p>version 0.5    March 30 2022 </p>
-<p>jbowens #0415 (Discord) </p>
-<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git </p>
-<p>&nbsp;</p>
+<summary><strong>USEAGE: </strong> <span style="color: #169179;">ACTIVATE ANYTIME</span></summary>
+<p>This is a utility Maneuver and can be used whenever your character can take an action.&nbsp; This will setup any bonuses and effects on the TARGET actor.&nbsp; A <span style="text-decoration: underline; color: #236fa1;">Superiority Die </span>will be expended immediately.</p>
 </details>
+<p>&nbsp;</p>
+<details>
+<summary><strong>SETUP:</strong></summary>
+<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>
+<img width="569" alt="image" src="https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png">
+</details>
+<p>&nbsp;</p>
+<details>
+<summary><strong>VERSION INFO</strong></summary>
+<p>v0.1 March 15 2022</p>
+<p>jbowens #0415 (Discord)</p>
+<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>
+</details>
+

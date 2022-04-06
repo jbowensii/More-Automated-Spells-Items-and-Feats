@@ -15,7 +15,7 @@ Add the superiority die to your Strength (Athletics) check.
 v0.5 March 31 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
-if (args[0].macroPass === "preSaves")  {
+if (args[0].macroPass === "preSave")  {
 
     // define Actor, Target and Item
     const pcActor = MidiQOL.MQfromActorUuid(args[0].actorUuid);
@@ -35,7 +35,7 @@ if (args[0].macroPass === "preSaves")  {
         await incrementResource (pcActor, "Superiority Dice", 1);
         return;
     }
-    
+
     // Set the DC and setup the saving throw
     let pcAthSkillTotal = pcActor.data.data.skills["ath"].total;
     const roll = await (new Roll(`1d20 + ${pcAthSkillTotal} + ${superiorityDie}`)).roll(); 

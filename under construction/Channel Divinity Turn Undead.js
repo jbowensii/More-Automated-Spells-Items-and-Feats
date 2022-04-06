@@ -25,27 +25,30 @@ if cleric level > 16 ... CR <= 4 DEAD else
             if cleric level > 7 ... CR <= 1 DEAD else
                 if cleric level >4 ... CR <= 1/2 DEAD
                         
-v0.5 March 30 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v0.8 April 4 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "preambleComplete") {
     let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     console.log ("MACRO TEST | STARTING TARGETS: %O",workflow.targets);
-    // I am using the activation condition field on the item itself to store the creature type I want to hit
+    // I am stealing the activation condition as a string for the creature type I want to hit
     const activationCondition = args[0].itemData.data.activation.condition.toLowerCase();
     for (let target of workflow.targets) {
         let creatureType = target.actor.data.data.details.type;
-        if (!([creatureType.value.toLowerCase(), creatureType.subtype.toLowerCase()].includes(activationCondition.toLowerCase()))) {
+        if ((creatureType === null) || (creatureType === undefined))    // that is not a creature
+            workflow.targets.delete(target);
+        else if (!([creatureType.value.toLowerCase(), creatureType.subtype.toLowerCase()].includes(activationCondition.toLowerCase()))) {
             console.log ("MACRO TEST | REMOVE TARGET: %O %s", target, creatureType);
             workflow.targets.delete(target);
         }
+        game.user.updateTokenTargets(Array.from(workflow.targets).map(t=>t.id));
     }
 } else if (args[0].macroPass === "postActiveEffects") {
     let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const pcActor = workflow.actor;
     console.log ("MACRO TEST | REMOVED ALL NON UNDEAD TARGETS: %O",workflow.targets);
 
-    // set CR to destory based on the algorithm above
+    // set CR to destory
     let crDestroy = 0.0;
     if (workflow.targets.size === 0) return;
     const actorClass = testClass(pcActor, "cleric", null, 1);
@@ -56,7 +59,7 @@ if (args[0].macroPass === "preambleComplete") {
                 else if (actorClass.levels > 7) crDestroy = 1;
                     else if (actorClass.levels > 4) crDestroy = 0.5;
     
-    // set HP = 0 for all targets of the CR or less, remember to save the actor document 
+    // set HP = 0 for all targets of the CR or less
     let target = null;
     for (target of workflow.targets) 
         if (target.document._actor.data._source.data.details.cr <= crDestroy) {

@@ -14,8 +14,8 @@ On a failed save, you push the target up to 15 feet away from you.
 
 v0.5 March 30 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
-
-if (args[0].macroPass === "postSaves") {
+console.log("ARGS %O  macropass",args[0],args[0].macroPass);
+if (args[0].macroPass === "postSave") {
 
     // check to make sure only one target is selected
     if ((args[0].targetUuids.length < 1) || (args[0].targetUuids.length > 1)) {

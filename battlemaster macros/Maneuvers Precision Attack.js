@@ -82,8 +82,6 @@ if (args[0].macroPass === "preCheckHits") {
         // if YES subtract a superiorty die
         await decrimentSheetResource (pcActor, "Superiority Dice", 1);
 
-        console.log("MACRO TEST | Workflow: %O", workflow);
-
         // get the live MIDI-QOL workflow so we can make changes
         let newRoll = new  Roll(`${workflow.attackRoll.result} + ${superiorityDie}`, workflow.actor.getRollData());
         newRoll = await newRoll.evaluate({ async: true });
