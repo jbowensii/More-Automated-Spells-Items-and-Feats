@@ -87,3 +87,24 @@ SETTING UP ITEMS INFO DROPDOWN
 <p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>
 </details>
 
+NEW NOTES:
+Good stuff, I had a quick look and there is a javascript shorthand that is very useful for such things
+if (!([creatureType?.value.toLowerCase(), creatureType?.subtype.toLowerCase()].includes(activationCondition?.toLowerCase()))) {
+    console.log ("MACRO TEST | REMOVE TARGET: %O %s", target, creatureType);
+    workflow.targets.delete(target);
+}
+
+And you don't need the if/else construction.
+The ? short circuits the lookup and the result ends up being [undefined, undefined].includes(string) which is false, which is what you want, since it then takes the not of that expression, so the if(expr) evaluates to true.
+
+Now you should register the module as a foundry module (there is some registration process which I forgot) so it appears on the module list and you get tagged as a developer - which has no real perks, but I think a different color on discord. (edited)
+
+tposney — Yesterday at 10:19 PM
+And for interest array iterators are very powerful, the if else chain for the crDestroy can be replaced with a one liner
+    if (!actorClass || actorClass.levels < 5) return;
+    crDestroy = [{level: 17, cr: 4}, {level: 14,cr: 3}, {level: 11., cr:2}, {level: 8, cr: 1}, {level: 5, cr: 0.5}].find(l => actorClass.levels >= l.level).cr;
+
+also worth looking at .map, .filter and .reduce (if you don't already know about them) (edited)
+
+tposney — Yesterday at 10:58 PM
+The normal route to access actor data from a token would token.actor.data.data (avoid going via _source if you can, since that won't include any derived data for the actor) and is what people reading the code would expect to see.

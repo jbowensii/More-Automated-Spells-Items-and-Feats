@@ -1,20 +1,39 @@
 {
-    "name": "More Automated Spells Items and Feats",
+    "name": "more-automated-spells-items-and-feats",
     "title": "More Automated Spells Items and Feats",
-    "description": "A module containing the exported More Automated Spells Items and Feats compendium.",
-    "version": "0.2.0",
-    "library": "false",
-    "manifestPlusVersion": "0.2.0",
+    "description": "A FoundryVTT module containing a MASIF (More Automated Spells Items and Feats) amount of automation for D&D 5e.",
+    "author": "jbowens #0415 (Discord)",
+    "version": "0.5.0",
+    "systems": [
+        "dnd5e"
+    ],
     "minimumCoreVersion": "9",
     "compatibleCoreVersion": "9",
-    "author": "jbowens #0415 (Discord)",
+    "dependencies": [
+        {
+            "name": "dae",
+            "manifest": "https://gitlab.com/tposney/dae/raw/master/package/module.json"
+        },
+        {
+            "name": "midi-qol",
+            "manifest": "https://gitlab.com/tposney/midi-qol/raw/master/package/module.json"
+        },
+        {
+            "name": "advanced-macros",
+            "manifest": "https://github.com/League-of-Foundry-Developers/fvtt-advanced-macros/releases/latest/download/module.json"
+        },
+        {
+            "name": "dfreds-convenient-effects",
+            "manifest": "https://github.com/DFreds/dfreds-convenient-effects/releases/latest/download/module.json"
+        }
+    ],    
     "packs": [
         {
-            "type": "Item",
+            "name": "More Automated Spells Items and Feats",
             "label": "More Automated Spells Items and Feats",
-            "module": "masif_0-1-0",
             "path": "packs/world-more-automated-spells-items-and-feats-1649102239992.db",
-            "name": "world-more-automated-spells-items-and-feats-1649102239992"
+            "entity": "Item",
+            "module": "More Automated Spells Items and Feats"
         }
     ],
     "url": "https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git",
