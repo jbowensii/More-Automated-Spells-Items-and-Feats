@@ -200,6 +200,8 @@ Things I am still working on / Known Issues:
 - Piercer: reroll damage
     
 - Spear Master
+
+- Elemental Adept feat
     
 </details>
 
