@@ -150,6 +150,7 @@ Things I am still working on / Known Issues:
 
 <details>
 <summary> AUTOMATIONS I AM WORKING ON: </summary>
+    
 - Inspiring Smite
     
 - Arcane Recovery
