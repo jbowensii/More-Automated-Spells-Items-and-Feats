@@ -151,30 +151,55 @@ Things I am still working on / Known Issues:
 <details>
 <summary> AUTOMATIONS I AM WORKING ON: </summary>
 - Inspiring Smite
+    
 - Arcane Recovery
+    
 - Sourcery Point Meta Magic Effects
+    
 - Uncanny Dodge
+    
 - Shadow Step
+    
 - Stunning Strike
+    
 - Fey Presence
+    
 - Misty Escape
+    
 - Psionic Power: Psi-Bolstered Knack
+    
 - Psionic Power: Psionic Die
+    
 - Psionic Power: Recovery
+    
 - Brave
+    
 - Orcish Fury - Extra Damage
+    
 - Primevil Awareness
+    
 - Slasher: Critical Hit
+    
 - Slasher: Reduce Speed
+    
 - Relentless Endurance
+    
 - Arcane Recovery
+    
 - Awakened Spellbook: Replace Damage
+    
 - Channel Divinity: Path to the Grave
+    
 - Circle of Mortality
+    
 - Feline Agility
+    
 - Piercer: Critical Hit
+    
 - Piercer: reroll damage
+    
 - Spear Master
+    
 </details>
 
 DISCORD (jbowens#0415)
