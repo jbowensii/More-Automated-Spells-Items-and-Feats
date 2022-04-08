@@ -148,7 +148,8 @@ Things I am still working on / Known Issues:
 - Fighter Maneuver Goading Attack: attack places effect disadv on all attacks, places marker on actor to give advantage to anyone with the goading marker (CANCEL OUT)
 - Fighter Maneuver Pushing Attack: Check for wall collission, make sure selected and targeted are not the same 1 creature 1 pc
 
-Automations I am working on (unless I find a good one already made):
+<details>
+<summary> AUTOMATIONS I AM WORKING ON: </summary>
 - Inspiring Smite
 - Arcane Recovery
 - Sourcery Point Meta Magic Effects
@@ -174,5 +175,6 @@ Automations I am working on (unless I find a good one already made):
 - Piercer: Critical Hit
 - Piercer: reroll damage
 - Spear Master
+</details>
 
 DISCORD (jbowens#0415)
