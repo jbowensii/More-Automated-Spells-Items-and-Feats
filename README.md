@@ -148,4 +148,31 @@ Things I am still working on / Known Issues:
 - Fighter Maneuver Goading Attack: attack places effect disadv on all attacks, places marker on actor to give advantage to anyone with the goading marker (CANCEL OUT)
 - Fighter Maneuver Pushing Attack: Check for wall collission, make sure selected and targeted are not the same 1 creature 1 pc
 
+Automations I am working on (unless I find a good one already made):
+- Inspiring Smite
+- Arcane Recovery
+- Sourcery Point Meta Magic Effects
+- Uncanny Dodge
+- Shadow Step
+- Stunning Strike
+- Fey Presence
+- Misty Escape
+- Psionic Power: Psi-Bolstered Knack
+- Psionic Power: Psionic Die
+- Psionic Power: Recovery
+- Brave
+- Orcish Fury - Extra Damage
+- Primevil Awareness
+- Slasher: Critical Hit
+- Slasher: Reduce Speed
+- Relentless Endurance
+- Arcane Recovery
+- Awakened Spellbook: Replace Damage
+- Channel Divinity: Path to the Grave
+- Circle of Mortality
+- Feline Agility
+- Piercer: Critical Hit
+- Piercer: reroll damage
+- Spear Master
+
 DISCORD (jbowens#0415)
