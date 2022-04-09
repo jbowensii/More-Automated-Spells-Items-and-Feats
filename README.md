@@ -31,7 +31,7 @@ So after playing with some scripts and helping debug some of my favorite modules
 
 I was shocked to learn that there is a ton of complication in automating a Battlemaster however... but if you are going to swim you might as well dive in. :) 
 
-So before I explain how to setup and use these scripts, a shout out to Tom Posney, the creator of MIDI-QOL and DAE. A fantastic person who is a great help, especially as he answered all of my crazy stupid questions and helped me solve some truely puxzzling probelms. (and he pointed out a whole bunch of obvious things that did not click for me)... Thank you Tom.
+So before I explain how to setup and use these scripts, a shout out to Tim Posney, the creator of MIDI-QOL and DAE. A fantastic person who is a great help, especially as he answered all of my crazy stupid questions and helped me solve some truely puxzzling probelms. (and he pointed out a whole bunch of obvious things that did not click for me)... Thank you Tim.
 <p>&nbsp;</p>
 </details>
 
