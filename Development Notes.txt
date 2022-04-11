@@ -6,7 +6,6 @@ MacroPass Documentation:
     ItemMacro (workflow):   preItemRoll
                             templatePlaced
                             preambleComplete
-                            preItemRoll
                             preSave
                             postSave
                             preDamageApplication
@@ -23,41 +22,47 @@ MacroPass Documentation:
                             
 
 COMMON LOG TESTS
-- console.log("ARGS %O  Macropass %s",args[0],args[0].macroPass);
-- console.log("PC ACTOR %O",pcActor);
+- console.log("MACRO TEST | ARGS %O  Macropass %s",args[0],args[0].macroPass);
+- console.log("MACRO TEST | PC ACTOR %O",pcActor);
 
 
 
-ERROR:
-Uncaught (in promise) Error: Sequencer | EffectManager | object must be instance of PlaceableObject or of type string
-
-
+DAE/MIDI NOTES: 
 This gives advantage to an attack if placed on a monster
 Guiding Bolt
-flags.midi-qol.grants.advantage.attack.all    Custom   1  
+flags.midi-qol.grants.advantage.attack.all      Custom      1  
+
+Adding a flag to your character for latter use in a script
+Elemental Adept (Cold)
+flags.dae                                       Custom      flagName  value
+
+Triggering an ItemMacro with an effect at a specific time in the workflow
+flags.midi-qol.onUseMacroName                   Custom      ItemMacro.Name of Macro,workflow (ex preDamageRoll) 
 
 
 
 
-Things I want to Automate
-  - Inspiring Smite
-  n Primal Strike
-  n Primal Transform
-  - Arcane Recovery
-  Scorcery Points Usages
-  Uncanny Dodge - check 
 
-
-NOTES:
-The data layout can be a bit confusing, the whole document piece is to facilitate the data base management and most of the time you can ignore it. The one case where it can bite you is when you do fromUuid(uuid) you get back the document version of the object. For tokens the tokens document class is TokenDocument, for actors and items it is Actor and Item - hence the special casing for token documents (sometimes).
+FOUNDRY VTT NOTES:
+The data layout can be a bit confusing, the whole document piece is to facilitate the data base management and most of the time you can ignore it. 
+The one case where it can bite you is when you do fromUuid(uuid) you get back the document version of the object. 
+For tokens the tokens document class is TokenDocument, for actors and items it is Actor and Item - hence the special casing for token documents (sometimes).
 Foundry store lots of references from one thing to another to make navigation easy.
 
-So actor.items.getName("Longsword").parent will get you back to where you started.  It's generally not copies but references to the object and there is only one copy of the object. actor.data, item.data is the actual data for the object and actor.data._source is the information stored in the database. [Some of the data in the actor/item is always calculated when the actor/item is updated and never store in the data base]
-For the console _token refers to the currently selected token. So you can do _token.actor to look at the actor data, then navigate through _token.actor.data.data to get to what you want, so
-_token.actor.data.data.details.type will get the actor type field. 
+So actor.items.getName("Longsword").parent will get you back to where you started.  
+It's generally not copies but references to the object and there is only one copy of the object. 
+actor.data, item.data is the actual data for the object and actor.data._source is the information stored in the database. 
+[Some of the data in the actor/item is always calculated when the actor/item is updated and never store in the data base]
+
 The labels are not a great thing to match on, since they are localised to the language the game is run in and hence can change.
 
-GIT NOTES:
+CONSOLE NOTES:
+For the console _token refers to the currently selected token. 
+So you can do _token.actor to look at the actor data, then navigate through _token.actor.data.data to get to what you want, so
+_token.actor.data.data.details.type will get the actor type field. 
+
+
+GIT COMMANDS:
 - VIDEO: https://www.youtube.com/watch?v=raM_Z0e7ov8
 > git branch -M master
 > git pull 
@@ -87,24 +92,22 @@ SETTING UP ITEMS INFO DROPDOWN
 <p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>
 </details>
 
-NEW NOTES:
-Good stuff, I had a quick look and there is a javascript shorthand that is very useful for such things
-if (!([creatureType?.value.toLowerCase(), creatureType?.subtype.toLowerCase()].includes(activationCondition?.toLowerCase()))) {
+JAVASCRIPT NOTES:
+There is a javascript shorthand that is very useful for such things ternary operator at https://www.javascripttutorial.net/javascript-ternary-operator/
+(!([creatureType?.value.toLowerCase(), creatureType?.subtype.toLowerCase()].includes(activationCondition?.toLowerCase()))) {
     console.log ("MACRO TEST | REMOVE TARGET: %O %s", target, creatureType);
     workflow.targets.delete(target);
 }
+you don't need the if/else construction.
+The ? short circuits the lookup and the result ends up being [undefined, undefined].includes(string) which is false, which is what you want, 
+since it then takes the not of that expression, so the if(expr) evaluates to true.
 
-And you don't need the if/else construction.
-The ? short circuits the lookup and the result ends up being [undefined, undefined].includes(string) which is false, which is what you want, since it then takes the not of that expression, so the if(expr) evaluates to true.
-
-Now you should register the module as a foundry module (there is some registration process which I forgot) so it appears on the module list and you get tagged as a developer - which has no real perks, but I think a different color on discord. (edited)
-
-tposney — Yesterday at 10:19 PM
-And for interest array iterators are very powerful, the if else chain for the crDestroy can be replaced with a one liner
-    if (!actorClass || actorClass.levels < 5) return;
+Array iterators are very powerful, the if else chain for the crDestroy can be replaced with a one liner
     crDestroy = [{level: 17, cr: 4}, {level: 14,cr: 3}, {level: 11., cr:2}, {level: 8, cr: 1}, {level: 5, cr: 0.5}].find(l => actorClass.levels >= l.level).cr;
 
-also worth looking at .map, .filter and .reduce (if you don't already know about them) (edited)
+also worth looking at 
+.map        https://www.w3schools.com/jsref/jsref_map.asp       for each element in the array do something
+.filter     https://www.w3schools.com/jsref/jsref_filter.asp    create new array of all elements of the original array that pass a test 
+.reduce     https://www.w3schools.com/jsref/jsref_reduce.asp    goes through an array and performs a function resulting in a singular value for the whole array
 
-tposney — Yesterday at 10:58 PM
-The normal route to access actor data from a token would token.actor.data.data (avoid going via _source if you can, since that won't include any derived data for the actor) and is what people reading the code would expect to see.
+The normal route to access actor data from a token would be:   token.actor.data.data (avoid going via _source)
