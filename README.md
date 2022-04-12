@@ -157,15 +157,7 @@ Things I am still working on / Known Issues:
     
 - Sourcery Point Meta Magic Effects
     
-- Uncanny Dodge
-    
 - Shadow Step
-    
-- Stunning Strike
-    
-- Fey Presence
-    
-- Misty Escape
     
 - Psionic Power: Psi-Bolstered Knack
     
@@ -200,8 +192,6 @@ Things I am still working on / Known Issues:
 - Piercer: reroll damage
     
 - Spear Master
-
-- Elemental Adept feat
     
 </details>
 
