@@ -3,23 +3,34 @@ MacroPass Documentation:
     On Use Macro:           on
                             off
 
-    ItemMacro (workflow):   preItemRoll
-                            templatePlaced
-                            preambleComplete
-                            preSave
-                            postSave
-                            preDamageApplication
-                            preActiveEffects
-                            postActiveEffects
-                            preDamageRoll
-                            postDamageRoll
+    ItemMacro (workflow):   
 
+    preItemRoll: Called before the item is rolled (*)
+    templatePlaced: Only callled once a template is placed
+    preambleComplete: Called after all targeting is complete
+	preAttackRoll: Called before the attack roll is made
+	preCheckHits: Called after the attack roll is made but before hits are adjudicated
+	postAttackRoll: Called after the attack is adjudicated
+	preDamageRoll: Called before damage is rolled
+	postDamageRoll: Called after the damage roll is made
+    preSave: Called before saving throws are rolled
+	postSave: Called after saves are rolled
+	preDamageApplication: Called before Damage Application
+	preActiveEffects: Called before applying active effects
+	postActiveEffects: Called after applying active effects
+	all: Called at each of the above
 
-                            postTargeting
-                            preAttack
-                            preCheckHits
-                            postAttack
-                            
+CUSTOM:    0
+MULTIPLY:  1
+ADD:       2
+DOWNGRADE: 3
+UPGRADE:   4
+OVERRIDE:  5      
+
+Special Durations
+1Attack                 1 Attack: Expires on the next spell/weapon attack by the character
+turnStartSource         Turn Start: Expires at the start of the source actor's next turn (in combat)
+turnEndSource           Turn End: Expires at the end of the source actor's next turn (in combat)
 
 COMMON LOG TESTS
 - console.log("MACRO TEST | ARGS %O  Macropass %s",args[0],args[0].macroPass);

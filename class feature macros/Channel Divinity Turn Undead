@@ -30,7 +30,6 @@ v0.8 April 4 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Auto
 
 if (args[0].macroPass === "preambleComplete") {
     let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
-    console.log ("MACRO TEST | STARTING TARGETS: %O",workflow.targets);
     // I am stealing the activation condition as a string for the creature type I want to hit
     const activationCondition = args[0].itemData.data.activation.condition.toLowerCase();
     for (let target of workflow.targets) {
@@ -38,7 +37,6 @@ if (args[0].macroPass === "preambleComplete") {
         if ((creatureType === null) || (creatureType === undefined))    // that is not a creature
             workflow.targets.delete(target);
         else if (!([creatureType.value.toLowerCase(), creatureType.subtype.toLowerCase()].includes(activationCondition.toLowerCase()))) {
-            console.log ("MACRO TEST | REMOVE TARGET: %O %s", target, creatureType);
             workflow.targets.delete(target);
         }
         game.user.updateTokenTargets(Array.from(workflow.targets).map(t=>t.id));
@@ -46,7 +44,6 @@ if (args[0].macroPass === "preambleComplete") {
 } else if (args[0].macroPass === "postActiveEffects") {
     let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const pcActor = workflow.actor;
-    console.log ("MACRO TEST | REMOVED ALL NON UNDEAD TARGETS: %O",workflow.targets);
 
     // set CR to destory
     let crDestroy = 0.0;
@@ -63,7 +60,6 @@ if (args[0].macroPass === "preambleComplete") {
     let target = null;
     for (target of workflow.targets) 
         if (target.document._actor.data._source.data.details.cr <= crDestroy) {
-            console.log ("MACRO TEST | DESTROY TARGET: %O %d",target, target.document._actor.data._source.data.details.cr);
             await target.actor.update({"data.attributes.hp.value": 0});
         }
 } 

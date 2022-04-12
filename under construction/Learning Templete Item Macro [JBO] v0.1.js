@@ -321,3 +321,24 @@ function dynamicButtonsDialog () {
 }
 // Example test for DAE flag
 // let useSneak = getProperty(actor.data, "flags.dae.autoSneak");
+
+// Apply the fightened effect to the target
+async function applyFrightenedEffect(target, args) {
+ effectData = {
+        label : "Frightened",
+        icon : "modules/dfreds-convenient-effects/images/frightened.svg",
+        origin: args.uuid,
+        changes: [
+            { "key": "flags.midi-qol.disadvantage.attack.all", "value": `1`, "mode": 0, "priority": 20 },
+            { "key": "flags.midi-qol.disadvantage.ability.check.all", "value": `1`, "mode": 0, "priority": 20 }
+        ],
+        disabled: false,
+        flags: {
+                dae: {specialDuration: ["turnEndSource"]},
+                core: {statusId: "Convenient Effect: Frightened"}
+               }
+       }
+    await MidiQOL.socket().executeAsGM("createEffects", {actorUuid: target.uuid, effects: [effectData]});
+}
+
+// await game.dfreds.effectInterface?.addEffect({ effectName: "the name of the effect", uuid: "uuid of the target", origin: "uuid of the source item/actor", metadata: "extra data" });
