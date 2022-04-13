@@ -157,8 +157,6 @@ Things I am still working on / Known Issues:
     
 - Sourcery Point Meta Magic Effects
     
-- Shadow Step
-    
 - Psionic Power: Psi-Bolstered Knack
     
 - Psionic Power: Psionic Die
@@ -166,8 +164,6 @@ Things I am still working on / Known Issues:
 - Psionic Power: Recovery
     
 - Brave
-    
-- Orcish Fury - Extra Damage
     
 - Primevil Awareness
     
