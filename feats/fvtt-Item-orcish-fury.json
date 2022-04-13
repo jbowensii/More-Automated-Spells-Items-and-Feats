@@ -1,0 +1,179 @@
+{
+  "name": "Orcish Fury",
+  "type": "feat",
+  "img": "systems/dnd5e/icons/skills/red_01.jpg",
+  "data": {
+    "description": {
+      "value": "<p>Your inner fury burns tirelessly. You gain the following benefits:</p>\n<ul>\n<li>When you hit with an attack using a simple or martial weapon, you can roll one of the weapon’s damage dice an additional time and add it as extra damage of the weapon’s damage type. Once you use this ability, you can’t use it again until you finish a short or long rest.</li>\n<li>Immediately after you use your Relentless Endurance trait, you can use your reaction to make one weapon attack. [MANUAL]</li>\n</ul>\n<p> </p>\n<details>\n<summary>VERSION INFO</summary>\n<p>v0.1 April 12 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "XGtE",
+    "activation": {
+      "type": "special",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Feat: Orcish Fury",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "effects": [
+    {
+      "_id": "YJK1tQQIV2Ycrqy0",
+      "changes": [
+        {
+          "key": "flags.midi-qol.onUseMacroName",
+          "mode": 0,
+          "value": "ItemMacro.Orcish Fury,preDamageRoll",
+          "priority": "1"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "systems/dnd5e/icons/skills/red_01.jpg",
+      "label": "Orcish Fury",
+      "origin": "Item.5PUe0GiheEHUomoR",
+      "transfer": true,
+      "flags": {
+        "core": {
+          "statusId": ""
+        },
+        "dae": {
+          "stackable": "none",
+          "durationExpression": "",
+          "macroRepeat": "none",
+          "specialDuration": [],
+          "transfer": true
+        },
+        "ActiveAuras": {
+          "isAura": false,
+          "aura": "None",
+          "radius": null,
+          "alignment": "",
+          "type": "",
+          "ignoreSelf": false,
+          "height": false,
+          "hidden": false,
+          "displayTemp": false,
+          "hostile": false,
+          "onlyOnce": false
+        }
+      },
+      "tint": null,
+      "selectedKey": "flags.midi-qol.onUseMacroName"
+    }
+  ],
+  "flags": {
+    "scene-packer": {
+      "hash": "fe649b424de5283a79b5fe66be450bc223ca4e19",
+      "sourceId": "Item.7FU2oUkt6RGn5Ggq"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Orcish Fury",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "/*****\nOrcish Fury\n\nUSEAGE : AUTOMATIC\nThis item should be placed on the character that has the Orcish Fury Feat.  \nUntil used, during each melee attack the player will be prompted if they\nwant to use this ability.\n \nMANEUVER DESCRIPTION:\nWhen you hit with an attack using a simple or martial weapon, you can roll one \nof the weapon’s damage dice an additional time and add it as extra damage of \nthe weapon’s damage type. Once you use this ability, you can’t use it again \nuntil you finish a short or long rest.\n\nv0.2 April 12 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\n// make sure the attempted hit was made with a weapon attack\nif (![\"mwak\",\"rwak\"].includes(args[0].item.data.actionType)) return;\n\nif (args[0].macroPass === \"preDamageRoll\") {\n    const pcActor = MidiQOL.MQfromActorUuid(args[0].actorUuid);\n    const target = await fromUuid(args[0].hitTargetUuids[0] ?? \"\");\n\n    // check to make sure only one target is selected\n    if ((args[0].targetUuids.length < 1) || (args[0].targetUuids.length > 1)) {\n        ui.notifications.error(\"You need to select a single target.\");\n        return;\n    }\n\n    // Find Superiority Dice Resource\n    let orcishFury = await findSheetResource(pcActor, \"Orcish Fury\");\n    if (!orcishFury) { \n        ui.notifications.error(\"Could not find a recource labeled 'Orcish Fury'...\"); \n        return;\n    } else if (orcishFury < 1) return;\n\n    // create a dialog and prompt to spend a superiority die\n    let dialog = new Promise((resolve) => {\n        new Dialog({\n            // localize this text\n            title: \"Orcish Fury:\",\n            content: \"<p>Use Orcish Fury for extra damage?</p>\",\n            buttons: {\n                one: {\n                    icon: '<p> </p><img src = \"systems/dnd5e/icons/skills/red_01.jpg\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>Yes</p>\",\n                    callback: () => resolve(true)\n                },\n                two: {\n                    icon: '<p> </p><img src = \"systems/dnd5e/icons/skills/weapon_28.jpg\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>No</p>\",\n                    callback: () => {resolve(false)}\n                }\n            },\n            default: \"two\"\n        }).render(true);\n    });\n    let choice = await dialog;\n\n    if (!choice) return;\n\n    // if YES subtract a superiorty die\n    await decrimentSheetResource (pcActor, \"Orcish Fury\", 1);\n\n    // get the live MIDI-QOL workflow so we can make changes\n    const diceMult = args[0].isCritical ? 2: 1;\n    let baseDice = (1 * diceMult);\n    let die = args[0].item.data.damage.parts[0][0].split('[')[0];   // everything before the [\n    die = die.toLowerCase();                                        // convert the string to lower case\n    let baseDie = die.split('d')[1];                                //everything after the 'd' the die size and any mods\n    let furyRoll = (baseDice+\"d\"+baseDie);                          // assemble the FuryRoll\n\n    const damageType = args[0].item.data.damage.parts[0][1];        // get teh damage type from the weapon in use   \n    \n    // roll the damage and add it to the workflow\n    let damageRoll = await new Roll(furyRoll).roll();\n    new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, damageType, target ? [target] : [], damageRoll, {flavor: \"Orcish Fury\", itemCardId: args[0].itemCardId});\n    return; \n}\n\n//---------------------------------- MY FUNCTIONS -------------------------------------\n\n// Test for available resource\n// Return resource object\nasync function findSheetResource (testActor, resourceName) {\n    let resources = Object.values(testActor.data.data.resources);\n    let foundResource = resources.find(i => i.label.toLowerCase() === resourceName.toLowerCase());\n    return foundResource;\n}\n\n// Decriment available resource\nasync function decrimentSheetResource (testActor, resourceName, numValue) {\n    let actorDup = duplicate(testActor.data._source);\n    let resources = Object.values(actorDup.data.resources);\n    let foundResource = resources.find(i => i.label.toLowerCase() === resourceName.toLowerCase());\n    foundResource.value = foundResource.value - numValue;\n    await testActor.update(actorDup); \n    return;\n}",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        }
+      }
+    },
+    "core": {
+      "sourceId": "Item.5PUe0GiheEHUomoR"
+    },
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "9.266",
+      "systemVersion": "1.5.7"
+    },
+    "cf": {
+      "id": "temp_p47ewx05igi"
+    },
+    "favtab": {
+      "isFavorite": true
+    }
+  }
+}

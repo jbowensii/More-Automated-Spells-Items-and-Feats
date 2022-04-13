@@ -1,0 +1,144 @@
+{
+  "name": "Misty Escape",
+  "type": "feat",
+  "img": "systems/dnd5e/icons/spells/wind-grasp-air-1.jpg",
+  "data": {
+    "description": {
+      "value": "<p>Starting at 6th level, you can vanish in a puff of mist in response to harm. When you take damage, you can use your reaction to turn <a href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Invisible\" data-tooltip-href=\"//www.dndbeyond.com/conditions/8-tooltip?disable-webm=1&amp;disable-webm=1\">invisible</a> and teleport up to 60 feet to an unoccupied space you can see. You remain <a href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Invisible\" data-tooltip-href=\"//www.dndbeyond.com/conditions/8-tooltip?disable-webm=1&amp;disable-webm=1\">invisible</a> until the start of your next turn or until you attack or cast a spell.</p>\n<p>Once you use this feature, you can’t use it again until you finish a short or long rest.</p>\n<p><br /><br /></p>\n<p> </p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB",
+    "activation": {
+      "type": "reactiondamage",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": "inst"
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "attribute",
+      "target": "",
+      "amount": 1
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Warlock: The Archfey",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": null
+  },
+  "effects": [],
+  "flags": {
+    "scene-packer": {
+      "hash": "3f8e82d03d7f568eeef85a0e2c4e77d6614b042a",
+      "sourceId": "Item.fM6bKg7xyAVQf04G"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Misty Escape",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "/*****\nMisty Escape\nStarting at 6th level, you can vanish in a puff of mist in response to harm. When you take damage, \nyou can use your reaction to turn invisible and teleport up to 60 feet to an unoccupied space you \ncan see. You remain invisible until the start of your next turn or until you attack or cast a spell.\nOnce you use this feature, you can’t use it again until you finish a short or long rest.\n\nNOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM \"MIDI-SRD\" SPELL: MISTY STEP\nBy Author: Kandashi   https://github.com/kandashi/Dynamic-Effects-SRD\n\nv0.1 April 11 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git\n*****/\n\nif (args[0].macroPass === \"preItemRoll\") {\n    let pcToken = token;\n    let pcActor = token.actor.data.data;\n    const target = canvas.tokens.get(pcToken.tokenId) || token;\n\n    let range = canvas.scene.createEmbeddedDocuments(\"MeasuredTemplate\", [{\n        t: \"circle\",\n        user: game.user._id,\n        x: target.x + canvas.grid.size / 2,\n        y: target.y + canvas.grid.size / 2,\n        direction: 0,\n        distance: 60,\n        borderColor: \"#FF0000\",\n        flags: { DAESRD: { MistyEscape: { ActorId: pcActor.id } } }\n    }]);\n\n    range.then(result => {\n        let templateData = {\n            t: \"rect\",\n            user: game.user._id,\n            distance: 7.5,\n            direction: 45,\n            x: 0,\n            y: 0,\n            fillColor: game.user.color,\n            flags: { DAESRD: { MistyEscape: { ActorId: pcActor.id } } }\n        };\n\n        Hooks.once(\"createMeasuredTemplate\", deleteTemplatesAndMove);\n        let doc = new CONFIG.MeasuredTemplate.documentClass(templateData, { parent: canvas.scene });\n        let template = new game.dnd5e.canvas.AbilityTemplate(doc);\n        template.actorSheet = pcActor.sheet;\n        template.drawPreview();\n\n        // make character invisible with custom effect\n        applyTempInvisibilityEffect(actor, actor);\n\n        async function deleteTemplatesAndMove(template) {\n            let removeTemplates = canvas.templates.placeables.filter(i => i.data.flags.DAESRD?.MistyEscape?.ActorId === pcActor.id);\n            let templateArray = removeTemplates.map(function (w) { return w.id });\n            await target.data.document.update(canvas.grid.getSnappedPosition(template.data.x, template.data.y));\n            if (removeTemplates) await canvas.scene.deleteEmbeddedDocuments(\"MeasuredTemplate\", templateArray);\n        };\n    });\n} return;\n\n// Mark the character invisible until the start of thier next turn \n// or when the character attacks or casts a spell\nasync function applyTempInvisibilityEffect(target, actor) {\n    let effectData = {\n        label : \"Invisible\",\n        icon : \"modules/dfreds-convenient-effects/images/invisible.svg\",\n        origin: actor.uuid,\n        changes: [\n            { \"key\": \"flags.midi-qol.advantage.attack.all\", \"value\": `1`, \"mode\": 0, \"priority\": 20 },\n            { \"key\": \"flags.midi-qol.grants.disadvantage.attack.all\", \"value\": `1`, \"mode\": 0, \"priority\": 20 }\n        ],\n        disabled: false,\n        flags: {\n                dae: {specialDuration: [\"turnStartSource\",\"1Attack\"]},\n                core: {statusId: \"Convenient Effect: Invisible\"}\n               }\n       }\n    await MidiQOL.socket().executeAsGM(\"createEffects\", {actorUuid: target.uuid, effects: [effectData]});\n    return;\n}",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        }
+      }
+    },
+    "midi-qol": {
+      "effectActivation": false,
+      "onUseMacroName": "[preItemRoll]ItemMacro"
+    },
+    "midiProperties": {
+      "nodam": false,
+      "fulldam": false,
+      "halfdam": false,
+      "rollOther": false,
+      "critOther": false,
+      "magicdam": false,
+      "magiceffect": false,
+      "concentration": false,
+      "toggleEffect": false
+    },
+    "core": {
+      "sourceId": "Item.snMxepltm5UWo5KL"
+    },
+    "cf": {
+      "id": "temp_ischjl2ljr"
+    },
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "9.266",
+      "systemVersion": "1.5.7"
+    }
+  }
+}

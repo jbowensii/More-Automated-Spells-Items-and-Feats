@@ -1,0 +1,177 @@
+{
+  "name": "Fey Presence",
+  "type": "feat",
+  "img": "systems/dnd5e/icons/spells/evil-eye-eerie-3.jpg",
+  "data": {
+    "description": {
+      "value": "<p data-content-chunk-id=\"8311fd28-6b27-4a6f-a8df-1c330de651bf\">Starting at 1st level, your patron bestows upon you the ability to project the beguiling and fearsome presence of the fey. As an action, you can cause each creature in a 10-foot cube originating from you to make a Wisdom saving throw against your warlock spell save DC. The creatures that fail their saving throws are all <a href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Charmed\" data-tooltip-href=\"//www.dndbeyond.com/conditions/2-tooltip?disable-webm=1&amp;disable-webm=1\">charmed</a> or <a href=\"https://www.dndbeyond.com/compendium/rules/basic-rules/appendix-a-conditions#Frightened\" data-tooltip-href=\"//www.dndbeyond.com/conditions/5-tooltip?disable-webm=1&amp;disable-webm=1\">frightened</a> by you (your choice) until the end of your next turn.</p>\n<p data-content-chunk-id=\"1e9c2965-b5dc-4d9e-86eb-5e73e0c8004\">Once you use this feature, you can’t use it again until you finish a short or long rest.</p>\n<p> </p>\n<details>\n<summary><strong>USEAGE: </strong> <span style=\"color:#169179\">ACTIVATE ANYTIME</span></summary>\n<p>You may activate this effect as an action when your character gets to act.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v0.3 April 11 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "Once per short rest, as an action, you can cause each creature in a 10-ft. cube from you to make a WIS saving throw (DC +14) or become @Compendium[dnd5e.rules.Charmed]{charmed} or @Compendium[dnd5e.rules.Frightened]{frightened} by you (your choice) until the end of your next turn.",
+      "unidentified": ""
+    },
+    "source": "PHB",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": "inst"
+    },
+    "target": {
+      "value": 10,
+      "width": null,
+      "units": "ft",
+      "type": "creature"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "spec"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "charges",
+      "target": "",
+      "amount": 1
+    },
+    "ability": "",
+    "actionType": "other",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "wis",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Warlock: Fey Patron",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "quantity": 1,
+    "weight": null,
+    "price": null
+  },
+  "effects": [],
+  "flags": {
+    "ddbimporter": {
+      "id": "1035",
+      "entityTypeId": "222216831",
+      "componentId": 396,
+      "componentTypeId": 12168134,
+      "class": "Warlock",
+      "subclass": "The Archfey",
+      "dndbeyond": {
+        "levelScale": null,
+        "levelScales": [],
+        "limitedUse": [
+          {
+            "level": null,
+            "uses": 1
+          }
+        ]
+      },
+      "importId": "py0qw85udlapktp3"
+    },
+    "infusions": {
+      "infused": false
+    },
+    "obsidian": {
+      "source": {
+        "type": "class",
+        "text": "Warlock"
+      }
+    },
+    "link-item-resource-5e": {
+      "resource-link": "primary"
+    },
+    "scene-packer": {
+      "hash": "bebdddef98cbc1a6f6ba1f3b42d539aa20500616",
+      "sourceId": "Item.uxuIHXCr3j69UyrZ"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "midi-qol": {
+      "effectActivation": false,
+      "onUseMacroName": "[all]ItemMacro"
+    },
+    "midiProperties": {
+      "nodam": false,
+      "fulldam": false,
+      "halfdam": false,
+      "rollOther": false,
+      "critOther": false,
+      "magicdam": false,
+      "magiceffect": false,
+      "concentration": false,
+      "toggleEffect": false
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Fey Presence",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "/*****\nFey Presence\n\nOnce per short rest, as an action, you can cause each creature in a 10-ft. cube \nfrom you to make a WIS saving throw (DC +14) or become charmed or frightened by \nyou (your choice) until the end of your next turn.\n\n- target evertything in a ten foot cube \nv0.3 April 11 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"preambleComplete\") {\n    let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    // prompt user for the fightened or charmed effect, store on the workflow as feyPresenceEffect \n    let dialog = new Promise((resolve) => {\n        new Dialog({\n            // localize this text\n            title: \"Fey Presence:\",\n            content: \"<p>Select the desired effect fightened or charmed?</p>\",\n            buttons: {\n                one: {\n                    icon: '<p> </p><img src = \"modules/dfreds-convenient-effects/images/frightened.svg\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>Frightened</p>\",\n                    callback: () => resolve(\"Frightened\")\n                },\n                two: {\n                    icon: '<p> </p><img src = \"modules/dfreds-convenient-effects/images/charmed.svg\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>Charmed</p>\",\n                    callback: () => {resolve(\"Charmed\")}\n                }\n            },\n            default: \"one\"\n        }).render(true);\n    });\n    let selectedEffect = await dialog;\n    await setProperty(workflow, \"feyPresenceEffect\", selectedEffect);\n\n} else if (args[0].macroPass === \"postActiveEffects\") {\n    let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    //for every target the failed the saving throw apply the selected feyPresenceEffect\n    let effect = getProperty(workflow, \"feyPresenceEffect\");\n    if (effect)\n        for (target of args[0].failedSaves) {\n            let targetActor = target.actor;\n            if (effect === \"Frightened\") await applyFrightenedEffect(targetActor, args);\n                else if (effect === \"Charmed\") await applyCharmedEffect(targetActor, args);\n                else ui.notifications.error(\"An error occured applying the effect.\");\n        }\n} return;\n\n// Apply the fightened effect to the target\nasync function applyFrightenedEffect(target, args) {\n    let effectData = {\n        label : \"Frightened\",\n        icon : \"modules/dfreds-convenient-effects/images/frightened.svg\",\n        origin: args.uuid,\n        changes: [\n            { \"key\": \"flags.midi-qol.disadvantage.attack.all\", \"value\": `1`, \"mode\": 0, \"priority\": 20 },\n            { \"key\": \"flags.midi-qol.disadvantage.ability.check.all\", \"value\": `1`, \"mode\": 0, \"priority\": 20 }\n        ],\n        disabled: false,\n        flags: {\n                dae: {specialDuration: [\"turnEndSource\"]},\n                core: {statusId: \"Convenient Effect: Frightened\"}\n               }\n       }\n    await MidiQOL.socket().executeAsGM(\"createEffects\", {actorUuid: target.uuid, effects: [effectData]});\n}\n\n// Apply the charmed effect to the target\nasync function applyCharmedEffect(target, args) {\n    let effectData = {\n        label : \"Charmed\",\n        icon : \"modules/dfreds-convenient-effects/images/charmed.svg\",\n        origin: args.uuid,\n        disabled: false,\n        flags: {\n                dae: {specialDuration: [\"turnEndSource\"]},\n                core: {statusId: \"Convenient Effect: Charmed\"}\n               }\n    }   \n    await MidiQOL.socket().executeAsGM(\"createEffects\", {actorUuid: target.uuid, effects: [effectData]});\n}",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        }
+      }
+    },
+    "core": {
+      "sourceId": "Item.VDDfkpWSeO51jAYS"
+    },
+    "cf": {
+      "id": "temp_ischjl2ljr"
+    },
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "9.266",
+      "systemVersion": "1.5.7"
+    }
+  }
+}

@@ -194,42 +194,18 @@ async function incrementResource (testActor, resourceName, numValue) {
 
 // Test PC Class, Subclass and Class Level
 // RETURN the class object (TRUE) or null (FALSE)
-async function testClass (testActor, className, subClassName, levels) {
-    let classList = Object.values(testActor.classes);
-    
-    debugLog("The class list:", classList, "OBJECT");
-    
-    let Class = null;
-    debugLog("Looking for class:", className, "STRING");
-    Class = classList.find(ef => ef.data.name === className);
-    
-    if (Class) {
-        debugLog("The class was found!", Class, "OBJECT");
-        if ((levels > 0) && (Class.data.data.levels >= levels)) {
-            debugLog("The class levels were >=", levels, "INTEGER");
-            if (subClassName === null) {
-                return Class;
-            }
-            let subclass = Class.data.data.subclass;
-            if (subclass === subClassName) {
-                debugLog("The subclass was found!", subclass, "STRING");
-                return Class;
-            }
-            else {
-                debugLog("The subclass was not found", subClassName, "STRING");
-                return null;
+// Test PC Class, Subclass and Class Level, RETURN the class object or null
+function testClass (testActor, className, subClassName, levels) {
+    let theClass = testActor.data.data.classes[className] ;
+    if (theClass) {
+        if ((levels > 0) && (theClass.levels >= levels)) {
+            if (subClassName === null || (theClass.subclass === subClassName)) {
+                return theClass;
             }
         }
-        else {
-            debugLog("The class levels were <", Class.data.data.levels, "INTEGER");
-            return null;
-        }
     }
-    else {
-        debugLog("The class was not found", Class, "OBJECT");
-        return null;
-    }
-}
+    return null;
+} 
 
 // Check if Module is enabled
 async function checkModule (moduleName) {

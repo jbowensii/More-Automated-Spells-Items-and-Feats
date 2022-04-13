@@ -1,0 +1,197 @@
+{
+  "name": "Shadow Step",
+  "type": "feat",
+  "img": "systems/dnd5e/icons/spells/wind-grasp-air-1.jpg",
+  "data": {
+    "description": {
+      "value": "<p>At 6th level, you gain the ability to step from one shadow into another. When you are in dim light or darkness, as a bonus action you can teleport up to 60 feet to an unoccupied space you can see that is also in dim light or darkness. You then have <a href=\"https://www.dndbeyond.com/sources/basic-rules/using-ability-scores#AdvantageandDisadvantage\" data-tooltip-href=\"//www.dndbeyond.com/rules/96-tooltip?disable-webm=1&amp;disable-webm=1\">advantage</a> on the first melee attack you make before the end of the turn.</p>\n<p> </p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB",
+    "activation": {
+      "type": "bonus",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": "inst"
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "util",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Monk: Way of the Shadow",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "effects": [
+    {
+      "_id": "Maol11OcLygv28wa",
+      "changes": [
+        {
+          "key": "flags.midi-qol.advantage.attack.all",
+          "mode": 0,
+          "value": "1",
+          "priority": "20"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "turns": 1
+      },
+      "icon": "systems/dnd5e/icons/spells/wind-grasp-air-1.jpg",
+      "label": "Shadow Step",
+      "origin": "Item.B2VMCdTeSXIiKeZJ",
+      "transfer": false,
+      "flags": {
+        "core": {
+          "statusId": ""
+        },
+        "dae": {
+          "stackable": "none",
+          "durationExpression": "",
+          "macroRepeat": "none",
+          "specialDuration": [
+            "1Attack"
+          ],
+          "transfer": false
+        },
+        "ActiveAuras": {
+          "isAura": false,
+          "aura": "None",
+          "radius": null,
+          "alignment": "",
+          "type": "",
+          "ignoreSelf": false,
+          "height": false,
+          "hidden": false,
+          "displayTemp": false,
+          "hostile": false,
+          "onlyOnce": false
+        }
+      },
+      "tint": null,
+      "selectedKey": "flags.midi-qol.advantage.attack.all"
+    }
+  ],
+  "flags": {
+    "scene-packer": {
+      "hash": "4c50091a2992309edf1c8162bec4e7c35f38b268",
+      "sourceId": "Item.Vdw5gM4BmATvc69e"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Shadow Step",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "/*****\nShadow Step\nAt 6th level, you gain the ability to step from one shadow into another. \nWhen you are in dim light or darkness, as a bonus action you can teleport \nup to 60 feet to an unoccupied space you can see that is also in dim light \nor darkness. You then have advantage on the first melee attack you make \nbefore the end of the turn.\n\nNOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM \"MIDI-SRD\" SPELL: MISTY STEP\nBy Author: Kandashi   https://github.com/kandashi/Dynamic-Effects-SRD\n\nv0.2 April 12 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git\n*****/\n\nif (args[0].macroPass === \"preItemRoll\") {\n    let pcToken = token;\n    let pcActor = token.actor.data.data;\n    const target = canvas.tokens.get(pcToken.tokenId) || token;\n\n    let range = canvas.scene.createEmbeddedDocuments(\"MeasuredTemplate\", [{\n        t: \"circle\",\n        user: game.user._id,\n        x: target.x + canvas.grid.size / 2,\n        y: target.y + canvas.grid.size / 2,\n        direction: 0,\n        distance: 60,\n        borderColor: \"#FF0000\",\n        flags: { DAESRD: { MistyEscape: { ActorId: pcActor.id } } }\n    }]);\n\n    range.then(result => {\n        let templateData = {\n            t: \"rect\",\n            user: game.user._id,\n            distance: 7.5,\n            direction: 45,\n            x: 0,\n            y: 0,\n            fillColor: game.user.color,\n            flags: { DAESRD: { MistyEscape: { ActorId: pcActor.id } } }\n        };\n\n        Hooks.once(\"createMeasuredTemplate\", deleteTemplatesAndMove);\n        let doc = new CONFIG.MeasuredTemplate.documentClass(templateData, { parent: canvas.scene });\n        let template = new game.dnd5e.canvas.AbilityTemplate(doc);\n        template.actorSheet = pcActor.sheet;\n        template.drawPreview();\n\n        async function deleteTemplatesAndMove(template) {\n            let removeTemplates = canvas.templates.placeables.filter(i => i.data.flags.DAESRD?.MistyEscape?.ActorId === pcActor.id);\n            let templateArray = removeTemplates.map(function (w) { return w.id });\n            await target.data.document.update(canvas.grid.getSnappedPosition(template.data.x, template.data.y));\n            if (removeTemplates) await canvas.scene.deleteEmbeddedDocuments(\"MeasuredTemplate\", templateArray);\n        };\n    });\n} return;",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        }
+      }
+    },
+    "midi-qol": {
+      "effectActivation": false,
+      "onUseMacroName": "[preItemRoll]ItemMacro"
+    },
+    "midiProperties": {
+      "nodam": false,
+      "fulldam": false,
+      "halfdam": false,
+      "rollOther": false,
+      "critOther": false,
+      "magicdam": false,
+      "magiceffect": false,
+      "concentration": false,
+      "toggleEffect": false
+    },
+    "core": {
+      "sourceId": "Item.snMxepltm5UWo5KL"
+    },
+    "favtab": {
+      "isFavorite": true
+    },
+    "cf": {
+      "id": "temp_ischjl2ljr"
+    },
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "9.266",
+      "systemVersion": "1.5.7"
+    }
+  }
+}
