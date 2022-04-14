@@ -122,3 +122,24 @@ also worth looking at
 .reduce     https://www.w3schools.com/jsref/jsref_reduce.asp    goes through an array and performs a function resulting in a singular value for the whole array
 
 The normal route to access actor data from a token would be:   token.actor.data.data (avoid going via _source)
+
+
+
+
+if you change workflow.damageRoll, you need to also update workflow.damageTotal and workflow.damageHTML. 
+You should not be changing any _fields in the roll. 
+
+damageHTML is set via workflow.damageHTML = await workflow.damageRoll.render().
+
+Fiddling with the dice results is not a good solution, since you end up with a "bad" state in the roll, 
+which is likely to cause problems. The way I'd recommend is to reroll the damage roll 
+(behind the scenes with the correct formula - they player will never know) - you can fiddle with the roll 
+before it is rolled, but not really after.
+
+
+
+const newRoll = workflow.damageRoll.clone();
+newRoll.dice.forEach(t=>t.modifiers.push("min2"));
+workflow.damageRoll = await newRoll.roll();
+workflow.damageTotal = newRoll.total;
+workflow.damageHTML = await newRoll.render();

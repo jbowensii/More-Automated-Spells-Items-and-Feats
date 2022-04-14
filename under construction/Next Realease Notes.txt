@@ -5,4 +5,8 @@
 - Elemental Adept feat (all 5) - completed
 - Shadow Step - completed
 - Orcish Fury - completed
-- Channel Divinity: Inspiring Smite & Inspiring Smite (These two go together) 
+- Channel Divinity: Inspiring Smite & Inspiring Smite (These two go together) - completed
+- Slasher (Critical hit and reduce speed) - completed 
+- Feline Agility - could not figure out how to track movement for the automatic reset
+- Piercer (Critical Hit bonus and reroll damage die) - completed
+- Channel Divinity: Path to the Grave - 

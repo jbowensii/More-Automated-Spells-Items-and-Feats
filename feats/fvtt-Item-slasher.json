@@ -1,0 +1,179 @@
+{
+  "name": "Slasher",
+  "type": "feat",
+  "img": "systems/dnd5e/icons/skills/weapon_34.jpg",
+  "data": {
+    "description": {
+      "value": "<p> You’ve learned where to cut to have the greatest results, granting you the following benefits:</p>\n<ul>\n<li>Once per turn when you hit a creature with an attack that deals slashing damage, you can reduce the speed of the target by 10 feet until the start of your next turn.</li>\n<li>When you score a critical hit that deals slashing damage to a creature, you grievously wound it. Until the start of your next turn, the target has disadvantage on all attack rolls.</li>\n</ul>\n<p> </p>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "TCoE",
+    "activation": {
+      "type": "special",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Feat: Slasher",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "effects": [
+    {
+      "_id": "5LsTTEo1APQ0w520",
+      "changes": [
+        {
+          "key": "flags.midi-qol.onUseMacroName",
+          "mode": 0,
+          "value": "ItemMacro.Slasher,preDamageRoll",
+          "priority": "20"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "systems/dnd5e/icons/skills/weapon_34.jpg",
+      "label": "Slasher",
+      "origin": "Item.Aj6rMauKBQFNOrub",
+      "transfer": true,
+      "flags": {
+        "core": {
+          "statusId": ""
+        },
+        "dae": {
+          "stackable": "none",
+          "durationExpression": "",
+          "macroRepeat": "none",
+          "specialDuration": [],
+          "transfer": true
+        },
+        "ActiveAuras": {
+          "isAura": false,
+          "aura": "None",
+          "radius": null,
+          "alignment": "",
+          "type": "",
+          "ignoreSelf": false,
+          "height": false,
+          "hidden": false,
+          "displayTemp": false,
+          "hostile": false,
+          "onlyOnce": false
+        }
+      },
+      "tint": null,
+      "selectedKey": "flags.midi-qol.onUseMacroName"
+    }
+  ],
+  "flags": {
+    "scene-packer": {
+      "hash": "fb6fcea624ca1feb8e9d0158e0d069039b861d56",
+      "sourceId": "Item.bnvtW3Gq8dN87h4u"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Slasher",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "/*****\nSlasher\n\nOnce per turn when you hit a creature with an attack that deals slashing damage, \nyou can reduce the speed of the target by 10 feet until the start of your next turn.\n\nWhen you score a critical hit that deals slashing damage to a creature, \nyou grievously wound it. Until the start of your next turn, the target has \ndisadvantage on all attack rolls.\n\nv0.1 April 13 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\n// make sure the attempted hit was made with a weapon attack\nif (![\"mwak\",\"rwak\"].includes(args[0].item.data.actionType)) return;\n\nif (args[0].macroPass === \"preDamageRoll\") {\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);\n    let targetToken = await fromUuid(args[0].hitTargetUuids[0]);\n    let targetActor = targetToken.actor;\n    let theItem = workflow.item.data.data;\n\n    if (theItem.damage.parts[0][1] !== \"slashing\") return;   // not a slashing weapon  \n        else {\n            let effect = await findEffect(targetActor, \"Reduced Movement\");\n            if (!effect) await applyReduceMovementEffect(targetActor, args[0].uuid);\n            if (workflow.isCritical) await applyAttackDisadvantageEffect(targetActor, args[0].uuid);\n        }\n    return; \n}\n\n// Apply the fightened effect to the target\nasync function applyReduceMovementEffect(target, originUuid) {\n    let effectData = {\n        label : \"Reduced Movement\",\n        icon : \"systems/dnd5e/icons/items/equipment/boots-leather.jpg\",\n        origin: originUuid,\n        changes: [ { \"key\": \"data.attributes.movement.all\", \"value\": `-10`, \"mode\":0, \"priority\": 20 } ],\n        disabled: false,\n        flags: { dae: {specialDuration: [\"turnStartSource\"]}, }\n       }\n    await MidiQOL.socket().executeAsGM(\"createEffects\", {actorUuid: target.uuid, effects: [effectData]});\n}\n\n// Apply the fightened effect to the target\nasync function applyAttackDisadvantageEffect(target, originUuid) {\n    let effectData = {\n        label : \"Attack Disadvantage\",\n        icon : \"systems/dnd5e/icons/skills/weapon_08.jpg\",\n        origin: originUuid,\n        changes: [ { \"key\": \"flags.midi-qol.disadvantage.attack.all\", \"value\": `1`, \"mode\": 0, \"priority\": 20 } ],\n        disabled: false,\n        flags: { dae: {specialDuration: [\"turnStartSource\"]}, }\n       }\n    await MidiQOL.socket().executeAsGM(\"createEffects\", {actorUuid: target.uuid, effects: [effectData]});\n}\n\n// Function to test for an effect\nasync function findEffect (thisActor, effectName) {\n    let effectUuid = null;\n    effectUuid = thisActor?.effects.find(ef=> ef.data.label === effectName);\n    return effectUuid;        \n}",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        }
+      }
+    },
+    "core": {
+      "sourceId": "Item.5PUe0GiheEHUomoR"
+    },
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "9.266",
+      "systemVersion": "1.5.7"
+    },
+    "cf": {
+      "id": "temp_b676eyusztv"
+    },
+    "favtab": {
+      "isFavorite": true
+    }
+  }
+}
