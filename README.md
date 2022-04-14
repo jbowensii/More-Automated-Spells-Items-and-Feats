@@ -164,11 +164,7 @@ Things I am still working on / Known Issues:
 - Brave
     
 - Primevil Awareness
-    
-- Slasher: Critical Hit
-    
-- Slasher: Reduce Speed
-    
+   
 - Relentless Endurance
     
 - Arcane Recovery
@@ -178,12 +174,6 @@ Things I am still working on / Known Issues:
 - Channel Divinity: Path to the Grave
     
 - Circle of Mortality
-    
-- Feline Agility
-    
-- Piercer: Critical Hit
-    
-- Piercer: reroll damage
     
 - Spear Master
     
