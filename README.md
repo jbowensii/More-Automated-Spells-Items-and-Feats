@@ -151,8 +151,6 @@ Things I am still working on / Known Issues:
 <details>
 <summary> AUTOMATIONS I AM WORKING ON: </summary>
     
-- Arcane Recovery
-    
 - Sourcery Point Meta Magic Effects
     
 - Psionic Power: Psi-Bolstered Knack
