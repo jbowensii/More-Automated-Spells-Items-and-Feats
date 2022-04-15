@@ -162,17 +162,11 @@ Things I am still working on / Known Issues:
 - Brave
     
 - Primevil Awareness
-   
-- Relentless Endurance
     
 - Arcane Recovery
     
 - Awakened Spellbook: Replace Damage
-    
-- Channel Divinity: Path to the Grave
-    
-- Circle of Mortality
-    
+      
 - Spear Master
     
 </details>
