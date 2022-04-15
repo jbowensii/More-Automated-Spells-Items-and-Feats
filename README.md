@@ -153,14 +153,6 @@ Things I am still working on / Known Issues:
     
 - Sourcery Point Meta Magic Effects
     
-- Psionic Power: Psi-Bolstered Knack
-    
-- Psionic Power: Psionic Die
-    
-- Psionic Power: Recovery
-    
-- Brave
-    
 - Primevil Awareness
     
 - Arcane Recovery
