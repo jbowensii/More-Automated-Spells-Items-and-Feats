@@ -142,25 +142,14 @@ AUTOMATED is just as it sounds, these will appear if you are using MIDI-QOL, DAE
 <p>&nbsp;</p>
 </details>
 
-Things I am still working on / Known Issues:
-
-- Fighter Maneuver Lunging Attack: This is not yet compatible with midi-qol range checking, awaiting a possible fix
-- Fighter Maneuver Goading Attack: attack places effect disadv on all attacks, places marker on actor to give advantage to anyone with the goading marker (CANCEL OUT)
-- Fighter Maneuver Pushing Attack: Check for wall collission, make sure selected and targeted are not the same 1 creature 1 pc
+<details>
+Known Issues:
+<p>&nbsp;</p>
+</details>
 
 <details>
 <summary> AUTOMATIONS I AM WORKING ON: </summary>
-    
-- Sourcery Point Meta Magic Effects
-    
-- Primevil Awareness
-    
-- Arcane Recovery
-    
-- Awakened Spellbook: Replace Damage
-      
-- Spear Master
-    
+<p>&nbsp;</p>
 </details>
 
 DISCORD (jbowens#0415) 
