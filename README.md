@@ -3,9 +3,11 @@ FoundryVTT More Automated Spells Items and Feats (MASIF amounts of automation) M
 
 This module requires the following modules to function:
 
-- MIDI-QOL                            https://foundryvtt.com/packages/midi-qol/
-- Dynamic Active Effects (dae)        https://foundryvtt.com/packages/dae  
-- DFreds Convenient Effects               https://foundryvtt.com/packages/dfreds-convenient-effects
+- MIDI-QOL                              https://foundryvtt.com/packages/midi-qol/
+- Dynamic Active Effects (dae)          https://foundryvtt.com/packages/dae  
+- DFreds Convenient Effects             https://foundryvtt.com/packages/dfreds-convenient-effects
+- Link Item and Resource (recommended)  https://foundryvtt.com/packages/link-item-resource-5e
+- 5e Sheet Resource plus (recommended)  https://foundryvtt.com/packages/resourcesplus
 
 I started automating the Fighter Battlemaster Maneuvers and just kept on going I guess...
 
@@ -36,7 +38,7 @@ So before I explain how to setup and use these scripts, a shout out to Tim Posne
 </details>
 
 <details>
-<summary> IMPORTING AN ITEM </summary>
+<summary> IMPORTING AN AUTOMATION ITEM </summary>
 <p>&nbsp;</p>
 
 Once the compendium module is installed you can import one of the items into your game.  Most of them are completely setup from the start and can be dropped on the appropriate character and just function.  
@@ -59,31 +61,40 @@ If you have a character sheet runs out of resource spaces, might I suggest the m
 <p>&nbsp;</p>
 </details>
 
-<details>
-<summary> AUTOMATIONS IN THE MODULE </summary>
+<details open>
+<summary> AUTOMATION ITEMS IN THIS MODULE</summary>
 
 - Divine Fury, Auto Divine Fury
-    
 - Channel Divinity: Turn Undead
-    
 - Eyes of the Night / Gift of the Eyes of the Night
-    
-- 23 Fighter: Battlemaster Maneuvers and support item(s)
-    
+- ALL 23 Fighter: Battlemaster Maneuvers and support item(s)
 - Peerless Athlete
-    
 - Steps of the Night
-    
 - Vigilant Blessing
-    
 - Help Action
-    
 - Vitrolic Sphere (with automatic DoT Damage) 
+- Stunning Strike
+- Fey Presence
+- Misty Escape
+- Elemental Adept feat (all 5)
+- Shadow Step
+- Orcish Fury
+- Channel Divinity: Inspiring Smite & Inspiring Smite (These two go together)
+- Slasher (Critical hit and reduce speed)
+- Piercer (Critical Hit bonus and reroll damage die)
+- Channel Divinity: Path to the Grave
+- Circle of Mortality
+- Psionic Power: Psionic Die
+- Aura of Alacrity
+- Incisive Sense
+- Channel Divinity: Radiance of the Dawn
+- Wrath of the storm
+- Zealous Presence
     
 </details>
     
-<details>
-<summary> BATTLEMASTER MANEUVER SETUP </summary>
+<details open>
+<summary> BATTLEMASTER MANEUVER SETUP</summary>
 <p>&nbsp;</p>
 
 Install and enable the module, it adds a single compendium with all of the maneuvers... 
@@ -121,7 +132,6 @@ Install and enable the module, it adds a single compendium with all of the maneu
 <details>
 <summary> WHAT TO KNOW ABOUT USING BATTLEMASTER MANEUVERS </summary>
 <p>&nbsp;</p>
-
 Fighter Battlemaster Maneuvers are divided into several categories: Utility, Before Attack, After Attack, and Automated.
 
 Utility Maneuvers can be identified by the EYE GRAPHIC, these can be activated whenever your characters can act. 
@@ -139,16 +149,38 @@ AFTER THE ATTACK must be activated if a hit is made.
 AUTOMATED is just as it sounds, these will appear if you are using MIDI-QOL, DAE and DF Convenient Effects.
 
 <img width="929" alt="image" src="https://user-images.githubusercontent.com/76136571/161351112-f4bae672-9866-442b-9e4d-9a2bf655d486.png">
+</details>
+
+<details>
+<summary> KNOWN ISSUES </summary>
 <p>&nbsp;</p>
 </details>
 
 <details>
-Known Issues:
-<p>&nbsp;</p>
-</details>
+<summary> AUTOMATIONS I AM WORKING ON</summary>
 
-<details>
-<summary> AUTOMATIONS I AM WORKING ON: </summary>
+- combat wildshape
+- Fighting Style: Great Weapon Fighting
+- Starry Forms (all 3)
+- Steady
+- shadow arts
+- warding flare
+- hound of ill omen
+- channel divinity destructive wrath
+- Sourcery Point Meta Magic Effects
+- Primevil Awareness
+- Arcane Recovery
+- Awakened Spellbook: Replace Damage
+- Spear Master
+- Fighter Maneuver Lunging Attack
+- Fighter Maneuver Goading Attack
+- Fighter Maneuver Pushing Attack
+- Feline Agility
+- Relentless Endurance
+- Brave
+- Psionic Power: Psionic Wispers 
+- Psionic Power: Psi-Bolstered Knack
+                                                                                                      
 <p>&nbsp;</p>
 </details>
 
