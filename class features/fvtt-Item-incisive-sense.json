@@ -1,0 +1,173 @@
+{
+  "name": "Incisive Sense",
+  "type": "feat",
+  "img": "icons/equipment/back/cloak-hooded-green-gold.webp",
+  "data": {
+    "description": {
+      "value": "<p>You have advantage on Intelligence (@Compendium[dnd5e.rules.Using Each Ability]{Investigation}) and Wisdom (@Compendium[dnd5e.rules.Using Each Ability]{Insight}) checks.</p>",
+      "chat": "<p>You have advantage on Intelligence (@Compendium[dnd5e.rules.Using Each Ability]{Investigation}) and Wisdom (@Compendium[dnd5e.rules.Using Each Ability]{Insight}) checks.</p>",
+      "unidentified": ""
+    },
+    "source": "Explorer's Guide to Wildemount pg 163",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "effects": [
+    {
+      "_id": "f50j8dfdk7sz7lfe",
+      "changes": [
+        {
+          "key": "flags.midi-qol.advantage.skill.ins",
+          "mode": 5,
+          "value": "1",
+          "priority": "20"
+        },
+        {
+          "key": "flags.midi-qol.advantage.skill.inv",
+          "mode": 5,
+          "value": "1",
+          "priority": "20"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "icons/equipment/back/cloak-hooded-green-gold.webp",
+      "label": "Incisive Sense",
+      "origin": "Actor.6OUbrDvzBaKBNRuA.Item.VPKVVTDdrss5Yi0f",
+      "transfer": true,
+      "flags": {
+        "core": {
+          "statusId": ""
+        },
+        "dae": {
+          "stackable": "none",
+          "durationExpression": "",
+          "macroRepeat": "none",
+          "specialDuration": [],
+          "transfer": true
+        },
+        "ActiveAuras": {
+          "isAura": false,
+          "aura": "None",
+          "radius": null,
+          "alignment": "",
+          "type": "",
+          "ignoreSelf": false,
+          "height": false,
+          "hidden": false,
+          "displayTemp": false,
+          "hostile": false,
+          "onlyOnce": false
+        }
+      },
+      "tint": null,
+      "selectedKey": [
+        "flags.midi-qol.advantage.skill.ins",
+        "flags.midi-qol.advantage.skill.inv"
+      ]
+    }
+  ],
+  "flags": {
+    "ddbimporter": {
+      "id": 2821775,
+      "type": "race",
+      "entityTypeId": 1960452172,
+      "dndbeyond": {
+        "displayOrder": 200
+      },
+      "importId": "8i3k4hbim8bho1dm"
+    },
+    "obsidian": {
+      "source": {
+        "type": "race"
+      }
+    },
+    "scene-packer": {
+      "hash": "2ef45f3a28ff3d57a072f7adc9b01196e05cad9d",
+      "sourceId": "Item.Oz2uUMayNNWPkLqR"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "exportSource": {
+      "world": "stormkings",
+      "system": "dnd5e",
+      "coreVersion": "9.266",
+      "systemVersion": "1.5.7"
+    }
+  }
+}

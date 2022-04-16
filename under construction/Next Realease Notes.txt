@@ -9,4 +9,37 @@
 - Slasher (Critical hit and reduce speed) - completed 
 - Feline Agility - could not figure out how to track movement for the automatic reset
 - Piercer (Critical Hit bonus and reroll damage die) - completed
-- Channel Divinity: Path to the Grave - 
+- Channel Divinity: Path to the Grave - completed
+- Circle of Mortality - completed
+- Relentless Endurance - 
+- Brave - no hook on core dnd 5e effects light fighteneed or charmed, requested MIDI-QOL hook or DAE flags
+- Psionic Power: Psionic Die - completed
+- Psionic Power: Psionic Wispers & Psi-Bolstered Knack - already existed 
+- Aura of Alacrity - completed
+- Incisive Sense - complete
+- Channel Divinity: Radiance of the Dawn - Complete
+- Wrath of the storm - complete
+- Zealous Presence - complete
+
+
+
+- combat wildshape (spell) - all wildshape bonuses added when wildshape expended and kept through transformation, end when wild shape is over?
+- Fighting Style: Great Weapon Fighting - reroll 1 & 2 on damage must keep new roll 1d10r<=2[slashing] + @mod + 1
+- Starry Form - transormation, custom keep HP
+- Steady automatic
+- shadow arts
+- warding flare
+- hound of ill omen auto summon companion with added temp HP
+- channel divinity destructive wrath
+- Sourcery Point Meta Magic Effects
+- Primevil Awareness
+- Arcane Recovery
+- Awakened Spellbook: Replace Damage
+- Spear Master
+- Fighter Maneuver Lunging Attack: This is not yet compatible with midi-qol range checking, awaiting a possible fix
+- Fighter Maneuver Goading Attack: attack places effect disadv on all attacks, places marker on actor to give advantage to anyone with the goading marker (CANCEL OUT)
+- Fighter Maneuver Pushing Attack: Check for wall collission, make sure selected and targeted are not the same 1 creature 1 pc
+- Feline Agility - could not figure out how to track movement for the automatic reset
+- Relentless Endurance - 
+- Brave - no hook on core dnd 5e effects light fighteneed or charmed, requested MIDI-QOL hook or DAE flags
+- Psionic Power: Psionic Wispers & Psi-Bolstered Knack - already existed 

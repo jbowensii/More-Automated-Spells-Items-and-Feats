@@ -1,0 +1,158 @@
+{
+  "name": "Channel Divinity: Radiance of the Dawn",
+  "type": "feat",
+  "img": "systems/dnd5e/icons/spells/light-air-fire-3.jpg",
+  "data": {
+    "description": {
+      "value": "As an action, you can use Channel Divinity and present your holy symbol to dispel any magical darkness within 30 ft. Each hostile creature (that doesn't have total cover) within 30 ft. must make a CON saving throw (DC +15) or take 2d10 +10 radiant damage (half damage on success).\n<details>\n  <summary>\n    More Details\n  </summary>\n  <p>\n    </p><p>Starting at 2nd level, you can use your Channel Divinity to harness sunlight, banishing darkness and dealing radiant damage to your foes.</p>\n<p>As an action, you present your holy symbol, and any magical darkness within 30 feet of you is dispelled. Additionally, each hostile creature within 30 feet of you must make a Constitution saving throw. A creature takes radiant damage equal to 2d10 + your cleric level on a failed saving throw, and half as much damage on a successful one. A creature that has total cover from you is not affected.</p>\n  <p></p>\n</details>",
+      "chat": "As an action, you can use Channel Divinity and present your holy symbol to dispel any magical darkness within 30 ft. Each hostile creature (that doesn't have total cover) within 30 ft. must make a CON saving throw (DC +15) or take 2d10 +10 radiant damage (half damage on success).\n<details>\n  <summary>\n    More Details\n  </summary>\n  <p>\n    </p><p>Starting at 2nd level, you can use your Channel Divinity to harness sunlight, banishing darkness and dealing radiant damage to your foes.</p>\n<p>As an action, you present your holy symbol, and any magical darkness within 30 feet of you is dispelled. Additionally, each hostile creature within 30 feet of you must make a Constitution saving throw. A creature takes radiant damage equal to 2d10 + your cleric level on a failed saving throw, and half as much damage on a successful one. A creature that has total cover from you is not affected.</p>\n  <p></p>\n</details>",
+      "unidentified": ""
+    },
+    "source": "",
+    "activation": {
+      "type": "action",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "enemy"
+    },
+    "range": {
+      "value": 30,
+      "long": null,
+      "units": "ft"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "charges",
+      "target": "",
+      "amount": 1
+    },
+    "ability": "",
+    "actionType": "save",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "2d10[radiant] + @classes.cleric.levels",
+          "radiant"
+        ]
+      ],
+      "versatile": "",
+      "value": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "con",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "effects": [],
+  "flags": {
+    "ddbimporter": {
+      "id": "53344",
+      "entityTypeId": "222216831",
+      "componentId": 138,
+      "componentTypeId": 12168134,
+      "class": "Cleric",
+      "subclass": "Light Domain",
+      "dndbeyond": {
+        "levelScale": null,
+        "levelScales": [],
+        "limitedUse": [
+          {
+            "level": null,
+            "uses": 1
+          }
+        ]
+      },
+      "importId": "cjwzq7lf48igj2ev",
+      "ignoreIcon": false,
+      "ignoreItemImport": false,
+      "retainResourceConsumption": true
+    },
+    "infusions": {
+      "infused": false
+    },
+    "obsidian": {
+      "source": {
+        "type": "class",
+        "text": "Cleric"
+      }
+    },
+    "scene-packer": {
+      "hash": "400d4ed5dd73d98dfa152af90fc894fe7f2cd856",
+      "sourceId": "Item.BvxA3rBt3nvjgMti"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "midi-qol": {
+      "effectActivation": false,
+      "onUseMacroName": ""
+    },
+    "midiProperties": {
+      "nodam": false,
+      "fulldam": false,
+      "halfdam": true,
+      "rollOther": false,
+      "critOther": false,
+      "magicdam": false,
+      "magiceffect": false,
+      "concentration": false,
+      "toggleEffect": false
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "core": {
+      "sourceId": "Item.BvxA3rBt3nvjgMti"
+    },
+    "exportSource": {
+      "world": "stormkings",
+      "system": "dnd5e",
+      "coreVersion": "9.266",
+      "systemVersion": "1.5.7"
+    }
+  }
+}
