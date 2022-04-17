@@ -6,6 +6,7 @@ This module requires the following modules to function:
 - MIDI-QOL                              https://foundryvtt.com/packages/midi-qol/
 - Dynamic Active Effects (dae)          https://foundryvtt.com/packages/dae  
 - DFreds Convenient Effects             https://foundryvtt.com/packages/dfreds-convenient-effects
+- Advanced Macros                       https://foundryvtt.com/packages/advanced-macros
 - Link Item and Resource (recommended)  https://foundryvtt.com/packages/link-item-resource-5e
 - 5e Sheet Resource plus (recommended)  https://foundryvtt.com/packages/resourcesplus
 
