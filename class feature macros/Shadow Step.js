@@ -19,25 +19,25 @@ if (args[0].macroPass === "preItemRoll") {
 
     let range = canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [{
         t: "circle",
-        user: game.user._id,
+        user: game.user.id,
         x: target.x + canvas.grid.size / 2,
         y: target.y + canvas.grid.size / 2,
         direction: 0,
         distance: 60,
         borderColor: "#FF0000",
-        flags: { DAESRD: { MistyEscape: { ActorId: pcActor.id } } }
+        flags: { DAESRD: { ShadowStep: { ActorId: pcActor.id } } }
     }]);
 
     range.then(result => {
         let templateData = {
             t: "rect",
-            user: game.user._id,
+            user: game.user.id,
             distance: 7.5,
             direction: 45,
             x: 0,
             y: 0,
             fillColor: game.user.color,
-            flags: { DAESRD: { MistyEscape: { ActorId: pcActor.id } } }
+            flags: { DAESRD: { ShadowStep: { ActorId: pcActor.id } } }
         };
 
         Hooks.once("createMeasuredTemplate", deleteTemplatesAndMove);

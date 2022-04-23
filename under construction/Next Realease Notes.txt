@@ -18,6 +18,7 @@
 - Relentless Endurance - 
 - Brave - no hook on core dnd 5e effects light fighteneed or charmed, requested MIDI-QOL hook or DAE flags
 - Psionic Power: Psionic Wispers & Psi-Bolstered Knack - already existed 
-
+- Dimension Door (cape of mountebank)
+- Channel Divinity: Path to the Grave
 
 
