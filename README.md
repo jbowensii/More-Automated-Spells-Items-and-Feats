@@ -181,6 +181,8 @@ AUTOMATED is just as it sounds, these will appear if you are using MIDI-QOL, DAE
 - Brave
 - Psionic Power: Psionic Wispers 
 - Psionic Power: Psi-Bolstered Knack
+- Dimension Door (cape of mountebank)
+- Channel Divinity: Path to the Grave
                                                                                                       
 <p>&nbsp;</p>
 </details>
