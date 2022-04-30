@@ -25,7 +25,7 @@ if cleric level > 16 ... CR <= 4 DEAD else
             if cleric level > 7 ... CR <= 1 DEAD else
                 if cleric level >4 ... CR <= 1/2 DEAD
                         
-v0.8 April 4 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v0.9 April 30 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "preambleComplete") {
@@ -39,7 +39,7 @@ if (args[0].macroPass === "preambleComplete") {
         else if (!([creatureType.value.toLowerCase(), creatureType.subtype.toLowerCase()].includes(activationCondition.toLowerCase()))) {
             workflow.targets.delete(target);
         }
-        game.user.updateTokenTargets(Array.from(workflow.targets).map(t=>t.id));
+        game.user.updateTokenTargets(Array.from(workflow.targets).map(t => t.id));
     }
 } else if (args[0].macroPass === "postActiveEffects") {
     let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
@@ -51,22 +51,24 @@ if (args[0].macroPass === "preambleComplete") {
     const actorClass = testClass(pcActor, "cleric", null, 1);
     if (!actorClass) return;
     if (actorClass.levels > 16) crDestroy = 4;
-        else if (actorClass.levels > 13) crDestroy = 3;
-            else if (actorClass.levels > 10) crDestroy = 2;
-                else if (actorClass.levels > 7) crDestroy = 1;
-                    else if (actorClass.levels > 4) crDestroy = 0.5;
-    
+    else if (actorClass.levels > 13) crDestroy = 3;
+    else if (actorClass.levels > 10) crDestroy = 2;
+    else if (actorClass.levels > 7) crDestroy = 1;
+    else if (actorClass.levels > 4) crDestroy = 0.5;
+
     // set HP = 0 for all targets of the CR or less
     let target = null;
-    for (target of workflow.targets) 
-        if (target.document._actor.data._source.data.details.cr <= crDestroy) {
-            await target.actor.update({"data.attributes.hp.value": 0});
+    for (target of workflow.targets) {
+        if (target.actor.data.data.details.cr <= crDestroy) {
+            await target.actor.update({ "data.attributes.hp.value": 0 });
+
         }
-} 
+    }
+}
 
 // Test PC Class, Subclass and Class Level, RETURN the class object or null
-function testClass (testActor, className, subClassName, levels) {
-    let theClass = testActor.data.data.classes[className] ;
+function testClass(testActor, className, subClassName, levels) {
+    let theClass = testActor.data.data.classes[className];
     if (theClass) {
         if ((levels > 0) && (theClass.levels >= levels)) {
             if (subClassName === null || (theClass.subclass === subClassName)) {

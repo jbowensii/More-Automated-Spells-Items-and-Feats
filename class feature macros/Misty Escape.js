@@ -18,7 +18,7 @@ if (args[0].macroPass === "preItemRoll") {
 
     let range = canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [{
         t: "circle",
-        user: game.user._id,
+        user: game.user.id,
         x: target.x + canvas.grid.size / 2,
         y: target.y + canvas.grid.size / 2,
         direction: 0,
@@ -30,7 +30,7 @@ if (args[0].macroPass === "preItemRoll") {
     range.then(result => {
         let templateData = {
             t: "rect",
-            user: game.user._id,
+            user: game.user.id,
             distance: 7.5,
             direction: 45,
             x: 0,
@@ -61,8 +61,8 @@ if (args[0].macroPass === "preItemRoll") {
 // or when the character attacks or casts a spell
 async function applyTempInvisibilityEffect(target, actor) {
     let effectData = {
-        label : "Invisible",
-        icon : "modules/dfreds-convenient-effects/images/invisible.svg",
+        label: "Invisible",
+        icon: "modules/dfreds-convenient-effects/images/invisible.svg",
         origin: actor.uuid,
         changes: [
             { "key": "flags.midi-qol.advantage.attack.all", "value": `1`, "mode": 0, "priority": 20 },
@@ -70,10 +70,10 @@ async function applyTempInvisibilityEffect(target, actor) {
         ],
         disabled: false,
         flags: {
-                dae: {specialDuration: ["turnStartSource","1Attack"]},
-                core: {statusId: "Convenient Effect: Invisible"}
-               }
-       }
-    await MidiQOL.socket().executeAsGM("createEffects", {actorUuid: target.uuid, effects: [effectData]});
+            dae: { specialDuration: ["turnStartSource", "1Attack"] },
+            core: { statusId: "Convenient Effect: Invisible" }
+        }
+    }
+    await MidiQOL.socket().executeAsGM("createEffects", { actorUuid: target.uuid, effects: [effectData] });
     return;
 }

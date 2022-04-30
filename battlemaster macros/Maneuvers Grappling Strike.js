@@ -15,7 +15,7 @@ Add the superiority die to your Strength (Athletics) check.
 v0.5 March 31 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
-if (args[0].macroPass === "preSave")  {
+if (args[0].macroPass === "preSave") {
 
     // define Actor, Target and Item
     const pcActor = MidiQOL.MQfromActorUuid(args[0].actorUuid);
@@ -25,20 +25,20 @@ if (args[0].macroPass === "preSave")  {
     // check to make sure only one target is selected
     if ((args[0].targetUuids.length < 1) || (args[0].targetUuids.length > 1)) {
         ui.notifications.error("You need to select a single target.");
-        await incrementResource (pcActor, "Superiority Dice", 1);
+        await incrementResource(pcActor, "Superiority Dice", 1);
         return;
     }
 
     let superiorityDie = pcActor.getFlag("dae", "SuperiorityDie");
     if (superiorityDie === null) {
         ui.notifications.error("Superiority Die feature is missing on the character sheet.");
-        await incrementResource (pcActor, "Superiority Dice", 1);
+        await incrementResource(pcActor, "Superiority Dice", 1);
         return;
     }
 
     // Set the DC and setup the saving throw
     let pcAthSkillTotal = pcActor.data.data.skills["ath"].total;
-    const roll = await (new Roll(`1d20 + ${pcAthSkillTotal} + ${superiorityDie}`)).roll(); 
+    const roll = await(new Roll(`1d20 + ${pcAthSkillTotal} + ${superiorityDie}`)).roll();
     theItem.data.data.save.dc = roll.total;
     theItem.data.data.save.scaling = "flat";
 
@@ -50,18 +50,18 @@ if (args[0].macroPass === "preSave")  {
     const item = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;
     item.data.data.save.ability = "str";
 }
-return; 
+return;
 
 //---------------------------------- MY FUNCTIONS -------------------------------------------
 
 // Increment available resource
-async function incrementResource (testActor, resourceName, numValue) {
-    let actorDup = duplicate(testActor.data._source);
+async function incrementResource(testActor, resourceName, numValue) {
+    let actorDup = duplicate(testActor);
     let resources = Object.values(actorDup.data.resources);
     let foundResource = resources.find(i => i.label.toLowerCase() === resourceName.toLowerCase());
     if (foundrResource) {
         foundResource.value = foundResource.value + numValue;
-        await testActor.update(actorDup); 
+        await testActor.update(actorDup);
     } else ui.notifications.error("You have not setup a Superiority Dice resource.");
     return;
 }

@@ -28,67 +28,66 @@ if (args[0].macroPass === "preActiveEffects") {
     // check to make sure only one target is selected
     if ((args[0].targetUuids.length < 1) || (args[0].targetUuids.length > 1)) {
         ui.notifications.error("You need to select a single target.");
-        await incrementResource (pcActor, "Superiority Dice", 1);
+        await incrementResource(pcActor, "Superiority Dice", 1);
         return;
     }
 
     // check to make sure target is not incapacitated
-    console.log("MACRO TEST | targetActor: %O", targetActor);
     if (!(targetActor.data.data.attributes.hp.value > 0)) {
         ui.notifications.error("Your target must be conscious!");
-        await incrementResource (pcActor, "Superiority Dice", 1);
+        await incrementResource(pcActor, "Superiority Dice", 1);
         return;
     }
 
     let superiorityDie = pcActor.getFlag("dae", "SuperiorityDie");
     if (superiorityDie === null) {
         ui.notifications.error("You are not a fighter battlemaster of at least level 3!");
-        await incrementResource (pcActor, "Superiority Dice", 1);
+        await incrementResource(pcActor, "Superiority Dice", 1);
         return;
     }
 
     // Roll superiority die for AC Bonus result
-    const acBonusRoll = await (new Roll(`${superiorityDie}`)).roll();    
-  
+    const acBonusRoll = await(new Roll(`${superiorityDie}`)).roll();
+
     //prompt for who gets the AC bonus
     let dialog = new Promise((resolve, reject) => {
         new Dialog({
-        // localize this text
-        title: "Battle Master: Bait and Switch",
-        content: "<p>Who gets the AC bonus for 1 turn You or Target?</p>",
-        buttons: {
-            one: {
-                icon: '<p> </p><img src = "systems/dnd5e/icons/skills/water_09.jpg" width="60" height="60"></>',
-                label: "<p>You</p>",
-                callback: () => resolve("YOU")
+            // localize this text
+            title: "Battle Master: Bait and Switch",
+            content: "<p>Who gets the AC bonus for 1 turn You or Target?</p>",
+            buttons: {
+                one: {
+                    icon: '<p> </p><img src = "systems/dnd5e/icons/skills/water_09.jpg" width="60" height="60"></>',
+                    label: "<p>You</p>",
+                    callback: () => resolve("YOU")
+                },
+                two: {
+                    icon: '<p> </p><img src = "systems/dnd5e/icons/skills/shadow_19.jpg" width="60" height="60"></>',
+                    label: "<p>Target</p>",
+                    callback: () => { resolve("TARGET") }
+                }
             },
-            two: {
-                icon: '<p> </p><img src = "systems/dnd5e/icons/skills/shadow_19.jpg" width="60" height="60"></>',
-                label: "<p>Target</p>",
-                callback: () => {resolve("TARGET")}
-            }
-        },
-        default: "two"
+            default: "two"
         }).render(true);
-        });
-    
+    });
+
     let choiceACBonus = await dialog;
-                
+
     if (choiceACBonus === "YOU") {
         // Set Actor Active Effect for AC bonus
         await pcActor.createEmbeddedDocuments("ActiveEffect", [{
-            "changes":  [{"key":"data.attributes.ac.bonus","mode":2,"value": `${acBonusRoll.total}`,"priority":"20"}],
+            "changes": [{ "key": "data.attributes.ac.bonus", "mode": 2, "value": `${acBonusRoll.total}`, "priority": "20" }],
             "label": "Bait and Switch AC Bonus",
-            "duration": {seconds: 0, rounds: 0, turns: 1},
+            "duration": { seconds: 0, rounds: 0, turns: 1 },
             "origin": args[0].itemUuid,
             "icon": "systems/dnd5e/icons/skills/gray_10.jpg",
         }]);
     } else {
         // Set Target Active Effect for AC bonus
         await targetActor.createEmbeddedDocuments("ActiveEffect", [{
-            "changes":  [{"key":"data.attributes.ac.bonus","mode":2,"value": `${acBonusRoll.total}`,"priority":"20"}],
+            "changes": [{ "key": "data.attributes.ac.bonus", "mode": 2, "value": `${acBonusRoll.total}`, "priority": "20" }],
             "label": "Bait and Switch AC Bonus",
-            "duration": {seconds: 0, rounds: 0, turns: 1},
+            "duration": { seconds: 0, rounds: 0, turns: 1 },
             "origin": args[0].itemUuid,
             "icon": "systems/dnd5e/icons/skills/gray_10.jpg",
         }]);
@@ -108,12 +107,12 @@ async function SwapTokens(pcMoveToken, targetMoveToken, thisCanvas) {
 
     thisCanvas.grid.diagonalRule = "EUCL";
     const diagonalRule = canvas.grid.diagonRule;
-    
+
     // Move Actor to OLD Target Location
     let travelRay = new Ray(pcCenter, targetCenter); //  create a ray to measure the angle to travel
     let angle = travelRay.angle;
     travelRay = Ray.fromAngle(pcMoveToken.data.x, pcMoveToken.data.y, angle, travelRay.distance);
-    snappedPosition = canvas.grid.getSnappedPosition(travelRay.B.x,travelRay.B.y);
+    snappedPosition = canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y);
     canvas.grid.diagonalRule = diagonalRule;
     await pcMoveToken.document.update(canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y));
 
@@ -121,7 +120,7 @@ async function SwapTokens(pcMoveToken, targetMoveToken, thisCanvas) {
     travelRay = new Ray(targetCenter, pcCenter); //  create a ray to measure the angle to travel
     angle = travelRay.angle;
     travelRay = Ray.fromAngle(targetMoveToken.data.x, targetMoveToken.data.y, angle, travelRay.distance);
-    snappedPosition = canvas.grid.getSnappedPosition(travelRay.B.x,travelRay.B.y);
+    snappedPosition = canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y);
     canvas.grid.diagonalRule = diagonalRule;
     await targetMoveToken.data.document.update(canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y));
 
@@ -129,13 +128,13 @@ async function SwapTokens(pcMoveToken, targetMoveToken, thisCanvas) {
 }
 
 // Increment available resource
-async function incrementResource (testActor, resourceName, numValue) {
-    let actorDup = duplicate(testActor.data._source);
+async function incrementResource(testActor, resourceName, numValue) {
+    let actorDup = duplicate(testActor);
     let resources = Object.values(actorDup.data.resources);
     let foundResource = resources.find(i => i.label.toLowerCase() === resourceName.toLowerCase());
     if (foundrResource) {
         foundResource.value = foundResource.value + numValue;
-        await testActor.update(actorDup); 
+        await testActor.update(actorDup);
     } else ui.notifications.error("You have not setup a Superiority Dice resource.");
     return;
 }

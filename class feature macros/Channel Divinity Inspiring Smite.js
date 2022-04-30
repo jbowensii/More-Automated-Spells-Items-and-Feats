@@ -14,16 +14,15 @@ v0.1 April 13 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Aut
 
 if (args[0] === "on") {
     const pcActor = await fromUuid(args[args.length - 1].actorUuid);
-    
-    const paladinClass = testClass (pcActor, "paladin", "Oath of Glory", 3);
-    console.log ("MACRO TEST | PALADIN CLASS: %O", paladinClass);
+
+    const paladinClass = testClass(pcActor, "paladin", "Oath of Glory", 3);
     if (!paladinClass) {
         ui.notifications.error("You are not a Oath of Glory Paladin of at least 3rd level.");
-        return;    
+        return;
     }
-    
+
     //roll 2d8 + paladinClass.levels and store result in flag.dae.healingPool
-    const roll = await (new Roll(`2d8 + ${paladinClass.levels}`)).roll();
+    const roll = await(new Roll(`2d8 + ${paladinClass.levels}`)).roll();
     pcActor.setFlag("dae", "healingpool", roll.total);
     return;
 
@@ -34,8 +33,8 @@ if (args[0] === "on") {
 }
 
 // Test PC Class, Subclass and Class Level, RETURN the class object or null
-function testClass (testActor, className, subClassName, levels) {
-    let theClass = testActor.data.data.classes[className] ;
+function testClass(testActor, className, subClassName, levels) {
+    let theClass = testActor.data.data.classes[className];
     if (theClass) {
         if ((levels > 0) && (theClass.levels >= levels)) {
             if (subClassName === null || (theClass.subclass === subClassName)) {

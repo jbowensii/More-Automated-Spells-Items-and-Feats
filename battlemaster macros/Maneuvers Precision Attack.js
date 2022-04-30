@@ -21,13 +21,13 @@ if (args[0].macroPass === "preCheckHits") {
     if ((theItem != null) && (theItem.name != "Maneuvers: Precision Attack")) {
         // define Actor, Target and Item
         const pcActor = MidiQOL.MQfromActorUuid(args[0].actorUuid);
-        
+
         // Find Superiority Dice Resource
         let resource = await findSheetResource(pcActor, "Superiority Dice");
-        if (!resource) { 
-            ui.notifications.error("Could not find a recource labeled 'Superiority Dice'..."); 
+        if (!resource) {
+            ui.notifications.error("Could not find a recource labeled 'Superiority Dice'...");
             return;
-        } 
+        }
 
         // No more Superiority Dice
         let superiorityDice = resource.value;
@@ -46,13 +46,13 @@ if (args[0].macroPass === "preCheckHits") {
         }
 
         // make sure the attempted hit was made with a weapon attack
-        if (!["mwak","rwak"].includes(args[0].item.data.actionType)) {
-            ui.notifications.error("Precision Attack only works with a weapon attack");  
-            return;       
+        if (!["mwak", "rwak"].includes(args[0].item.data.actionType)) {
+            ui.notifications.error("Precision Attack only works with a weapon attack");
+            return;
         }
-        
+
         // create a dialog and prompt to spend a superiority die
-        let useSuperiorityDie = false;        
+        let useSuperiorityDie = false;
         if (superiorityDice > 0) {
             let dialog = new Promise((resolve, reject) => {
                 new Dialog({
@@ -68,7 +68,7 @@ if (args[0].macroPass === "preCheckHits") {
                         two: {
                             icon: '<p> </p><img src = "systems/dnd5e/icons/skills/weapon_28.jpg" width="60" height="60"></>',
                             label: "<p>No</p>",
-                            callback: () => {resolve(false)}
+                            callback: () => { resolve(false) }
                         }
                     },
                     default: "two"
@@ -80,10 +80,10 @@ if (args[0].macroPass === "preCheckHits") {
         if (!useSuperiorityDie) return;
 
         // if YES subtract a superiorty die
-        await decrimentSheetResource (pcActor, "Superiority Dice", 1);
+        await decrimentSheetResource(pcActor, "Superiority Dice", 1);
 
         // get the live MIDI-QOL workflow so we can make changes
-        let newRoll = new  Roll(`${workflow.attackRoll.result} + ${superiorityDie}`, workflow.actor.getRollData());
+        let newRoll = new Roll(`${workflow.attackRoll.result} + ${superiorityDie}`, workflow.actor.getRollData());
         newRoll = await newRoll.evaluate({ async: true });
         workflow.attackRoll = newRoll;
         workflow.attackRollTotal = newRoll.total;
@@ -98,18 +98,18 @@ return;
 
 // Test for available resource
 // Return resource object
-async function findSheetResource (testActor, resourceName) {
+async function findSheetResource(testActor, resourceName) {
     let resources = Object.values(testActor.data.data.resources);
     let foundResource = resources.find(i => i.label.toLowerCase() === resourceName.toLowerCase());
     return foundResource;
 }
 
 // Decriment available resource
-async function decrimentSheetResource (testActor, resourceName, numValue) {
-    let actorDup = duplicate(testActor.data._source);
+async function decrimentSheetResource(testActor, resourceName, numValue) {
+    let actorDup = duplicate(testActor);
     let resources = Object.values(actorDup.data.resources);
     let foundResource = resources.find(i => i.label.toLowerCase() === resourceName.toLowerCase());
     foundResource.value = foundResource.value - numValue;
-    await testActor.update(actorDup); 
+    await testActor.update(actorDup);
     return;
 }
