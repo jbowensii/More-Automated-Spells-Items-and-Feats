@@ -25,7 +25,7 @@ if cleric level > 16 ... CR <= 4 DEAD else
             if cleric level > 7 ... CR <= 1 DEAD else
                 if cleric level >4 ... CR <= 1/2 DEAD
                         
-v0.9 April 30 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v1.0 March 1 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "preambleComplete") {
@@ -57,11 +57,11 @@ if (args[0].macroPass === "preambleComplete") {
     else if (actorClass.levels > 4) crDestroy = 0.5;
 
     // set HP = 0 for all targets of the CR or less
-    let target = null;
-    for (target of workflow.targets) {
+    const macro = game.macros.getName("Make Dead");
+    for (let target of workflow.targets) {
+        console.log("MACRO TEST | TARGET ACTOR UUID %s", target.actor.uuid);
         if (target.actor.data.data.details.cr <= crDestroy) {
-            await target.actor.update({ "data.attributes.hp.value": 0 });
-
+            macro.execute(target.actor.uuid);
         }
     }
 }

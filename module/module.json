@@ -3,7 +3,7 @@
     "title": "More Automated Spells Items and Feats",
     "description": "A FoundryVTT module containing a MASIF (More Automated Spells Items and Feats) amount of automation for D&D 5e.",
     "author": "jbowens #0415 (Discord)",
-    "version": "0.7.0",
+    "version": "0.7.5",
     "systems": [
         "dnd5e"
     ],
@@ -33,6 +33,13 @@
             "label": "More Automated Spells Items and Feats",
             "path": "packs/world-more-automated-spells-items-and-feats-1649102239992.db",
             "entity": "Item",
+            "module": "More Automated Spells Items and Feats"
+        },
+        {
+            "name": "More Automated Spells Items and Feats Macros",
+            "label": "More Automated Spells Items and Feats Macros",
+            "path": "packs/world-more-automated-spells-items-and-feats-macros",
+            "entity": "Macro",
             "module": "More Automated Spells Items and Feats"
         }
     ],

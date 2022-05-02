@@ -1,5 +1,5 @@
 {
-  "name": "Channel Divinity: Turn Undead",
+  "name": "Channel Divinity Turn Undead",
   "type": "feat",
   "img": "icons/magic/holy/barrier-shield-winged-blue.webp",
   "data": {
@@ -67,14 +67,21 @@
   "effects": [
     {
       "_id": "3adv1867dmy3nrmn",
-      "changes": [],
+      "changes": [
+        {
+          "key": "flags.midi-qol.onUseMacroName",
+          "mode": 0,
+          "value": "ItemMacro.\"Channel Divinity: Turn Undead\",all",
+          "priority": "1"
+        }
+      ],
       "disabled": false,
       "duration": {
         "startTime": null,
         "seconds": 60
       },
       "icon": "systems/dnd5e/icons/skills/yellow_19.jpg",
-      "label": "Channel Divinity: Turn Undead",
+      "label": "Channel Divinity Turn Undead",
       "origin": "Actor.4okcHmPmM1iBwyFs.Item.0Gd8ADfg2sOZyTyq",
       "transfer": false,
       "flags": {
@@ -102,13 +109,14 @@
           "onlyOnce": false
         }
       },
-      "tint": null
+      "tint": null,
+      "selectedKey": "flags.midi-qol.onUseMacroName"
     }
   ],
   "flags": {
     "scene-packer": {
-      "hash": "74274731373765b84f8e907d4ef58df4b0c4e4cc",
-      "sourceId": "Item.2O29BkVjK5uDB0QI"
+      "hash": "ceeeada18865889bf6c37c1e9ae1c85a28250b4f",
+      "sourceId": "Item.vnkZSWKgVM0PaQqX"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -157,12 +165,12 @@
       "macro": {
         "data": {
           "_id": null,
-          "name": "Channel Divinity: Turn Undead",
+          "name": "Channel Divinity Turn Undead",
           "type": "script",
           "author": "ldRsJ6Yp5qPydWA1",
           "img": "icons/svg/dice-target.svg",
           "scope": "global",
-          "command": "/*****\nCleric: Turn Undead\n\nUSEAGE : ACTIVATE TO CHANNEL DIVINITY : TURN UNDEAD\nClick on this item to activate the turn undead.  \nPlease remember to setup usage consumption in the itme itself.  \n \nMANEUVER DESCRIPTION:\nAs an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that \ncan see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its \nsaving throw, it is turned for 1 minute or until it takes any damage.\n\nA turned creature must spend its turns trying to move as far away from you as it can, and it can’t \nwillingly move to a space within 30 feet of you. It also can’t take reactions. For its action, it \ncan use only the Dash action or try to escape from an effect that prevents it from moving. If there’s \nnowhere to move, the creature can use the Dodge action.\n\nStarting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the \ncreature is instantly destroyed if its challenge rating is at or below a certain \nthreshold, as shown in the Destroy Undead algorithm below:\n\nif cleric level > 16 ... CR <= 4 DEAD else\n    if cleric level > 13 ... CR <= 3 DEAD else\n        if cleric level > 10 ... CR <= 2 DEAD else\n            if cleric level > 7 ... CR <= 1 DEAD else\n                if cleric level >4 ... CR <= 1/2 DEAD\n                        \nv0.9 April 30 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"preambleComplete\") {\n    let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    // I am stealing the activation condition as a string for the creature type I want to hit\n    const activationCondition = args[0].itemData.data.activation.condition.toLowerCase();\n    for (let target of workflow.targets) {\n        let creatureType = target.actor.data.data.details.type;\n        if ((creatureType === null) || (creatureType === undefined))    // that is not a creature\n            workflow.targets.delete(target);\n        else if (!([creatureType.value.toLowerCase(), creatureType.subtype.toLowerCase()].includes(activationCondition.toLowerCase()))) {\n            workflow.targets.delete(target);\n        }\n        game.user.updateTokenTargets(Array.from(workflow.targets).map(t => t.id));\n    }\n} else if (args[0].macroPass === \"postActiveEffects\") {\n    let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    const pcActor = workflow.actor;\n\n    // set CR to destory\n    let crDestroy = 0.0;\n    if (workflow.targets.size === 0) return;\n    const actorClass = testClass(pcActor, \"cleric\", null, 1);\n    if (!actorClass) return;\n    if (actorClass.levels > 16) crDestroy = 4;\n    else if (actorClass.levels > 13) crDestroy = 3;\n    else if (actorClass.levels > 10) crDestroy = 2;\n    else if (actorClass.levels > 7) crDestroy = 1;\n    else if (actorClass.levels > 4) crDestroy = 0.5;\n\n    // set HP = 0 for all targets of the CR or less\n    let target = null;\n    for (target of workflow.targets) {\n        if (target.actor.data.data.details.cr <= crDestroy) {\n            await target.actor.update({ \"data.attributes.hp.value\": 0 });\n\n        }\n    }\n}\n\n// Test PC Class, Subclass and Class Level, RETURN the class object or null\nfunction testClass(testActor, className, subClassName, levels) {\n    let theClass = testActor.data.data.classes[className];\n    if (theClass) {\n        if ((levels > 0) && (theClass.levels >= levels)) {\n            if (subClassName === null || (theClass.subclass === subClassName)) {\n                return theClass;\n            }\n        }\n    }\n    return null;\n}",
+          "command": "/*****\nCleric: Turn Undead\n\nUSEAGE : ACTIVATE TO CHANNEL DIVINITY : TURN UNDEAD\nClick on this item to activate the turn undead.  \nPlease remember to setup usage consumption in the itme itself.  \n \nMANEUVER DESCRIPTION:\nAs an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that \ncan see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its \nsaving throw, it is turned for 1 minute or until it takes any damage.\n\nA turned creature must spend its turns trying to move as far away from you as it can, and it can’t \nwillingly move to a space within 30 feet of you. It also can’t take reactions. For its action, it \ncan use only the Dash action or try to escape from an effect that prevents it from moving. If there’s \nnowhere to move, the creature can use the Dodge action.\n\nStarting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the \ncreature is instantly destroyed if its challenge rating is at or below a certain \nthreshold, as shown in the Destroy Undead algorithm below:\n\nif cleric level > 16 ... CR <= 4 DEAD else\n    if cleric level > 13 ... CR <= 3 DEAD else\n        if cleric level > 10 ... CR <= 2 DEAD else\n            if cleric level > 7 ... CR <= 1 DEAD else\n                if cleric level >4 ... CR <= 1/2 DEAD\n                        \nv1.0 March 1 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"preambleComplete\") {\n    let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    // I am stealing the activation condition as a string for the creature type I want to hit\n    const activationCondition = args[0].itemData.data.activation.condition.toLowerCase();\n    for (let target of workflow.targets) {\n        let creatureType = target.actor.data.data.details.type;\n        if ((creatureType === null) || (creatureType === undefined))    // that is not a creature\n            workflow.targets.delete(target);\n        else if (!([creatureType.value.toLowerCase(), creatureType.subtype.toLowerCase()].includes(activationCondition.toLowerCase()))) {\n            workflow.targets.delete(target);\n        }\n        game.user.updateTokenTargets(Array.from(workflow.targets).map(t => t.id));\n    }\n} else if (args[0].macroPass === \"postActiveEffects\") {\n    let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    const pcActor = workflow.actor;\n\n    // set CR to destory\n    let crDestroy = 0.0;\n    if (workflow.targets.size === 0) return;\n    const actorClass = testClass(pcActor, \"cleric\", null, 1);\n    if (!actorClass) return;\n    if (actorClass.levels > 16) crDestroy = 4;\n    else if (actorClass.levels > 13) crDestroy = 3;\n    else if (actorClass.levels > 10) crDestroy = 2;\n    else if (actorClass.levels > 7) crDestroy = 1;\n    else if (actorClass.levels > 4) crDestroy = 0.5;\n\n    // set HP = 0 for all targets of the CR or less\n    const macro = game.macros.getName(\"Make Dead\");\n    for (let target of workflow.targets) {\n        console.log(\"MACRO TEST | TARGET ACTOR UUID %s\", target.actor.uuid);\n        if (target.actor.data.data.details.cr <= crDestroy) {\n            macro.execute(target.actor.uuid);\n        }\n    }\n}\n\n// Test PC Class, Subclass and Class Level, RETURN the class object or null\nfunction testClass(testActor, className, subClassName, levels) {\n    let theClass = testActor.data.data.classes[className];\n    if (theClass) {\n        if ((levels > 0) && (theClass.levels >= levels)) {\n            if (subClassName === null || (theClass.subclass === subClassName)) {\n                return theClass;\n            }\n        }\n    }\n    return null;\n}",
           "folder": null,
           "sort": 0,
           "permission": {
@@ -176,7 +184,7 @@
       "world": "test",
       "system": "dnd5e",
       "coreVersion": "9.269",
-      "systemVersion": "1.5.7"
+      "systemVersion": "1.6.0"
     },
     "cf": {
       "id": "temp_bw9jtupqlwp",
