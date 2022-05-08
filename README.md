@@ -3,7 +3,9 @@ FoundryVTT More Automated Spells Items and Feats (MASIF amounts of automation) M
 
 This module is still active as I work out any issues to get re-listed on FoundryVTT (if that is even possible).
 
-I AM REMOVING THE OLD GITHUB AND REBILDING IT WITHOUT SOME MISTAKENLY INCLUDED COPYRIGHT MATERIAL
+    I AM REMOVING THE OLD GITHUB AND REBILDING IT WITHOUT SOME MISTAKENLY INCLUDED COPYRIGHT MATERIAL
+
+To manually install use this URL: https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/download/1.0.0/module.json
 
 This module requires the following modules to function:
 
@@ -45,8 +47,6 @@ The descriptions for each feature are empty, since including they MAY violate co
 There will also be notes in the description that instruct you HOW and WHEN to use the item to automate your game play. 
 <b>Please remember to click on the collapsible icon <img width="15" alt="image" src="https://user-images.githubusercontent.com/76136571/164912225-f8485d94-56bd-4e1d-baf9-58873cb426a4.png"> to open a section and read the instructions.</b> 
 
-Sometimes there is even more setup like linking those items to a character sheet resources.  a module to help with this is Link Item and Resource ... https://foundryvtt.com/packages/link-item-resource-5e
-
 If you have a character sheet runs out of resource spaces, might I suggest the module 5e Sheet Resource Plus ... https://github.com/ardittristan/5eSheet-resourcesPlus
 
 <p>&nbsp;</p>
@@ -54,6 +54,9 @@ If you have a character sheet runs out of resource spaces, might I suggest the m
 
 <details>
 <summary> AUTOMATION ITEMS IN THIS MODULE</summary>
+    
+    
+    The WIKI pages are currently empty but will be filled out shortly.
 
 - <a href="https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/wiki/Divine-Fury">`Divine Fury`</a>
 - <a href="https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/wiki/Channel-Divinity:-Turn-Undead">`Channel Divinity: Turn Undead`</a>
