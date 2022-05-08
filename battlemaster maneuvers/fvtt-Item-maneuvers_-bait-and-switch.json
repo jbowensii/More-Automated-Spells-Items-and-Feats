@@ -1,0 +1,163 @@
+{
+  "name": "Maneuvers: Bait and Switch",
+  "type": "feat",
+  "img": "icons/magic/perception/shadow-stealth-eyes-purple.webp",
+  "data": {
+    "description": {
+      "value": "<p data-content-chunk-id=\"ea1fee30-2970-4771-9e19-721665eca895\">[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>USAGE: </strong> <span style=\"color: #169179;\">ACTIVATE ANYTIME</span></summary>\n<p>This is a utility Maneuver and can be used whenever your character can take an action.&nbsp; This will set up any bonuses and effects on the TARGET actor.&nbsp; A <span style=\"text-decoration: underline; color: #236fa1;\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "<p>When a creature you can see moves into the reach you have with the melee weapon you’re wielding, you can use your reaction to expend one superiority die and make one attack against the creature, using that weapon. If the attack hits, add the superiority die to the weapon’s damage roll.</p>",
+      "unidentified": ""
+    },
+    "source": "TCoE p42",
+    "activation": {
+      "type": "special",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "attribute",
+      "target": "",
+      "amount": 1
+    },
+    "ability": "",
+    "actionType": "other",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Fighter: Battlemaster",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "effects": [],
+  "flags": {
+    "ddbimporter": {
+      "id": "2439086",
+      "entityTypeId": "222216831",
+      "componentId": 1306902,
+      "componentTypeId": 258900837,
+      "class": "Fighter",
+      "subclass": "Battle Master",
+      "importId": "28pyz8r4w0vt0973"
+    },
+    "infusions": {
+      "infused": false
+    },
+    "obsidian": {
+      "source": {
+        "type": "class",
+        "text": "Fighter"
+      }
+    },
+    "scene-packer": {
+      "hash": "c1cbd73d6f4a4dbd8e8d4f6eeb549dd6fbd12d92",
+      "sourceId": "Item.IyPiNhNhAEtip1nA"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "midi-qol": {
+      "effectActivation": false,
+      "onUseMacroName": "[preActiveEffects]ItemMacro"
+    },
+    "midiProperties": {
+      "nodam": false,
+      "fulldam": false,
+      "halfdam": false,
+      "rollOther": false,
+      "critOther": false,
+      "magicdam": false,
+      "magiceffect": false,
+      "concentration": false,
+      "toggleEffect": false
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "favtab": {
+      "isFavorite": true
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Maneuvers: Bait and Switch",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "/*****\nFighter Battlemaster Maneuver: Bait and Switch\n\nUSEAGE : ACTIVATE ANYTIME\nThis is a utility Maneuver and can be used whenever your character can take an action.  \nThis will setup any bonuses and effects on the TARGET actor.  \nA Superiority Die will be expended immediately.\n\nv1.2 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\n// Activate on preActiveEffects\nif (args[0].macroPass === \"preActiveEffects\") {\n\n    // define Actor, Target and Workflow\n    const pcActor = MidiQOL.MQfromActorUuid(args[0].actorUuid);\n    const targetActor = args[0].targets[0].actor;\n    let pcToken = token;\n    let targetToken = await fromUuid(args[0].hitTargetUuids[0]);\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n\n    // check to make sure only one target is selected\n    if ((args[0].targetUuids.length < 1) || (args[0].targetUuids.length > 1)) {\n        ui.notifications.error(\"You need to select a single target.\");\n        await incrementResource(pcActor, \"Superiority Dice\", 1);\n        return;\n    }\n\n    // check to make sure target is not incapacitated\n    if (!(targetActor.data.data.attributes.hp.value > 0)) {\n        ui.notifications.error(\"Your target must be conscious!\");\n        await incrementResource(pcActor, \"Superiority Dice\", 1);\n        return;\n    }\n\n    let superiorityDie = pcActor.getFlag(\"dae\", \"SuperiorityDie\");\n    if (superiorityDie === null) {\n        ui.notifications.error(\"You are not a fighter battlemaster of at least level 3!\");\n        await incrementResource(pcActor, \"Superiority Dice\", 1);\n        return;\n    }\n\n    // Roll superiority die for AC Bonus result\n    const acBonusRoll = await(new Roll(`${superiorityDie}`)).roll();\n\n    //prompt for who gets the AC bonus\n    let dialog = new Promise((resolve, reject) => {\n        new Dialog({\n            // localize this text\n            title: \"Battle Master: Bait and Switch\",\n            content: \"<p>Who gets the AC bonus for 1 turn You or Target?</p>\",\n            buttons: {\n                one: {\n                    icon: '<p> </p><img src = \"systems/dnd5e/icons/skills/water_09.jpg\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>You</p>\",\n                    callback: () => resolve(\"YOU\")\n                },\n                two: {\n                    icon: '<p> </p><img src = \"systems/dnd5e/icons/skills/shadow_19.jpg\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>Target</p>\",\n                    callback: () => { resolve(\"TARGET\") }\n                }\n            },\n            default: \"two\"\n        }).render(true);\n    });\n\n    let choiceACBonus = await dialog;\n\n    if (choiceACBonus === \"YOU\") {\n        // Set Actor Active Effect for AC bonus\n        await pcActor.createEmbeddedDocuments(\"ActiveEffect\", [{\n            \"changes\": [{ \"key\": \"data.attributes.ac.bonus\", \"mode\": 2, \"value\": `${acBonusRoll.total}`, \"priority\": \"20\" }],\n            \"label\": \"Bait and Switch AC Bonus\",\n            \"duration\": { seconds: 0, rounds: 0, turns: 1 },\n            \"origin\": args[0].itemUuid,\n            \"icon\": \"systems/dnd5e/icons/skills/gray_10.jpg\",\n        }]);\n    } else {\n        // Set Target Active Effect for AC bonus\n        await targetActor.createEmbeddedDocuments(\"ActiveEffect\", [{\n            \"changes\": [{ \"key\": \"data.attributes.ac.bonus\", \"mode\": 2, \"value\": `${acBonusRoll.total}`, \"priority\": \"20\" }],\n            \"label\": \"Bait and Switch AC Bonus\",\n            \"duration\": { seconds: 0, rounds: 0, turns: 1 },\n            \"origin\": args[0].itemUuid,\n            \"icon\": \"systems/dnd5e/icons/skills/gray_10.jpg\",\n        }]);\n    }\n\n    // Swap the token positions positions on the canvas\n    await SwapTokens(pcToken, targetToken, canvas);\n}\nreturn;\n\n//---------------------------------- MY FUNCTIONS -------------------------------------------\n\nasync function SwapTokens(pcMoveToken, targetMoveToken, thisCanvas) {\n    let targetCenter = targetMoveToken.object.center;\n    let pcCenter = pcMoveToken.center;\n    let snappedPosition = null;\n\n    thisCanvas.grid.diagonalRule = \"EUCL\";\n    const diagonalRule = canvas.grid.diagonRule;\n\n    // Move Actor to OLD Target Location\n    let travelRay = new Ray(pcCenter, targetCenter); //  create a ray to measure the angle to travel\n    let angle = travelRay.angle;\n    travelRay = Ray.fromAngle(pcMoveToken.data.x, pcMoveToken.data.y, angle, travelRay.distance);\n    snappedPosition = canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y);\n    canvas.grid.diagonalRule = diagonalRule;\n    await pcMoveToken.document.update(canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y));\n\n    // Move Target to OLD Actor Location\n    travelRay = new Ray(targetCenter, pcCenter); //  create a ray to measure the angle to travel\n    angle = travelRay.angle;\n    travelRay = Ray.fromAngle(targetMoveToken.data.x, targetMoveToken.data.y, angle, travelRay.distance);\n    snappedPosition = canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y);\n    canvas.grid.diagonalRule = diagonalRule;\n    await targetMoveToken.data.document.update(canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y));\n\n    return;\n}\n\n// Increment available resource\nasync function incrementResource(testActor, resourceName, numValue) {\n    let actorDup = duplicate(testActor);\n    let resources = Object.values(actorDup.data.resources);\n    let foundResource = resources.find(i => i.label.toLowerCase() === resourceName.toLowerCase());\n    if (foundrResource) {\n        foundResource.value = foundResource.value + numValue;\n        await testActor.update(actorDup);\n    } else ui.notifications.error(\"You have not setup a Superiority Dice resource.\");\n    return;\n}",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        }
+      }
+    },
+    "core": {
+      "sourceId": "Item.QCt9G1ryLky9enrK"
+    },
+    "cf": null,
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "9.269",
+      "systemVersion": "1.6.1"
+    }
+  }
+}

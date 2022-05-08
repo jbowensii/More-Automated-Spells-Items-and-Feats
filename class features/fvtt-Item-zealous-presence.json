@@ -1,14 +1,14 @@
 {
   "name": "Zealous Presence",
   "type": "feat",
-  "img": "systems/dnd5e/icons/skills/yellow_14.jpg",
+  "img": "icons/creatures/magical/construct-iron-stomping-yellow.webp",
   "data": {
     "description": {
-      "value": "Once per long rest as a bonus action, you unleash a battle cry and up to 10 other creatures of your choice within 60 feet of you that can hear you gain advantage on attack rolls and saving throws until the start of your next turn.",
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "Once per long rest as a bonus action, you unleash a battle cry and up to 10 other creatures of your choice within 60 feet of you that can hear you gain advantage on attack rolls and saving throws until the start of your next turn.",
       "unidentified": ""
     },
-    "source": "",
+    "source": "XGtE p11",
     "activation": {
       "type": "bonus",
       "cost": 1,
@@ -36,7 +36,7 @@
     },
     "consume": {
       "type": "charges",
-      "target": "juMtQeO7Dyz3rDlO",
+      "target": "",
       "amount": 1
     },
     "ability": "",
@@ -57,11 +57,12 @@
       "dc": null,
       "scaling": "spell"
     },
-    "requirements": "",
+    "requirements": "Barbarian: Path of the Zealot",
     "recharge": {
       "value": null,
       "charged": false
-    }
+    },
+    "attunement": null
   },
   "effects": [
     {
@@ -158,8 +159,8 @@
       "resource-link": "secondary"
     },
     "scene-packer": {
-      "hash": "c0d407ff07cca2139b68ae531ea4e07844613366",
-      "sourceId": "Item.Kjv6xBCHzbdiD9uE"
+      "hash": "8a906dfa7c58c0fb56f4636d224b4f2c04ab2b2d",
+      "sourceId": "Item.XGrcyW4DQeVeDMlF"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -204,10 +205,10 @@
       "sourceId": "Item.Kjv6xBCHzbdiD9uE"
     },
     "exportSource": {
-      "world": "stormkings",
+      "world": "test",
       "system": "dnd5e",
-      "coreVersion": "9.266",
-      "systemVersion": "1.5.7"
+      "coreVersion": "9.269",
+      "systemVersion": "1.6.1"
     }
   }
 }

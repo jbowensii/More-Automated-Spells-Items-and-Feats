@@ -1,10 +1,10 @@
 {
   "name": "Vitriolic Sphere",
   "type": "spell",
-  "img": "systems/dnd5e/icons/spells/fireball-acid-2.jpg",
+  "img": "icons/magic/fire/projectile-fireball-smoke-large-green.webp",
   "data": {
     "description": {
-      "value": "<p class=\"Core-Styles_Core-Body\">You point at a location within range, and a glowing, 1-foot-diameter ball of emerald acid streaks there and explodes in a 20-foot-radius sphere. Each creature in that area must make a Dexterity saving throw. On a failed save, a creature takes 10d4 acid damage and another 5d4 acid damage at the end of its next turn. On a successful save, a creature takes half the initial damage and no damage at the end of its next turn.</p>\n<p class=\"Core-Styles_Core-Body\"><span class=\"Serif-Character-Style_Inline-Subhead-Serif\"><strong>At Higher Levels.</strong> </span>When you cast this spell using a spell slot of 5th level or higher, the initial damage increases by 2d4 for each slot level above 4th.</p>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v0.2 April 1 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "",
       "unidentified": ""
     },
@@ -202,8 +202,8 @@
     "exportSource": {
       "world": "test",
       "system": "dnd5e",
-      "coreVersion": "9.255",
-      "systemVersion": "1.5.7"
+      "coreVersion": "9.269",
+      "systemVersion": "1.6.1"
     }
   }
 }

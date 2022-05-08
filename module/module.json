@@ -3,7 +3,7 @@
     "title": "More Automated Spells Items and Feats",
     "description": "A FoundryVTT module containing a MASIF (More Automated Spells Items and Feats) amount of automation for D&D 5e.",
     "author": "jbowens #0415 (Discord)",
-    "version": "0.7.5",
+    "version": "1.0.0",
     "systems": [
         "dnd5e"
     ],
@@ -29,16 +29,58 @@
     ],
     "packs": [
         {
-            "name": "More Automated Spells Items and Feats",
-            "label": "More Automated Spells Items and Feats",
-            "path": "packs/world-more-automated-spells-items-and-feats-1649102239992.db",
+            "name": "More Automated Battle Master Maneuvers",
+            "label": "More Automated Battle Master Maneuvers",
+            "path": "packs/MASIFF-battlemaster.db",
             "entity": "Item",
             "module": "More Automated Spells Items and Feats"
         },
         {
-            "name": "More Automated Spells Items and Feats Macros",
-            "label": "More Automated Spells Items and Feats Macros",
-            "path": "packs/world-more-automated-spells-items-and-feats-macros",
+            "name": "More Automated Class Features",
+            "label": "More Automated Class Features",
+            "path": "packs/MASIF-class-features.db",
+            "entity": "Item",
+            "module": "More Automated Spells Items and Feats"
+        },
+        {
+            "name": "More Automated Feats",
+            "label": "More Automated Feats",
+            "path": "packs/MASIF-feats.db",
+            "entity": "Item",
+            "module": "More Automated Spells Items and Feats"
+        },
+        {
+            "name": "More Automated Items",
+            "label": "More Automated Items",
+            "path": "packs/MASIF-items.db",
+            "entity": "Item",
+            "module": "More Automated Spells Items and Feats"
+        },
+        {
+            "name": "More Automated Other",
+            "label": "More Automated Other",
+            "path": "packs/MASIF-other.db",
+            "entity": "Item",
+            "module": "More Automated Spells Items and Feats"
+        },
+        {
+            "name": "More Automated Race Features",
+            "label": "More Automated Race Features",
+            "path": "packs/MASIF-race-features.db",
+            "entity": "Item",
+            "module": "More Automated Spells Items and Feats"
+        },
+        {
+            "name": "More Automated Spells",
+            "label": "More Automated Spells",
+            "path": "packs/MASIF-spells.db",
+            "entity": "Item",
+            "module": "More Automated Spells Items and Feats"
+        },
+        {
+            "name": "More Automated World Macros",
+            "label": "More Automated World Macros",
+            "path": "packs/MASIF-world-macros",
             "entity": "Macro",
             "module": "More Automated Spells Items and Feats"
         }

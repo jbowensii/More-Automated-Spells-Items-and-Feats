@@ -7,13 +7,8 @@ USEAGE : ACTIVATE BEFORE ATTACK
 This Maneuver must be activated BEFORE the character makes an attack.  
 This will setup any bonuses and effects on the TARGET character.  
 A Superiority Die will be expended immediately.
- 
-MANEUVER DESCRIPTION:
-When you make a melee weapon attack on your turn, you can expend one 
-superiority die to increase your reach for that attack by 5 feet. 
-If you hit, you add the superiority die to the attack’s damage roll.
 
-v0.4 March 31 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v1.2 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 // Activate on preActiveEffects

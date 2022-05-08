@@ -1,14 +1,10 @@
 /*****
 Misty Escape
-Starting at 6th level, you can vanish in a puff of mist in response to harm. When you take damage, 
-you can use your reaction to turn invisible and teleport up to 60 feet to an unoccupied space you 
-can see. You remain invisible until the start of your next turn or until you attack or cast a spell.
-Once you use this feature, you can’t use it again until you finish a short or long rest.
 
 NOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM "MIDI-SRD" SPELL: MISTY STEP
 By Author: Kandashi   https://github.com/kandashi/Dynamic-Effects-SRD
 
-v0.1 April 11 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git
+v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git
 *****/
 
 if (args[0].macroPass === "preItemRoll") {

@@ -1,12 +1,11 @@
 /*****
 Fey Presence
 
-Once per short rest, as an action, you can cause each creature in a 10-ft. cube 
-from you to make a WIS saving throw (DC +14) or become charmed or frightened by 
-you (your choice) until the end of your next turn.
+USAGE: Usae ability when you character has an action
 
-- target evertything in a ten foot cube 
-v0.3 April 11 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+- this ability targets evertything in a ten foot cube 
+
+v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "preambleComplete") {
@@ -26,7 +25,7 @@ if (args[0].macroPass === "preambleComplete") {
                 two: {
                     icon: '<p> </p><img src = "modules/dfreds-convenient-effects/images/charmed.svg" width="60" height="60"></>',
                     label: "<p>Charmed</p>",
-                    callback: () => {resolve("Charmed")}
+                    callback: () => { resolve("Charmed") }
                 }
             },
             default: "one"
@@ -43,16 +42,16 @@ if (args[0].macroPass === "preambleComplete") {
         for (target of args[0].failedSaves) {
             let targetActor = target.actor;
             if (effect === "Frightened") await applyFrightenedEffect(targetActor, args);
-                else if (effect === "Charmed") await applyCharmedEffect(targetActor, args);
-                else ui.notifications.error("An error occured applying the effect.");
+            else if (effect === "Charmed") await applyCharmedEffect(targetActor, args);
+            else ui.notifications.error("An error occured applying the effect.");
         }
 } return;
 
 // Apply the fightened effect to the target
 async function applyFrightenedEffect(target, args) {
     let effectData = {
-        label : "Frightened",
-        icon : "modules/dfreds-convenient-effects/images/frightened.svg",
+        label: "Frightened",
+        icon: "modules/dfreds-convenient-effects/images/frightened.svg",
         origin: args.uuid,
         changes: [
             { "key": "flags.midi-qol.disadvantage.attack.all", "value": `1`, "mode": 0, "priority": 20 },
@@ -60,24 +59,24 @@ async function applyFrightenedEffect(target, args) {
         ],
         disabled: false,
         flags: {
-                dae: {specialDuration: ["turnEndSource"]},
-                core: {statusId: "Convenient Effect: Frightened"}
-               }
-       }
-    await MidiQOL.socket().executeAsGM("createEffects", {actorUuid: target.uuid, effects: [effectData]});
+            dae: { specialDuration: ["turnEndSource"] },
+            core: { statusId: "Convenient Effect: Frightened" }
+        }
+    }
+    await MidiQOL.socket().executeAsGM("createEffects", { actorUuid: target.uuid, effects: [effectData] });
 }
 
 // Apply the charmed effect to the target
 async function applyCharmedEffect(target, args) {
     let effectData = {
-        label : "Charmed",
-        icon : "modules/dfreds-convenient-effects/images/charmed.svg",
+        label: "Charmed",
+        icon: "modules/dfreds-convenient-effects/images/charmed.svg",
         origin: args.uuid,
         disabled: false,
         flags: {
-                dae: {specialDuration: ["turnEndSource"]},
-                core: {statusId: "Convenient Effect: Charmed"}
-               }
-    }   
-    await MidiQOL.socket().executeAsGM("createEffects", {actorUuid: target.uuid, effects: [effectData]});
+            dae: { specialDuration: ["turnEndSource"] },
+            core: { statusId: "Convenient Effect: Charmed" }
+        }
+    }
+    await MidiQOL.socket().executeAsGM("createEffects", { actorUuid: target.uuid, effects: [effectData] });
 }

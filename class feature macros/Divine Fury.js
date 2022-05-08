@@ -4,15 +4,9 @@ Divine Fury | Auto Divine Fury  [there are two items to make this function]
 NOTE: I used Tom Posney's MIDI-QOL Sneak Attack / Auto Sneak Attack as a templete for this
 
 USEAGE : PASSIVE
-Please place these two items on a Barbarian Zealot
+Please place these two items on a Barbarian Zealot the rest is automated
  
-MANEUVER DESCRIPTION:
-Starting when you choose this path at 3rd level, you can channel divine fury into your 
-weapon strikes. While you’re raging, the first creature you hit on each of your turns 
-with a weapon attack takes extra damage equal to 1d6 + half your barbarian level. 
-The extra damage is necrotic or radiant; you choose the type of damage when you gain this feature.
-
-v0.5 April 30 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (["mwak", "rwak"].includes(args[0].item.data.actionType)) {

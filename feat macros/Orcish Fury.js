@@ -6,14 +6,8 @@ This item should be placed on the character that has the Orcish Fury Feat.
 Until used, during each melee attack the player will be prompted if they
 want to use this ability.
  
-MANEUVER DESCRIPTION:
-When you hit with an attack using a simple or martial weapon, you can roll one 
-of the weapon’s damage dice an additional time and add it as extra damage of 
-the weapon’s damage type. Once you use this ability, you can’t use it again 
-until you finish a short or long rest.
-
-v0.6 April 12 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
-Bugt fixes provided by tposney#1462 and callbritton#5405 thank you both
+v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+Bug fixes provided by tposney#1462 and callbritton#5405 thank you both
 *****/
 
 // make sure the attempted hit was made with a weapon attack

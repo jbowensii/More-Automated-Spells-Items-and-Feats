@@ -1,0 +1,308 @@
+{
+  "name": "Psionic Die",
+  "type": "feat",
+  "img": "icons/sundries/gaming/dice-runed-brown.webp",
+  "data": {
+    "description": {
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "You learn maneuvers that are fueled by superiority dice. Maneuvers enhance an attack in some way. You have 5d8 superiority dice per short rest.",
+      "unidentified": ""
+    },
+    "source": "PHB",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": "",
+      "per": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "other",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Rogue: Soulknife",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "effects": [
+    {
+      "_id": "UgB9349LhJU4nKsd",
+      "changes": [
+        {
+          "key": "macro.itemMacro",
+          "mode": 0,
+          "value": "",
+          "priority": "20"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "systems/dnd5e/icons/items/inventory/dice.jpg",
+      "label": "Psionic Die",
+      "origin": "Item.H14LgNk3j1O3e3FV",
+      "transfer": true,
+      "flags": {
+        "core": {
+          "statusId": ""
+        },
+        "dae": {
+          "stackable": "none",
+          "durationExpression": "",
+          "macroRepeat": "none",
+          "specialDuration": [],
+          "transfer": true
+        },
+        "ActiveAuras": {
+          "isAura": false,
+          "aura": "None",
+          "radius": null,
+          "alignment": "",
+          "type": "",
+          "ignoreSelf": false,
+          "height": false,
+          "hidden": false,
+          "displayTemp": false,
+          "hostile": false,
+          "onlyOnce": false
+        },
+        "dnd5e-helpers": {
+          "rest-effect": "Ignore"
+        }
+      },
+      "tint": null,
+      "selectedKey": "macro.itemMacro"
+    }
+  ],
+  "flags": {
+    "ddbimporter": {
+      "id": "1023",
+      "entityTypeId": "222216831",
+      "componentId": 209,
+      "componentTypeId": 12168134,
+      "class": "Fighter",
+      "subclass": "Battle Master",
+      "dndbeyond": {
+        "levelScale": {
+          "id": 12,
+          "level": 7,
+          "description": "d8",
+          "dice": {
+            "diceCount": 5,
+            "diceValue": 8,
+            "diceMultiplier": null,
+            "fixedValue": null,
+            "diceString": "5d8"
+          },
+          "fixedValue": null
+        },
+        "levelScales": [
+          {
+            "id": 11,
+            "level": 1,
+            "description": "d8",
+            "dice": {
+              "diceCount": 4,
+              "diceValue": 8,
+              "diceMultiplier": null,
+              "fixedValue": null,
+              "diceString": "4d8"
+            },
+            "fixedValue": null
+          },
+          {
+            "id": 12,
+            "level": 7,
+            "description": "d8",
+            "dice": {
+              "diceCount": 5,
+              "diceValue": 8,
+              "diceMultiplier": null,
+              "fixedValue": null,
+              "diceString": "5d8"
+            },
+            "fixedValue": null
+          },
+          {
+            "id": 13,
+            "level": 10,
+            "description": "d10",
+            "dice": {
+              "diceCount": 5,
+              "diceValue": 10,
+              "diceMultiplier": null,
+              "fixedValue": null,
+              "diceString": "5d10"
+            },
+            "fixedValue": null
+          },
+          {
+            "id": 14,
+            "level": 15,
+            "description": "d10",
+            "dice": {
+              "diceCount": 6,
+              "diceValue": 10,
+              "diceMultiplier": null,
+              "fixedValue": null,
+              "diceString": "6d10"
+            },
+            "fixedValue": null
+          },
+          {
+            "id": 15,
+            "level": 18,
+            "description": "d12",
+            "dice": {
+              "diceCount": 6,
+              "diceValue": 12,
+              "diceMultiplier": null,
+              "fixedValue": null,
+              "diceString": "6d12"
+            },
+            "fixedValue": null
+          }
+        ],
+        "limitedUse": [
+          {
+            "level": null,
+            "uses": 1
+          }
+        ]
+      },
+      "importId": "ye6nz9f4x9n3v7lu",
+      "ignoreIcon": true,
+      "ignoreItemImport": true,
+      "retainResourceConsumption": true
+    },
+    "infusions": {
+      "infused": false
+    },
+    "obsidian": {
+      "source": {
+        "type": "class",
+        "text": "Fighter"
+      }
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "midi-qol": {
+      "effectActivation": false,
+      "onUseMacroName": ""
+    },
+    "midiProperties": {
+      "nodam": false,
+      "halfdam": false,
+      "fulldam": false,
+      "rollOther": false,
+      "critOther": false,
+      "concentration": false,
+      "magicdam": false,
+      "magiceffect": false,
+      "toggleEffect": false
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "scene-packer": {
+      "hash": "52da011d815daac6308e1038a2df07ccb1bc230e",
+      "sourceId": "Item.1SZLgIr42Rn2kwZ1"
+    },
+    "core": {
+      "sourceId": "Item.8gdA6c8j5GnkX33K"
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Psionic Die",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "/*****\nPsionic Power: Psionic Power\n\nUSEAGE : PASSIVE\nThis energy is represented by your Psionic Energy dice, which are each a d6. \nYou have a number of these dice equal to twice your proficiency bonus, and \nthey fuel various psionic powers you have, which are detailed below.\n\nv1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0] === \"on\") {\n    const pcActor = await fromUuid(args[args.length - 1].actorUuid);\n    let rogueLevel = testClass(pcActor, \"rogue\", \"Soulknife\", 3)?.levels ?? 0;\n    if (!rogueLevel) {\n        ui.notifications.error(\"You are not a Rogue: Soulknife of at least 3rd level.\");\n        return;\n    }\n    let flagData;\n    if (rogueLevel > 16) flagData = \"+ 1d12\";\n    else if (rogueLevel > 10) flagData = \"+ 1d10\";\n    else if (rogueLevel > 4) flagData = \"+ 1d8\";\n    else if (rogueLevel > 0) flagData = \"+ 1d6\";\n    pcActor.setFlag(\"dae\", \"PsionicDie\", flagData)\n\n} else if (args[0] === \"off\") {\n    const pcActor = await fromUuid(args[args.length - 1].actorUuid);\n    pcActor.unsetFlag(\"dae\", \"PsionicDie\");\n}\n\n// Test PC Class, Subclass and Class Level\n// RETURN the class object (TRUE) or null (FALSE)\nfunction testClass(testActor, className, subClassName, levels) {\n    let theClass = testActor.data.data.classes[className];\n    if (theClass) {\n        if ((levels > 0) && (theClass.levels >= levels)) {\n            if (subClassName === null || (theClass.subclass === subClassName)) {\n                return theClass;\n            }\n        }\n    }\n    return null;\n}",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        }
+      }
+    },
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "9.269",
+      "systemVersion": "1.6.1"
+    },
+    "favtab": {
+      "isFavorite": true
+    },
+    "cf": {
+      "id": "temp_fgyhz98iq6m",
+      "path": "DDB Override#/CF_SEP/Battlemaster Maneuvers",
+      "color": "#000000"
+    }
+  }
+}

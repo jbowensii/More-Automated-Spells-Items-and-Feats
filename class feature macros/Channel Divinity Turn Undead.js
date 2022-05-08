@@ -4,28 +4,10 @@ Cleric: Turn Undead
 USEAGE : ACTIVATE TO CHANNEL DIVINITY : TURN UNDEAD
 Click on this item to activate the turn undead.  
 Please remember to setup usage consumption in the itme itself.  
- 
-MANEUVER DESCRIPTION:
-As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that 
-can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its 
-saving throw, it is turned for 1 minute or until it takes any damage.
 
-A turned creature must spend its turns trying to move as far away from you as it can, and it can’t 
-willingly move to a space within 30 feet of you. It also can’t take reactions. For its action, it 
-can use only the Dash action or try to escape from an effect that prevents it from moving. If there’s 
-nowhere to move, the creature can use the Dodge action.
+This Macro requires a GAME LEVEL MACRO: MAKE DEAD 
 
-Starting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the 
-creature is instantly destroyed if its challenge rating is at or below a certain 
-threshold, as shown in the Destroy Undead algorithm below:
-
-if cleric level > 16 ... CR <= 4 DEAD else
-    if cleric level > 13 ... CR <= 3 DEAD else
-        if cleric level > 10 ... CR <= 2 DEAD else
-            if cleric level > 7 ... CR <= 1 DEAD else
-                if cleric level >4 ... CR <= 1/2 DEAD
-                        
-v1.0 March 1 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v1.1 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "preambleComplete") {
@@ -48,7 +30,7 @@ if (args[0].macroPass === "preambleComplete") {
     // set CR to destory
     let crDestroy = 0.0;
     if (workflow.targets.size === 0) return;
-    const actorClass = testClass(pcActor, "cleric", null, 1);
+    let actorClass = testClass(pcActor, "cleric", null, 1)?.levels ?? 0;
     if (!actorClass) return;
     if (actorClass.levels > 16) crDestroy = 4;
     else if (actorClass.levels > 13) crDestroy = 3;
@@ -59,19 +41,19 @@ if (args[0].macroPass === "preambleComplete") {
     // set HP = 0 for all targets of the CR or less
     const macro = game.macros.getName("Make Dead");
     for (let target of workflow.targets) {
-        console.log("MACRO TEST | TARGET ACTOR UUID %s", target.actor.uuid);
         if (target.actor.data.data.details.cr <= crDestroy) {
             macro.execute(target.actor.uuid);
         }
     }
 }
 
-// Test PC Class, Subclass and Class Level, RETURN the class object or null
+// Test PC Class, Subclass and Class Level
+// RETURN the class object (TRUE) or null (FALSE)
 function testClass(testActor, className, subClassName, levels) {
     let theClass = testActor.data.data.classes[className];
     if (theClass) {
         if ((levels > 0) && (theClass.levels >= levels)) {
-            if (subClassName === null || (theClass.subclass === subClassName)) {
+            if (subClassName === null || (theClass.subclass.identifier.toLowerCase() === subClassName.toLowerCase())) {
                 return theClass;
             }
         }

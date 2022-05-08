@@ -1,12 +1,9 @@
 /*****
 Elemental Adept 
 
-When you gain this feat, choose one of the following damage types: acid, cold, fire, lightning, or thunder.
-    - Spells you cast ignore resistance to damage of the chosen type. 
-    - In addition, when you roll damage for a spell you cast that deals damage of that type, you can treat any 1 on a damage die as a 2.
-You can select this feat multiple times. Each time you do so, you must choose a different damage type.
+USAGE: This is fully automated, just place on a character
 
-Before you roll for spell damage:
+workflow: spell damage
     - retreive the damage type fromt thew DAE variable = damageType 
     - duplicate the ITEM on the workflow as OriginalItem
     - search through all damage on the workfolow ITEM for the given damage type
@@ -15,7 +12,7 @@ Before you roll for spell damage:
     - for every target with resistance set vulnerability
     - CLEANUP: restore the item and remove the vulnerability form all target(s)
 
-v0.8 April 10 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 // make sure the attempted hit was made with a spell attack of some type

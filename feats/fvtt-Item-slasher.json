@@ -1,14 +1,14 @@
 {
   "name": "Slasher",
   "type": "feat",
-  "img": "systems/dnd5e/icons/skills/weapon_34.jpg",
+  "img": "icons/skills/melee/blade-tips-triple-bent-white.webp",
   "data": {
     "description": {
-      "value": "<p> You’ve learned where to cut to have the greatest results, granting you the following benefits:</p>\n<ul>\n<li>Once per turn when you hit a creature with an attack that deals slashing damage, you can reduce the speed of the target by 10 feet until the start of your next turn.</li>\n<li>When you score a critical hit that deals slashing damage to a creature, you grievously wound it. Until the start of your next turn, the target has disadvantage on all attack rolls.</li>\n</ul>\n<p> </p>",
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "TCoE",
+    "source": "TCoE p81",
     "activation": {
       "type": "special",
       "cost": 0,
@@ -115,7 +115,7 @@
   "flags": {
     "scene-packer": {
       "hash": "fb6fcea624ca1feb8e9d0158e0d069039b861d56",
-      "sourceId": "Item.bnvtW3Gq8dN87h4u"
+      "sourceId": "Item.CQe7aJptcXa6qlv1"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -150,7 +150,7 @@
           "author": "ldRsJ6Yp5qPydWA1",
           "img": "icons/svg/dice-target.svg",
           "scope": "global",
-          "command": "/*****\nSlasher\n\nOnce per turn when you hit a creature with an attack that deals slashing damage, \nyou can reduce the speed of the target by 10 feet until the start of your next turn.\n\nWhen you score a critical hit that deals slashing damage to a creature, \nyou grievously wound it. Until the start of your next turn, the target has \ndisadvantage on all attack rolls.\n\nv0.1 April 13 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\n// make sure the attempted hit was made with a weapon attack\nif (![\"mwak\",\"rwak\"].includes(args[0].item.data.actionType)) return;\n\nif (args[0].macroPass === \"preDamageRoll\") {\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);\n    let targetToken = await fromUuid(args[0].hitTargetUuids[0]);\n    let targetActor = targetToken.actor;\n    let theItem = workflow.item.data.data;\n\n    if (theItem.damage.parts[0][1] !== \"slashing\") return;   // not a slashing weapon  \n        else {\n            let effect = await findEffect(targetActor, \"Reduced Movement\");\n            if (!effect) await applyReduceMovementEffect(targetActor, args[0].uuid);\n            if (workflow.isCritical) await applyAttackDisadvantageEffect(targetActor, args[0].uuid);\n        }\n    return; \n}\n\n// Apply the fightened effect to the target\nasync function applyReduceMovementEffect(target, originUuid) {\n    let effectData = {\n        label : \"Reduced Movement\",\n        icon : \"systems/dnd5e/icons/items/equipment/boots-leather.jpg\",\n        origin: originUuid,\n        changes: [ { \"key\": \"data.attributes.movement.all\", \"value\": `-10`, \"mode\":0, \"priority\": 20 } ],\n        disabled: false,\n        flags: { dae: {specialDuration: [\"turnStartSource\"]}, }\n       }\n    await MidiQOL.socket().executeAsGM(\"createEffects\", {actorUuid: target.uuid, effects: [effectData]});\n}\n\n// Apply the fightened effect to the target\nasync function applyAttackDisadvantageEffect(target, originUuid) {\n    let effectData = {\n        label : \"Attack Disadvantage\",\n        icon : \"systems/dnd5e/icons/skills/weapon_08.jpg\",\n        origin: originUuid,\n        changes: [ { \"key\": \"flags.midi-qol.disadvantage.attack.all\", \"value\": `1`, \"mode\": 0, \"priority\": 20 } ],\n        disabled: false,\n        flags: { dae: {specialDuration: [\"turnStartSource\"]}, }\n       }\n    await MidiQOL.socket().executeAsGM(\"createEffects\", {actorUuid: target.uuid, effects: [effectData]});\n}\n\n// Function to test for an effect\nasync function findEffect (thisActor, effectName) {\n    let effectUuid = null;\n    effectUuid = thisActor?.effects.find(ef=> ef.data.label === effectName);\n    return effectUuid;        \n}",
+          "command": "/*****\nSlasher\n\nUSAGE: Automatic just place on a character \n\nv1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\n// make sure the attempted hit was made with a weapon attack\nif (![\"mwak\", \"rwak\"].includes(args[0].item.data.actionType)) return;\n\nif (args[0].macroPass === \"preDamageRoll\") {\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);\n    let targetToken = await fromUuid(args[0].hitTargetUuids[0]);\n    let targetActor = targetToken.actor;\n    let theItem = workflow.item.data.data;\n\n    if (theItem.damage.parts[0][1] !== \"slashing\") return;   // not a slashing weapon  \n    else {\n        let effect = await findEffect(targetActor, \"Reduced Movement\");\n        if (!effect) await applyReduceMovementEffect(targetActor, args[0].uuid);\n        if (workflow.isCritical) await applyAttackDisadvantageEffect(targetActor, args[0].uuid);\n    }\n    return;\n}\n\n// Apply the fightened effect to the target\nasync function applyReduceMovementEffect(target, originUuid) {\n    let effectData = {\n        label: \"Reduced Movement\",\n        icon: \"systems/dnd5e/icons/items/equipment/boots-leather.jpg\",\n        origin: originUuid,\n        changes: [{ \"key\": \"data.attributes.movement.all\", \"value\": `-10`, \"mode\": 0, \"priority\": 20 }],\n        disabled: false,\n        flags: { dae: { specialDuration: [\"turnStartSource\"] }, }\n    }\n    await MidiQOL.socket().executeAsGM(\"createEffects\", { actorUuid: target.uuid, effects: [effectData] });\n}\n\n// Apply the fightened effect to the target\nasync function applyAttackDisadvantageEffect(target, originUuid) {\n    let effectData = {\n        label: \"Attack Disadvantage\",\n        icon: \"systems/dnd5e/icons/skills/weapon_08.jpg\",\n        origin: originUuid,\n        changes: [{ \"key\": \"flags.midi-qol.disadvantage.attack.all\", \"value\": `1`, \"mode\": 0, \"priority\": 20 }],\n        disabled: false,\n        flags: { dae: { specialDuration: [\"turnStartSource\"] }, }\n    }\n    await MidiQOL.socket().executeAsGM(\"createEffects\", { actorUuid: target.uuid, effects: [effectData] });\n}\n\n// Function to test for an effect\nasync function findEffect(thisActor, effectName) {\n    let effectUuid = null;\n    effectUuid = thisActor?.effects.find(ef => ef.data.label === effectName);\n    return effectUuid;\n}",
           "folder": null,
           "sort": 0,
           "permission": {
@@ -166,8 +166,8 @@
     "exportSource": {
       "world": "test",
       "system": "dnd5e",
-      "coreVersion": "9.266",
-      "systemVersion": "1.5.7"
+      "coreVersion": "9.269",
+      "systemVersion": "1.6.1"
     },
     "cf": {
       "id": "temp_b676eyusztv"

@@ -1,10 +1,10 @@
 {
   "name": "Vigilant Blessing",
   "type": "feat",
-  "img": "systems/dnd5e/icons/skills/light_06.jpg",
+  "img": "icons/magic/symbols/cog-shield-white-blue.webp",
   "data": {
     "description": {
-      "value": "<p>The night has taught you to be vigilant. As an action, you give one creature you touch (including possibly yourself) advantage on the next initiative roll the creature makes. This benefit ends immediately after the roll or if you use this feature again.</p>\n<details>\n<summary>VERSION INFO</summary>\n<p>v0.5 April 2 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "",
       "unidentified": ""
     },
@@ -57,7 +57,7 @@
       "dc": null,
       "scaling": "spell"
     },
-    "requirements": "Cleric Twilight Domain",
+    "requirements": "Cleric: Twilight Domain",
     "recharge": {
       "value": null,
       "charged": false
@@ -173,8 +173,8 @@
     "exportSource": {
       "world": "test",
       "system": "dnd5e",
-      "coreVersion": "9.255",
-      "systemVersion": "1.5.7"
+      "coreVersion": "9.269",
+      "systemVersion": "1.6.1"
     }
   }
 }

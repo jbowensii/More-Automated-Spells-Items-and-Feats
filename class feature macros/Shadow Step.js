@@ -1,15 +1,10 @@
 /*****
 Shadow Step
-At 6th level, you gain the ability to step from one shadow into another. 
-When you are in dim light or darkness, as a bonus action you can teleport 
-up to 60 feet to an unoccupied space you can see that is also in dim light 
-or darkness. You then have advantage on the first melee attack you make 
-before the end of the turn.
 
 NOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM "MIDI-SRD" SPELL: MISTY STEP
 By Author: Kandashi   https://github.com/kandashi/Dynamic-Effects-SRD
 
-v0.2 April 12 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git
+v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git
 *****/
 
 if (args[0].macroPass === "preItemRoll") {

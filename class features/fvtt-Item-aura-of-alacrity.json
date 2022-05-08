@@ -1,0 +1,208 @@
+{
+  "name": "Aura of Alacrity",
+  "type": "feat",
+  "img": "icons/skills/movement/feet-winged-boots-brown.webp",
+  "data": {
+    "description": {
+      "value": "<p><em>[PLACE YOUR DESCRIPTION HERE]</em></p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "<p><em>7th- and 18th-level Oath of Glory feature</em></p>\n<p>You emanate an aura that fills you and your companions with supernatural speed, allowing you to race across a battlefield in formation. Your walking speed increases by 10 feet. In addition, if you aren’t @Compendium[dnd5e.rules.Incapacitated]{incapacitated}, the walking speed of any ally who starts their turn within 5 feet of you increases by 10 feet until the end of that turn.</p>\n<p>When you reach 18th level in this class, the range of the aura increases to 10 feet.</p>",
+      "unidentified": ""
+    },
+    "source": "MOoT p29",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Paladin : Oath of Glory",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": null
+  },
+  "effects": [
+    {
+      "_id": "2clgap6djsy9eun2",
+      "changes": [
+        {
+          "key": "data.attributes.movement.walk",
+          "mode": 2,
+          "value": "10",
+          "priority": "20"
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null
+      },
+      "icon": "systems/dnd5e/icons/skills/armor_01.jpg",
+      "label": "Aura of Alacrity",
+      "origin": "Actor.XhIWoWzMyMzFK5FU.Item.8TLpbFnPykVWRRwa",
+      "transfer": true,
+      "flags": {
+        "core": {
+          "statusId": "1"
+        },
+        "dae": {
+          "stackable": "none",
+          "durationExpression": "",
+          "macroRepeat": "none",
+          "specialDuration": [],
+          "transfer": true
+        },
+        "ActiveAuras": {
+          "isAura": true,
+          "aura": "Allies",
+          "radius": 5,
+          "alignment": "",
+          "type": "",
+          "ignoreSelf": false,
+          "height": false,
+          "hidden": false,
+          "displayTemp": false,
+          "hostile": false,
+          "onlyOnce": false
+        }
+      },
+      "tint": null,
+      "selectedKey": "data.attributes.movement.walk"
+    }
+  ],
+  "flags": {
+    "ddbimporter": {
+      "id": 2203086,
+      "type": "class",
+      "dndbeyond": {
+        "requiredLevel": 7,
+        "displayOrder": 3,
+        "levelScale": {
+          "id": 266710,
+          "level": 7,
+          "description": "Aura of Alacrity (Range 5 feet)",
+          "dice": null,
+          "fixedValue": 5
+        },
+        "levelScales": [
+          {
+            "id": 266710,
+            "level": 7,
+            "description": "Aura of Alacrity (Range 5 feet)",
+            "dice": {
+              "diceCount": null,
+              "diceValue": null,
+              "diceMultiplier": null,
+              "fixedValue": null,
+              "diceString": null
+            },
+            "fixedValue": 5
+          },
+          {
+            "id": 266711,
+            "level": 18,
+            "description": "Aura of Alacrity (range 10 feet)",
+            "dice": {
+              "diceCount": null,
+              "diceValue": null,
+              "diceMultiplier": null,
+              "fixedValue": null,
+              "diceString": null
+            },
+            "fixedValue": 10
+          }
+        ],
+        "limitedUse": [],
+        "class": "Paladin : Oath of Glory"
+      },
+      "class": "Paladin",
+      "subclass": "Oath of Glory",
+      "importId": "lkdgypqhrbwo10lx"
+    },
+    "obsidian": {
+      "source": {
+        "type": "class",
+        "text": "Paladin"
+      }
+    },
+    "scene-packer": {
+      "hash": "d740076f3f7a5b23ff80d12db391f1617b12c2b1",
+      "sourceId": "Item.CPeO36Ox7J472TD5"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "core": {
+      "sourceId": "Item.IymI4xM6Du0DvYhg"
+    },
+    "exportSource": {
+      "world": "test",
+      "system": "dnd5e",
+      "coreVersion": "9.269",
+      "systemVersion": "1.6.1"
+    }
+  }
+}

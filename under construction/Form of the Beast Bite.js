@@ -1,12 +1,9 @@
 /*****
 Form of the Beast: Bite
 
-USEAGE : AUTOMATED
-This item should be placed on the character that is a Path of the Beast Barbarian  
- 
-Your mouth transforms into a bestial muzzle or great mandibles (your choice). It deals 1d8 piercing damage on a hit. Once on each of your turns when you damage a creature with this bite, you regain a number of hit points equal to your proficiency bonus, provided you have less than half your hit points when you hit.
+USAGE: Automatic just place on a character 
 
-v0.1 April 25 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v1.0 May 7 2022  jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 // if not a melee attack stop macro
