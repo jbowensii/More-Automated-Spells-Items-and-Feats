@@ -3,7 +3,7 @@ FoundryVTT More Automated Spells Items and Feats (MASIF amounts of automation) M
 
 This module is still active as I work out any issues to get re-listed on FoundryVTT (if that is even possible).
 
-    I AM REMOVED THE OLD GITHUB AND REBUILT IT WITHOUT SOME MISTAKENLY INCLUDED COPYRIGHT MATERIAL
+    I REMOVED THE OLD GITHUB AND REBUILT IT WITHOUT SOME MISTAKENLY INCLUDED COPYRIGHT MATERIAL
 
 To manually install use this URL: https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/download/1.0.0/module.json
 
