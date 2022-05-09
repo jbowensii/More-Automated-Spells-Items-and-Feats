@@ -3,7 +3,7 @@ FoundryVTT More Automated Spells Items and Feats (MASIF amounts of automation) M
 
 This module is still active as I work out any issues to get re-listed on FoundryVTT (if that is even possible).
 
-    I AM REMOVING THE OLD GITHUB AND REBILDING IT WITHOUT SOME MISTAKENLY INCLUDED COPYRIGHT MATERIAL
+    I AM REMOVED THE OLD GITHUB AND REBUILT IT WITHOUT SOME MISTAKENLY INCLUDED COPYRIGHT MATERIAL
 
 To manually install use this URL: https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/download/1.0.0/module.json
 
@@ -30,7 +30,7 @@ https://www.youtube.com/watch?v=raM_Z0e7ov8
 
 So after playing with some scripts and helping debug some of my favorite modules with their authors, I broke down and decided to see if I could help automate some features that had not been automated as yet.  
     
-So before I explain how to setup and use these features / items in your game, a shout out to Tim Posney, the creator of MIDI-QOL and DAE. A fantastic person who is a great help, especially as he answered all of my crazy stupid questions and helped me solve some truely puxzzling probelms. (and he pointed out a whole bunch of obvious things that did not click for me)... Thank you Tim.
+A shout out to Tim Posney, the creator of MIDI-QOL and DAE. A fantastic person who is a great help, especially as he answered all of my crazy stupid questions and helped me solve some truely puxzzling probelms. (and he pointed out a whole bunch of obvious things that did not click for me)... Thank you Tim.
 <p>&nbsp;</p>
 </details>
 
@@ -40,9 +40,9 @@ So before I explain how to setup and use these features / items in your game, a 
 
 Once the compendium module is installed you can import one of the items into your game.  Most of them are completely setup from the start and can be dropped on the appropriate character and just function.  
     
-There is also a global MACRO folder, as aq GameMaster (DungeonMaster) import these and make sure they are marked as execute as a GM.  
+There is also a global MACRO folder, as a GameMaster (DungeonMaster) import these and make sure they are marked as execute as a GM.  
 
-The descriptions for each feature are empty, since including they MAY violate copyright, so please insert your own descriptions.  
+The descriptions for each feature are empty, since including then MAY violate copyright, so please insert your own descriptions.  
 
 There will also be notes in the description that instruct you HOW and WHEN to use the item to automate your game play. 
 <b>Please remember to click on the collapsible icon <img width="15" alt="image" src="https://user-images.githubusercontent.com/76136571/164912225-f8485d94-56bd-4e1d-baf9-58873cb426a4.png"> to open a section and read the instructions.</b> 
