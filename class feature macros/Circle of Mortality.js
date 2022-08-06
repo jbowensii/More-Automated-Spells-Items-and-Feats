@@ -1,14 +1,11 @@
 /*****
 Circle of Mortality
 
-v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v1.1 August 6 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "postDamageRoll") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);
-    const actorUuid = workflow.tokenUuid;
-    const actorToken = canvas.tokens.get(workflow.tokenId);
-    const thisItem = actorToken.actor.items.find(i => i.name === "Circle of Mortality")?.data;
     let targetTokenUuid = args[0].hitTargetUuids[0];
     let targetToken = await fromUuid(targetTokenUuid);
     let targetActor = targetToken.actor;
@@ -30,16 +27,6 @@ if (args[0].macroPass === "postDamageRoll") {
     let bonusHealing = (healingRollMax - workflow.damageRoll.total);
     await setProperty(workflow, "BonusHealing", bonusHealing);
 
-    // trigger BonusDamage to apply the extra damage / adjustments outside of the normal damage roll
-    let effectData = {
-        label: "Healing Mortality",
-        changes: [{ key: "flags.dnd5e.DamageBonusMacro", mode: 0, value: `ItemMacro.Circle of Mortality,all`, priority: 20 }],
-        icon: thisItem.img,
-        origin: thisItem.uuid,
-        duration: { turns: 1 }
-    };
-
-    await MidiQOL.socket().executeAsGM("createEffects", { actorUuid: actorUuid, effects: [effectData] });
     return;
 
 } else if (args[0].tag === "DamageBonus") {
@@ -48,17 +35,9 @@ if (args[0].macroPass === "postDamageRoll") {
     const actorToken = canvas.tokens.get(workflow.tokenId);
     let bonusHealing = await getProperty(workflow, "BonusHealing");
 
-    // remove extra damage effect 
-    let effect = await findEffect(actorToken, "Healing Mortality");
-    await MidiQOL.socket().executeAsGM("removeEffects", { actorUuid: actorUuid, effects: [effect.id] });
-
     // Bonus Healing
-    return { damageRoll: `${bonusHealing}[healing]`, flavor: "Circle of Mortality Bonus Healing" };
-}
-
-// Function to test for an effect
-async function findEffect(target, effectName) {
-    let effectUuid = null;
-    effectUuid = target?.actor.data.effects.find(ef => ef.data.label === effectName);
-    return effectUuid;
+    if (bonusHealing > 0) {
+        await setProperty(workflow, "BonusHealing", 0);
+        return { damageRoll: `${bonusHealing}[healing]`, flavor: "Circle of Mortality Bonus Healing" };
+    } else return;
 }

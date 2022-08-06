@@ -315,3 +315,6 @@ async function applyFrightenedEffect(target, args) {
 }
 
 // await game.dfreds.effectInterface?.addEffect({ effectName: "the name of the effect", uuid: "uuid of the target", origin: "uuid of the source item/actor", metadata: "extra data" });
+
+//let effect = target.actor.effects.find(i => i.data.label === "whatever");
+//if (effect) await MidiQOL.socket().executeAsGM("removeEffects", { actorUuid: target.actor.uuid, effects: [effect.id] });

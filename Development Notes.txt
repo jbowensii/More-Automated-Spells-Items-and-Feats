@@ -51,6 +51,8 @@ Triggering an ItemMacro with an effect at a specific time in the workflow
 flags.midi-qol.onUseMacroName                   Custom      ItemMacro.Name of Macro,workflow (ex preDamageRoll) 
 
 
+data.details.attunedItemsCount
+data.details.attunedItemsMax
 
 
 

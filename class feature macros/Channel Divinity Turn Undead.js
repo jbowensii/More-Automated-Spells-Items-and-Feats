@@ -30,27 +30,53 @@ if (args[0].macroPass === "preambleComplete") {
     // set CR to destory
     let crDestroy = 0.0;
     if (workflow.targets.size === 0) return;
-    let actorClass = testClass(pcActor, "cleric", null, 1)?.levels ?? 0;
-    if (!actorClass) return;
-    if (actorClass.levels > 16) crDestroy = 4;
-    else if (actorClass.levels > 13) crDestroy = 3;
-    else if (actorClass.levels > 10) crDestroy = 2;
-    else if (actorClass.levels > 7) crDestroy = 1;
-    else if (actorClass.levels > 4) crDestroy = 0.5;
+    //console.log("MACRO TEST | Actor: %O", pcActor);
+    //console.log("MACRO TEST | Actor Classes: %O", pcActor.data.document.classes);
+    //let actorClass = testClass(pcActor, "cleric", null, 1)?.levels ?? 0;
+    //if (!actorClass) return;
+    let actorClass = pcActor.classes.cleric.data.data.levels;
+    if (actorClass > 16) crDestroy = 4;
+    else if (actorClass > 13) crDestroy = 3;
+    else if (actorClass > 10) crDestroy = 2;
+    else if (actorClass > 7) crDestroy = 1;
+    else if (actorClass > 4) crDestroy = 0.5;
 
-    // set HP = 0 for all targets of the CR or less
-    const macro = game.macros.getName("Make Dead");
+    // set HP = 0 for all targets of the CR or less that have been turned
+    //const macro = game.macros.getName("MakeDead");
+    const macro = game.macros.find(i => i.name === "MakeDead");
+    console.log("MACRO TEST | Macro Object: %O", macro);
+    console.log("MACRO TEST | Actor Class: %O", actorClass);
     for (let target of workflow.targets) {
+        console.log("MACRO TEST | CRDestroy 2: %s", crDestroy);
+        console.log("MACRO TEST | target: %O", target);
+        console.log("MACRO TEST | target actor before: %O", target.actor);
+        let turned = null;
+        turned = await targetFindEffect(target.actor, "Channel Divinity: Turn Undead");
+        console.log("MACRO TEST | turned: %O", turned);
+        console.log("MACRO TEST | target actor: %O", target.actor);
+        console.log("MACRO TEST | CR: %s", target.actor.data.data.details.cr);
         if (target.actor.data.data.details.cr <= crDestroy) {
-            macro.execute(target.actor.uuid);
+            console.log("MACRO TEST | CHECK FOR DEAD!");
+            if (turned != undefined) {
+                console.log("MACRO TEST | destroyed!");
+                await macro.execute(target.actor.uuid);
+            }
         }
     }
 }
 
+/* 
 // Test PC Class, Subclass and Class Level
 // RETURN the class object (TRUE) or null (FALSE)
 function testClass(testActor, className, subClassName, levels) {
-    let theClass = testActor.data.data.classes[className];
+    //let theClass = testActor.data.data.classes[className];
+    let className = testActor.classes.cleric;
+    let classLevels = testActor.classes.cleric.data.data.levels;
+    let subclassName =
+        console.log("MACRO TEST | THE CLASS: %O", theClass);
+    console.log("MACRO TEST | THE CLASS Levels: %i", testActor.classes.cleric.levels);
+    console.log("MACRO TEST | THE CLASS subclass: %s", testActor.classes.cleric.subclass.name);
+
     if (theClass) {
         if ((levels > 0) && (theClass.levels >= levels)) {
             if (subClassName === null || (theClass.subclass.identifier.toLowerCase() === subClassName.toLowerCase())) {
@@ -59,4 +85,16 @@ function testClass(testActor, className, subClassName, levels) {
         }
     }
     return null;
+}
+*/
+
+// Function to test for an effect
+async function targetFindEffect(target, effectName) {
+    let effectUuid = null;
+    console.log("MACRO TEST | target effects: %O", target.data.effects);
+    console.log("MACRO TEST | effect name: %s", effectName);
+    //effectUuid = target?.data.actorData.effects.find(ef => ef.name === effectName);
+    effectUuid = target.data.effects.find(ef => ef.sourceName === effectName);
+    console.log("MACRO TEST | effect UUID: %O", effectUuid);
+    return effectUuid;
 }
