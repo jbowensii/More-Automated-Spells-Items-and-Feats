@@ -5,7 +5,7 @@ USEAGE : PASSIVE
 This item must be on the character for Manuevers to function.  
 It does not do anything directly but is a helper effect to determine the Battle Master Hit Die (d8, d10, d12) based on level.
  
-v1.2 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v1.3 August 6 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0] === "on") {
