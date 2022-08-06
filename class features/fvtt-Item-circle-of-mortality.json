@@ -130,7 +130,10 @@
           }
         ]
       },
-      "importId": "qr5dq6rdmr31r67m"
+      "importId": "4hcm2jmz0inu7t2d",
+      "pack": "world.ddb-override",
+      "originalItemName": "Circle of Mortality",
+      "replaced": true
     },
     "infusions": {
       "infused": false
@@ -142,8 +145,8 @@
       }
     },
     "scene-packer": {
-      "hash": "147942c86ae8cf51b4d497a7ad4a4b8a34b40af5",
-      "sourceId": "Item.rmIlA4EpUQtohU26"
+      "hash": "3d632caecd50db7bc026c5fb08ac5b20868a0c80",
+      "sourceId": "Item.wFx1w4tCFLan9aAc"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -164,7 +167,7 @@
           "author": "ldRsJ6Yp5qPydWA1",
           "img": "icons/svg/dice-target.svg",
           "scope": "global",
-          "command": "/*****\nCircle of Mortality\n\nv1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"postDamageRoll\") {\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);\n    const actorUuid = workflow.tokenUuid;\n    const actorToken = canvas.tokens.get(workflow.tokenId);\n    const thisItem = actorToken.actor.items.find(i => i.name === \"Circle of Mortality\")?.data;\n    let targetTokenUuid = args[0].hitTargetUuids[0];\n    let targetToken = await fromUuid(targetTokenUuid);\n    let targetActor = targetToken.actor;\n\n    // if Target HP > 0 return \n    if (targetActor.data.data.attributes.hp.value != 0) return;\n\n    // check to make sure only one target is selected\n    if ((args[0].targetUuids.length < 1) || (args[0].targetUuids.length > 1)) {\n        ui.notifications.error(\"You need to select a single target.\");\n        return;\n    }\n\n    // compute maximum healing for the spell cast\n    let healingRollMax = 0;\n    for (let i = 0; i < workflow.damageRoll.terms.length; i++)\n        if (workflow.damageRoll.terms[i]?.faces) healingRollMax = healingRollMax + (workflow.damageRoll.terms[i].faces * workflow.damageRoll.terms[i].number);\n        else if (workflow.damageRoll.terms[i]?.number) healingRollMax = healingRollMax + workflow.damageRoll.terms[i].number;\n    let bonusHealing = (healingRollMax - workflow.damageRoll.total);\n    await setProperty(workflow, \"BonusHealing\", bonusHealing);\n\n    // trigger BonusDamage to apply the extra damage / adjustments outside of the normal damage roll\n    let effectData = {\n        label: \"Healing Mortality\",\n        changes: [{ key: \"flags.dnd5e.DamageBonusMacro\", mode: 0, value: `ItemMacro.Circle of Mortality,all`, priority: 20 }],\n        icon: thisItem.img,\n        origin: thisItem.uuid,\n        duration: { turns: 1 }\n    };\n\n    await MidiQOL.socket().executeAsGM(\"createEffects\", { actorUuid: actorUuid, effects: [effectData] });\n    return;\n\n} else if (args[0].tag === \"DamageBonus\") {\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);\n    const actorUuid = workflow.tokenUuid;\n    const actorToken = canvas.tokens.get(workflow.tokenId);\n    let bonusHealing = await getProperty(workflow, \"BonusHealing\");\n\n    // remove extra damage effect \n    let effect = await findEffect(actorToken, \"Healing Mortality\");\n    await MidiQOL.socket().executeAsGM(\"removeEffects\", { actorUuid: actorUuid, effects: [effect.id] });\n\n    // Bonus Healing\n    return { damageRoll: `${bonusHealing}[healing]`, flavor: \"Circle of Mortality Bonus Healing\" };\n}\n\n// Function to test for an effect\nasync function findEffect(target, effectName) {\n    let effectUuid = null;\n    effectUuid = target?.actor.data.effects.find(ef => ef.data.label === effectName);\n    return effectUuid;\n}",
+          "command": "/*****\nCircle of Mortality\n\nv1.1 August 6 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"postDamageRoll\") {\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);\n    let targetTokenUuid = args[0].hitTargetUuids[0];\n    let targetToken = await fromUuid(targetTokenUuid);\n    let targetActor = targetToken.actor;\n\n    // if Target HP > 0 return \n    if (targetActor.data.data.attributes.hp.value != 0) return;\n\n    // check to make sure only one target is selected\n    if ((args[0].targetUuids.length < 1) || (args[0].targetUuids.length > 1)) {\n        ui.notifications.error(\"You need to select a single target.\");\n        return;\n    }\n\n    // compute maximum healing for the spell cast\n    let healingRollMax = 0;\n    for (let i = 0; i < workflow.damageRoll.terms.length; i++)\n        if (workflow.damageRoll.terms[i]?.faces) healingRollMax = healingRollMax + (workflow.damageRoll.terms[i].faces * workflow.damageRoll.terms[i].number);\n        else if (workflow.damageRoll.terms[i]?.number) healingRollMax = healingRollMax + workflow.damageRoll.terms[i].number;\n    let bonusHealing = (healingRollMax - workflow.damageRoll.total);\n    await setProperty(workflow, \"BonusHealing\", bonusHealing);\n\n    return;\n\n} else if (args[0].tag === \"DamageBonus\") {\n    console.log(\"MACRO | bonus healing application\");\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);\n    const actorUuid = workflow.tokenUuid;\n    const actorToken = canvas.tokens.get(workflow.tokenId);\n    let bonusHealing = await getProperty(workflow, \"BonusHealing\");\n\n    // Bonus Healing\n    if (bonusHealing > 0) {\n        await setProperty(workflow, \"BonusHealing\", 0);\n        return { damageRoll: `${bonusHealing}[healing]`, flavor: \"Circle of Mortality Bonus Healing\" };\n    } else return;\n}",
           "folder": null,
           "sort": 0,
           "permission": {
@@ -208,11 +211,14 @@
     "core": {
       "sourceId": "Item.edUabd3mcVcUaLtm"
     },
+    "cf": {
+      "id": "temp_92357bvnxs9"
+    },
     "exportSource": {
       "world": "test",
       "system": "dnd5e",
       "coreVersion": "9.269",
-      "systemVersion": "1.6.1"
+      "systemVersion": "1.6.3"
     }
   }
 }
