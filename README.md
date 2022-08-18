@@ -89,6 +89,7 @@ If you have a character sheet runs out of resource spaces, might I suggest the m
 - <a href="https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/wiki/Channel-Divinity:-Radiance-of-the-Dawn">`Channel Divinity: Radiance of the Dawn`</a>
 - <a href="https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/wiki/Wrath-of-the-storm">`Wrath of the storm`</a>
 - <a href="https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/wiki/Zealous-Presence">`Zealous Presence`</a>
+- <a href="https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/wiki/Channel-Divinity:-Preserve-Life">`Channel Divinity: Preserve Life`</a>
     
 </details>
 
