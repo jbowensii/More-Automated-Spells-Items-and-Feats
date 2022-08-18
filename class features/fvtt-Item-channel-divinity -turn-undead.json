@@ -4,7 +4,7 @@
   "img": "icons/magic/holy/barrier-shield-winged-blue.webp",
   "data": {
     "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.1 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.4 August 13 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "",
       "unidentified": ""
     },
@@ -36,7 +36,7 @@
     },
     "consume": {
       "type": "charges",
-      "target": "9xmJZjzubR4Zf9Cm",
+      "target": "",
       "amount": null
     },
     "ability": "",
@@ -53,7 +53,7 @@
     },
     "formula": "",
     "save": {
-      "ability": "wis",
+      "ability": "",
       "dc": null,
       "scaling": "spell"
     },
@@ -86,14 +86,15 @@
       "transfer": false,
       "flags": {
         "core": {
-          "statusId": ""
+          "statusId": "true"
         },
         "dae": {
           "stackable": "none",
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [],
-          "transfer": false
+          "transfer": false,
+          "selfTarget": false
         },
         "ActiveAuras": {
           "isAura": false,
@@ -115,8 +116,8 @@
   ],
   "flags": {
     "scene-packer": {
-      "hash": "9af6e3cd15b861c0b5528df6f871a279636b1f75",
-      "sourceId": "Item.qsHLT2mbvMnor8K4"
+      "hash": "05a2a29955384c3853adb31eb4e831921b93acb0",
+      "sourceId": "Item.hnIZdMI8M2fIBDAs"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -167,10 +168,10 @@
           "_id": null,
           "name": "Channel Divinity: Turn Undead",
           "type": "script",
-          "author": "ldRsJ6Yp5qPydWA1",
+          "author": "KBnld8ZLhMcDSTkg",
           "img": "icons/svg/dice-target.svg",
           "scope": "global",
-          "command": "/*****\nCleric: Turn Undead\n\nUSEAGE : ACTIVATE TO CHANNEL DIVINITY : TURN UNDEAD\nClick on this item to activate the turn undead.  \nPlease remember to setup usage consumption in the itme itself.  \n\nThis Macro requires a GAME LEVEL MACRO: MAKE DEAD \n\nv1.1 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"preambleComplete\") {\n    let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    // I am stealing the activation condition as a string for the creature type I want to hit\n    const activationCondition = args[0].itemData.data.activation.condition.toLowerCase();\n    for (let target of workflow.targets) {\n        let creatureType = target.actor.data.data.details.type;\n        if ((creatureType === null) || (creatureType === undefined))    // that is not a creature\n            workflow.targets.delete(target);\n        else if (!([creatureType.value.toLowerCase(), creatureType.subtype.toLowerCase()].includes(activationCondition.toLowerCase()))) {\n            workflow.targets.delete(target);\n        }\n        game.user.updateTokenTargets(Array.from(workflow.targets).map(t => t.id));\n    }\n} else if (args[0].macroPass === \"postActiveEffects\") {\n    let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    const pcActor = workflow.actor;\n\n    // set CR to destory\n    let crDestroy = 0.0;\n    if (workflow.targets.size === 0) return;\n    let actorClass = testClass(pcActor, \"cleric\", null, 1)?.levels ?? 0;\n    if (!actorClass) return;\n    if (actorClass > 16) crDestroy = 4;\n    else if (actorClass > 13) crDestroy = 3;\n    else if (actorClass > 10) crDestroy = 2;\n    else if (actorClass > 7) crDestroy = 1;\n    else if (actorClass > 4) crDestroy = 0.5;\n\n    // set HP = 0 for all targets of the CR or less that have been turned\n    const macro = game.macros.getName(\"Make Dead\");\n    console.log(\"MACRO TEST | Actor Class: %O\", actorClass);\n    for (let target of workflow.targets) {\n        console.log(\"MACRO TEST | CRDestroy 2: %s\", crDestroy);\n        console.log(\"MACRO TEST | target: %O\", target);\n        let turned = null;\n        turned = await targetFindEffect(target, \"Channel Divinity: Turn Undead\");\n        console.log(\"MACRO TEST | turned: %O\", turned);\n        console.log(\"MACRO TEST | target actor: %O\", target.actor);\n        console.log(\"MACRO TEST | CR: %s\", target.actor.data.data.details.cr);\n        if (target.actor.data.data.details.cr <= crDestroy) {\n            console.log(\"MACRO TEST | CHECK FOR DEAD!\");\n            if (turned != undefined) macro.execute(target.actor.uuid);\n        }\n    }\n}\n\n// Test PC Class, Subclass and Class Level\n// RETURN the class object (TRUE) or null (FALSE)\nfunction testClass(testActor, className, subClassName, levels) {\n    let theClass = testActor.data.data.classes[className];\n    if (theClass) {\n        if ((levels > 0) && (theClass.levels >= levels)) {\n            if (subClassName === null || (theClass.subclass.identifier.toLowerCase() === subClassName.toLowerCase())) {\n                return theClass;\n            }\n        }\n    }\n    return null;\n}\n\n// Function to test for an effect\nasync function targetFindEffect(target, effectName) {\n    let effectUuid = null;\n    //console.log(\"MACRO TEST | target effects: %O\", target.data.actorData.effects);\n    //console.log(\"MACRO TEST | effect name: %s\", effectName);\n    effectUuid = target?.data.actorData.effects.find(ef => ef.name === effectName);\n    //console.log(\"MACRO TEST | effect UUID: %O\", effectUuid);\n    return effectUuid;\n}",
+          "command": "/*****\nCleric: Turn Undead\n\nUSEAGE : ACTIVATE TO CHANNEL DIVINITY : TURN UNDEAD\nClick on this item to activate the turn undead.  \nPlease remember to setup usage consumption in the itme itself.  \n\nThis Macro requires a GAME LEVEL MACRO: MAKE DEAD \n\nv1.4 August 13 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n// if (!game.modules.get(\"warpgate\")?.active) return ui.notifications.error(\"Turn Undead requires warpgate module\");\n\nif (args[0].macroPass === \"preambleComplete\") {\n    let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    // I am stealing the activation condition as a string for the creature type I want to hit\n    const activationCondition = args[0].itemData.data.activation.condition.toLowerCase();\n    let immunity = [\"Turn Immunity\"];\n    for (let target of workflow.targets) {\n        let creatureType = target.actor.data.data.details.type;\n        // remove targets that are not creatures (aka PCs etc)\n        if ((creatureType === null) || (creatureType === undefined)) {\n            workflow.targets.delete(target);\n        }\n        // remove creatures that are not undead \n        else if (!([creatureType.value.toLowerCase(), creatureType.subtype.toLowerCase()].includes(activationCondition.toLowerCase()))) {\n            workflow.targets.delete(target);\n        }\n        // remove creatures with turn immunity\n        else if (target.actor.items.find(i => immunity.includes(i.name))) {\n            workflow.targets.delete(target);\n        }\n\n        // check for i, if so give advanatage on tragets next save\n        let resistance = [\"Turn Resistance\"];\n        if (target.actor.items.find(i => resistance.includes(i.name))) {\n            // add resistance to next save \n            await markTurnResistance(target.actor, args);\n        }\n\n        game.user.updateTokenTargets(Array.from(workflow.targets).map(t => t.id));\n    }\n} else if (args[0].macroPass === \"postSave\") {\n    let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    const pcActor = workflow.actor;\n\n    let crDestroy = 0.0;\n    if (workflow.targets.size === 0) return;\n    let actorClass = pcActor.classes.cleric.data.data.levels;\n    if (actorClass > 16) crDestroy = 4;\n    else if (actorClass > 13) crDestroy = 3;\n    else if (actorClass > 10) crDestroy = 2;\n    else if (actorClass > 7) crDestroy = 1;\n    else if (actorClass > 4) crDestroy = 0.5;\n\n    // set HP = 0 for all targets of the CR or less that have been turned\n    for (let target of workflow.failedSaves) {\n        if (target.actor.data.data.details.cr < crDestroy) {\n            //let target = failedSave.actor;\n            let maxHP = Number(target.actor.data.data.attributes.hp.max);\n            let updates = {\n                actor: { \"data.attributes.hp.value\": 0, \"data.attributes.hp.max\": maxHP }\n            };\n            let mutateCallbacks = \"\";\n            await warpgate.mutate(target.document, updates, mutateCallbacks, { permanent: true });\n        } else {\n            // set frightened for all those undead above the CR that were not destoryed\n            console.log(\"MACRO TEST | target actor: %O\", target.actor);\n            console.log(\"MACRO TEST | add frightened: %O\", target);\n            let thisActor = target.uuid;\n            game.dfreds.effectInterface.addEffect({ effectName: 'Frightened', thisActor });\n        }\n    }\n    return;\n}\n\n// if the character has resistance to the new damage type, set vulnerability to negate it\nasync function markTurnResistance(target, args) {\n    const effectData = {\n        label: \"Turn Resistance\",\n        icon: \"systems/dnd5e/icons/skills/affliction_21.jpg\",\n        origin: args.uuid,\n        changes: [{\n            \"key\": \"flags.midi-qol.advantage.ability.check.wis\",\n            \"value\": 1,\n            \"mode\": 0,\n            \"priority\": 20\n        }],\n        disabled: false,\n        flags: {\n            dae: {\n                specialDuration: [\"isSave\"]\n            }\n        }\n    }\n    await MidiQOL.socket().executeAsGM(\"createEffects\", { actorUuid: target.uuid, effects: [effectData] });\n    return;\n}",
           "folder": null,
           "sort": 0,
           "permission": {
@@ -184,7 +185,7 @@
       "world": "test",
       "system": "dnd5e",
       "coreVersion": "9.269",
-      "systemVersion": "1.6.1"
+      "systemVersion": "1.6.3"
     },
     "cf": {
       "id": "temp_92357bvnxs9",
@@ -201,7 +202,7 @@
       "componentId": 110,
       "componentTypeId": 12168134,
       "class": "Cleric",
-      "subclass": "Twilight Domain",
+      "subclass": "Grave Domain",
       "dndbeyond": {
         "levelScale": null,
         "levelScales": [],
@@ -216,9 +217,24 @@
           }
         ]
       },
-      "importId": "0bof1x1rte45mt06",
+      "importId": "h0fgg2cviptcizbi",
       "originalItemName": "Channel Divinity: Turn Undead",
       "replaced": true
+    },
+    "siftoolkit": {
+      "SIFData": {
+        "ignoreDuration": false,
+        "texture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true,
+        "playTemplateAudio": false,
+        "playDamageAudio": false,
+        "playSaveAudio": false,
+        "clip": "",
+        "volume": 100
+      }
     }
   }
 }

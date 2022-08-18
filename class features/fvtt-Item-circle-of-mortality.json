@@ -31,7 +31,7 @@
     },
     "uses": {
       "value": null,
-      "max": "",
+      "max": null,
       "per": ""
     },
     "consume": {
@@ -146,7 +146,7 @@
     },
     "scene-packer": {
       "hash": "3d632caecd50db7bc026c5fb08ac5b20868a0c80",
-      "sourceId": "Item.wFx1w4tCFLan9aAc"
+      "sourceId": "Item.Jw9AdQfRGHHxDdwz"
     },
     "spellTemplateManager": {
       "stmData": {
