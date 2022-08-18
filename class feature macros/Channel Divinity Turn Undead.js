@@ -7,33 +7,45 @@ Please remember to setup usage consumption in the itme itself.
 
 This Macro requires a GAME LEVEL MACRO: MAKE DEAD 
 
-v1.1 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v1.4 August 13 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
+// if (!game.modules.get("warpgate")?.active) return ui.notifications.error("Turn Undead requires warpgate module");
 
 if (args[0].macroPass === "preambleComplete") {
     let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     // I am stealing the activation condition as a string for the creature type I want to hit
     const activationCondition = args[0].itemData.data.activation.condition.toLowerCase();
+    let immunity = ["Turn Immunity"];
     for (let target of workflow.targets) {
         let creatureType = target.actor.data.data.details.type;
-        if ((creatureType === null) || (creatureType === undefined))    // that is not a creature
+        // remove targets that are not creatures (aka PCs etc)
+        if ((creatureType === null) || (creatureType === undefined)) {
             workflow.targets.delete(target);
+        }
+        // remove creatures that are not undead 
         else if (!([creatureType.value.toLowerCase(), creatureType.subtype.toLowerCase()].includes(activationCondition.toLowerCase()))) {
             workflow.targets.delete(target);
         }
+        // remove creatures with turn immunity
+        else if (target.actor.items.find(i => immunity.includes(i.name))) {
+            workflow.targets.delete(target);
+        }
+
+        // check for i, if so give advanatage on tragets next save
+        let resistance = ["Turn Resistance"];
+        if (target.actor.items.find(i => resistance.includes(i.name))) {
+            // add resistance to next save 
+            await markTurnResistance(target.actor, args);
+        }
+
         game.user.updateTokenTargets(Array.from(workflow.targets).map(t => t.id));
     }
-} else if (args[0].macroPass === "postActiveEffects") {
+} else if (args[0].macroPass === "postSave") {
     let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const pcActor = workflow.actor;
 
-    // set CR to destory
     let crDestroy = 0.0;
     if (workflow.targets.size === 0) return;
-    //console.log("MACRO TEST | Actor: %O", pcActor);
-    //console.log("MACRO TEST | Actor Classes: %O", pcActor.data.document.classes);
-    //let actorClass = testClass(pcActor, "cleric", null, 1)?.levels ?? 0;
-    //if (!actorClass) return;
     let actorClass = pcActor.classes.cleric.data.data.levels;
     if (actorClass > 16) crDestroy = 4;
     else if (actorClass > 13) crDestroy = 3;
@@ -42,59 +54,39 @@ if (args[0].macroPass === "preambleComplete") {
     else if (actorClass > 4) crDestroy = 0.5;
 
     // set HP = 0 for all targets of the CR or less that have been turned
-    //const macro = game.macros.getName("MakeDead");
-    const macro = game.macros.find(i => i.name === "MakeDead");
-    console.log("MACRO TEST | Macro Object: %O", macro);
-    console.log("MACRO TEST | Actor Class: %O", actorClass);
-    for (let target of workflow.targets) {
-        console.log("MACRO TEST | CRDestroy 2: %s", crDestroy);
-        console.log("MACRO TEST | target: %O", target);
-        console.log("MACRO TEST | target actor before: %O", target.actor);
-        let turned = null;
-        turned = await targetFindEffect(target.actor, "Channel Divinity: Turn Undead");
-        console.log("MACRO TEST | turned: %O", turned);
-        console.log("MACRO TEST | target actor: %O", target.actor);
-        console.log("MACRO TEST | CR: %s", target.actor.data.data.details.cr);
-        if (target.actor.data.data.details.cr <= crDestroy) {
-            console.log("MACRO TEST | CHECK FOR DEAD!");
-            if (turned != undefined) {
-                console.log("MACRO TEST | destroyed!");
-                await macro.execute(target.actor.uuid);
+    for (let target of workflow.failedSaves) {
+        if (target.actor.data.data.details.cr < crDestroy) {
+            //let target = failedSave.actor;
+            let maxHP = Number(target.actor.data.data.attributes.hp.max);
+            let updates = {
+                actor: { "data.attributes.hp.value": 0, "data.attributes.hp.max": maxHP }
+            };
+            let mutateCallbacks = "";
+            await warpgate.mutate(target.document, updates, mutateCallbacks, { permanent: true });
+        }
+    }
+    return;
+}
+
+// if the character has resistance to the new damage type, set vulnerability to negate it
+async function markTurnResistance(target, args) {
+    const effectData = {
+        label: "Turn Resistance",
+        icon: "systems/dnd5e/icons/skills/affliction_21.jpg",
+        origin: args.uuid,
+        changes: [{
+            "key": "flags.midi-qol.advantage.ability.check.wis",
+            "value": 1,
+            "mode": 0,
+            "priority": 20
+        }],
+        disabled: false,
+        flags: {
+            dae: {
+                specialDuration: ["isSave"]
             }
         }
     }
-}
-
-/* 
-// Test PC Class, Subclass and Class Level
-// RETURN the class object (TRUE) or null (FALSE)
-function testClass(testActor, className, subClassName, levels) {
-    //let theClass = testActor.data.data.classes[className];
-    let className = testActor.classes.cleric;
-    let classLevels = testActor.classes.cleric.data.data.levels;
-    let subclassName =
-        console.log("MACRO TEST | THE CLASS: %O", theClass);
-    console.log("MACRO TEST | THE CLASS Levels: %i", testActor.classes.cleric.levels);
-    console.log("MACRO TEST | THE CLASS subclass: %s", testActor.classes.cleric.subclass.name);
-
-    if (theClass) {
-        if ((levels > 0) && (theClass.levels >= levels)) {
-            if (subClassName === null || (theClass.subclass.identifier.toLowerCase() === subClassName.toLowerCase())) {
-                return theClass;
-            }
-        }
-    }
-    return null;
-}
-*/
-
-// Function to test for an effect
-async function targetFindEffect(target, effectName) {
-    let effectUuid = null;
-    console.log("MACRO TEST | target effects: %O", target.data.effects);
-    console.log("MACRO TEST | effect name: %s", effectName);
-    //effectUuid = target?.data.actorData.effects.find(ef => ef.name === effectName);
-    effectUuid = target.data.effects.find(ef => ef.sourceName === effectName);
-    console.log("MACRO TEST | effect UUID: %O", effectUuid);
-    return effectUuid;
+    await MidiQOL.socket().executeAsGM("createEffects", { actorUuid: target.uuid, effects: [effectData] });
+    return;
 }
