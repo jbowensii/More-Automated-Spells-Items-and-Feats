@@ -1,12 +1,15 @@
 # More Automated Spells Items and Feats
 FoundryVTT More Automated Spells Items and Feats (MASIF amounts of automation) Module
 
-This module has been re-actived in FoundryVTT under the Wizard of the Coast Fan Content Policy: https://company.wizards.com/en/legal/fancontentpolicy
+Version 1.1.0 
+- Updates for D&D 5e 1.6.3 compatibility as I prepare for FoundryVTT V10
 
-This fan work is meant to ease the online game play of Wizard of the Coast Dungeons and Dragons 5e game.  
-Please use yout purchased D&D 5e books and online materials to provide descriptions of the features included in this Fan work.
+This module has been re-activated in FoundryVTT and is produced for FREE under the Wizard of the Coast Fan Content Policy: https://company.wizards.com/en/legal/fancontentpolicy
 
-Thank you Anathema for your the assistance.
+This fan work is meant to ease the online gameplay of Wizards of the Coast Dungeons and Dragons 5e game.
+Please use your purchased D&D 5e books and online materials to provide descriptions of the features included in this Fan work.
+
+Thank you Anathema for your assistance.
 
 To manually install use this URL: https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/download/1.0.0/module.json
 
