@@ -1,9 +1,12 @@
 # More Automated Spells Items and Feats
 FoundryVTT More Automated Spells Items and Feats (MASIF amounts of automation) Module
 
-This module is still active as I work out any issues to get re-listed on FoundryVTT (if that is even possible).
+This module has been re-actived in FoundryVTT under the Wizard of the Coast Fan Content Policy: https://company.wizards.com/en/legal/fancontentpolicy
 
-    I REMOVED THE OLD GITHUB AND REBUILT IT WITHOUT SOME MISTAKENLY INCLUDED COPYRIGHT MATERIAL
+This fan work is meant to ease the online game play of Wizard of the Coast Dungeons and Dragons 5e game.  
+Please use yout purchased D&D 5e books and online materials to provide descriptions of the features included in this Fan work.
+
+Thank you Anathema for your the assistance.
 
 To manually install use this URL: https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/download/1.0.0/module.json
 
@@ -13,12 +16,13 @@ This module requires the following modules to function:
 - Dynamic Active Effects (dae)          https://foundryvtt.com/packages/dae  
 - DFreds Convenient Effects             https://foundryvtt.com/packages/dfreds-convenient-effects
 - Advanced Macros                       https://foundryvtt.com/packages/advanced-macros
+- warpgate                              https://github.com/trioderegion/warpgate
 - 5e Sheet Resource plus (recommended)  https://foundryvtt.com/packages/resourcesplus
 
 <details>
 <summary> PREAMBLE </summary>
 <p>&nbsp;</p>
-So it has been many years since I have been a practicing developer, and this is my first time writing in javascript. My code is much more verbose than necessary with unnecesary space and descriptive variablenames.  I did this is hopes that folks like me could follow along with the code and understand how it works.  I know that javascript can be much more compact.  When I first looked at javascript it was way more intimidating than writting 68030 assembly back in my early days after college (yes I just dated myself).  Once I have mastered javascript I am sure I will write much more compact code, but I hope this inspires some of you to follow along and try your hand at automating something you really want.  In fact most of my automations are NOT macros at all (javascript).  MIDI-QOL and DAE provide a huge framework to do 90% of everything most people would want without writing a line of javascript code.  
+So it has been many years since I have been a practicing developer, and this is my first time writing in javascript. My code is much more verbose than necessary with unnecesary space and descriptive variablenames and comments.  I did this is hopes that folks like me could follow along with the code and understand how it works.  I know that javascript can be much more compact.  When I first looked at javascript it was way more intimidating than writting 68030 assembly back in my early days after college (yes I just dated myself).  Once I have mastered javascript I am sure I will write much more compact code, but I hope this inspires some of you to follow along and try your hand at automating something you really want.  In fact most of my automations are NOT macros at all (javascript).  MIDI-QOL and DAE provide a huge framework to do 90% of everything most people would want without writing a line of javascript code.  
 
 These three videos did a great job explaining how to get started writing foundry macros. I highly recommend them... they were made by spacemandev.
 
@@ -40,9 +44,7 @@ A shout out to Tim Posney, the creator of MIDI-QOL and DAE. A fantastic person w
 
 Once the compendium module is installed you can import one of the items into your game.  Most of them are completely setup from the start and can be dropped on the appropriate character and just function.  
     
-There is also a global MACRO folder, as a GameMaster (DungeonMaster) import these and make sure they are marked as execute as a GM.  
-
-The descriptions for each feature are empty, since including then MAY violate copyright, so please insert your own descriptions.  
+The descriptions for each feature ARE EMPTY, since including descriptions would violate the Wizard of the Coast Fan Content Policy, so please insert your own descriptions from your purchased D&D 5e materials.  
 
 There will also be notes in the description that instruct you HOW and WHEN to use the item to automate your game play. 
 <b>Please remember to click on the collapsible icon <img width="15" alt="image" src="https://user-images.githubusercontent.com/76136571/164912225-f8485d94-56bd-4e1d-baf9-58873cb426a4.png"> to open a section and read the instructions.</b> 
@@ -88,3 +90,4 @@ If you have a character sheet runs out of resource spaces, might I suggest the m
 </details>
 
 DISCORD (jbowens#0415) 
+Wizard of the Coast Fan Content Policy: https://company.wizards.com/en/legal/fancontentpolicy
