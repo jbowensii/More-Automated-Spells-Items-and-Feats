@@ -5,7 +5,6 @@
   "data": {
     "description": {
       "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>USAGE: </strong><span style=\"color: #169179;\">ACTIVATE BEFORE THE ATTACK</span></summary>\n<p>*** This maneuver does not work with MIDI-QOL Range checking, awaiting patch ***</p>\n<p>This Maneuver must be activated BEFORE the character makes an attack.&nbsp; This will set up any bonuses and effects on the TARGET character.&nbsp; A <span style=\"text-decoration: underline; color: #236fa1;\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "chat": "<p>When a creature you can see moves into the reach you have with the melee weapon you’re wielding, you can use your reaction to expend one superiority die and make one attack against the creature, using that weapon. If the attack hits, add the superiority die to the weapon’s damage roll.</p>",
       "unidentified": ""
     },
     "source": "PHB p74",

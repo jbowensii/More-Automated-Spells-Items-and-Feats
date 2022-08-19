@@ -5,7 +5,6 @@
   "data": {
     "description": {
       "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>USAGE: </strong> <span style=\"color: #169179;\">AUTOMATED</span></summary>\n<p>This item should be placed on the character that has the Precision Attack Maneuver.&nbsp; This item places an effect on the Actor that allows the rolling of a Superiority Die to be added to the attack Roll before the TO HIT is evaluated.</p>\n</details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "chat": "When you make a weapon attack roll, you can expend one superiority die to add it to the roll before or after the roll but before any effects are applied.\n<details>\n  <summary>\n    More Details\n  </summary>\n  <p>\n    </p><p>When you make a weapon attack roll against a creature, you can expend one superiority die to add it to the roll. You can use this maneuver before or after making the attack roll, but before any effects of the attack are applied.</p>\n  <p></p>\n</details>",
       "unidentified": ""
     },
     "source": "PHB p74",

@@ -5,7 +5,6 @@
   "data": {
     "description": {
       "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "chat": "You learn maneuvers that are fueled by superiority dice. Maneuvers enhance an attack in some way. You have 5d8 superiority dice per short rest.",
       "unidentified": ""
     },
     "source": "PHB",
