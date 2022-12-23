@@ -58,6 +58,78 @@ If you have a character sheet runs out of resource spaces, might I suggest the m
 </details>
 
 <details>
+<summary> DETAILED INSTRUCTIONS provided by rprejean</summary>
+
+
+First, thank you rprejean for this writeup... 
+
+This document is to assist those with setting up MASIE to use the Battle Master Module. Its purpose is to clearly detail the steps needed to get the Battle Master module working. It assumes that you have loaded all of the prerequisite modules mentioned on Github.
+
+Visit the Github link above to download the latest version and find out more about the module. I am not the developer nor do I have any experience in developing modules. For questions regarding the module, again, see the Github link above. 
+
+Step 1:  Download, install and activate the module. Then locate the assets in the compendium. 
+
+![Picture1](https://user-images.githubusercontent.com/76136571/209366254-6d6f054d-645e-4ec6-9142-b3779b83097f.png)
+![Picture2](https://user-images.githubusercontent.com/76136571/209366257-bbd24ecd-86ff-4895-92e6-f39501a7abb2.png)
+
+Step 2: Set up the character to be a Battle Master
+Create a resource pool named “Superiority Die” set as seen below with the allotted pool corresponding to character’s level. See the D&D PHB. 
+
+![Picture10](https://user-images.githubusercontent.com/76136571/209366682-55b673ca-f33d-443a-9e45-31b4a7ac11c1.png)
+
+Create a subclass and link it to the Fighter main class.
+Create a new item named “Battle Master” with the type “Subclass”
+
+![Picture11](https://user-images.githubusercontent.com/76136571/209366711-82d2612c-6456-410c-8d6d-137b3266563b.png)
+
+Open the item and change: (all lowercase)
+Identifier:  battle-master
+Class Identifier: fighter
+
+![Picture12](https://user-images.githubusercontent.com/76136571/209366746-75b7cf6c-584b-4e2f-aa55-9558127b15ef.png)
+
+Drag the new subclass to the fighter's Character sheet.
+
+![Picture13](https://user-images.githubusercontent.com/76136571/209366786-fbc41795-e833-42f0-a3e7-7dad72810e2e.png)
+
+Go to the BM compendium and drag “Superiority Die” to the character.It will appear in the features tab and create a passive effect under effects.
+
+![Picture14](https://user-images.githubusercontent.com/76136571/209366851-d36541c6-5189-46db-9f04-623f82cf8b95.png)
+
+This item requires no modification
+
+Step 3: Configuring Battle Master Maneuvers
+
+![image](https://user-images.githubusercontent.com/76136571/209367065-ec4b63fa-d79a-4a19-a011-a60d108da762.png)
+
+●	Choose a Maneuver and drag it to the character sheet.
+
+●	They will appear under Active Abilities
+
+●	Open the settings for each Maneuver
+
+![Picture15](https://user-images.githubusercontent.com/76136571/209366914-0131cec6-8856-4120-b4ac-d1e7878cbb79.png)
+
+●	Details: Resource Consumption
+
+○	Attribute
+
+○	Resources.primary
+
+○	1
+
+●	Every Maneuver will be setup like this.
+
+○	This causes all of them to use the same resource pool that was generated earlier
+
+
+![Picture16](https://user-images.githubusercontent.com/76136571/209366972-3d1e166f-4011-4768-851b-5fd496ab3954.png)
+
+<p>&nbsp;</p>
+</details>
+
+
+<details>
 <summary> AUTOMATION ITEMS IN THIS MODULE</summary>
     
     
