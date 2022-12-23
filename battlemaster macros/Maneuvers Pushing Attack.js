@@ -6,7 +6,7 @@ This Maneuver must be activated AFTER the character makes an attack and knows th
 HIT was successful.  This will activate any bonuses, saves, effects and extra damage 
 to the TARGET.  A Superiority Die will be expended immediately.
 
-v1.2 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "postSave") {
@@ -33,17 +33,17 @@ if (args[0].macroPass === "postSave") {
                 content: "<p>How far would you like to push the target?</p>",
                 buttons: {
                     one: {
-                        icon: '<p> </p><img src = "systems/dnd5e/icons/skills/water_09.jpg" width="60" height="60"></>',
+                        icon: '<p> </p><img src = "icons/magic/water/pseudopod-swirl-blue.webp" width="60" height="60"></>',
                         label: "<p>5 ft.</p>",
                         callback: () => resolve(1)
                     },
                     two: {
-                        icon: '<p> </p><img src = "systems/dnd5e/icons/skills/shadow_19.jpg" width="60" height="60"></>',
+                        icon: '<p> </p><img src = "icons/magic/air/wind-vortex-swirl-purple.webp" width="60" height="60"></>',
                         label: "<p>10 ft.</p>",
                         callback: () => { resolve(2) }
                     },
                     three: {
-                        icon: '<p> </p><img src = "systems/dnd5e/icons/skills/fire_02.jpg" width="60" height="60"></>',
+                        icon: '<p> </p><img src = "icons/magic/fire/orb-vortex.webp" width="60" height="60"></>',
                         label: "<p>15 ft.</p>",
                         callback: () => { resolve(3) }
                     }
@@ -66,7 +66,8 @@ if (args[0].macroPass === "postSave") {
         canvas.grid.diagonalRule = diagonalRule;
 
         // update the canvas to move the token
-        await target.data.document.update(canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y));
+        //await target.document.update(canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y));
+        await target.update(canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y));
     }
 }
 return;
@@ -75,12 +76,9 @@ return;
 
 // Increment available resource
 async function incrementResource(testActor, resourceName, numValue) {
-    let actorDup = duplicate(testActor);
-    let resources = Object.values(actorDup.data.resources);
-    let foundResource = resources.find(i => i.label.toLowerCase() === resourceName.toLowerCase());
-    if (foundrResource) {
-        foundResource.value = foundResource.value + numValue;
-        await testActor.update(actorDup);
-    } else ui.notifications.error("You have not setup a Superiority Dice resource.");
+    const resourceKey = Object.keys(testActor.system.resources).find(k => testActor.system.resources[k].label.toLowerCase() === resourceName.toLowerCase());
+    let newResources = duplicate(testActor.system.resources);
+    newResources[resourceKey].value += 1;
+    await actor.update({"system.resources": newResources});
     return;
 }

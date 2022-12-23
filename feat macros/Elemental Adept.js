@@ -10,14 +10,15 @@ workflow: spell damage
     - if found add "min2" to all damages
     - test all targets for resistance to damageType
     - for every target with resistance set vulnerability
-    - CLEANUP: restore the item and remove the vulnerability form all target(s)
+    - CLEANUP: restore the item and remove the vulnerability form all target(s) 
 
-v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 December 18 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 // make sure the attempted hit was made with a spell attack of some type
-if (!["msak", "rsak", "save"].includes(args[0].item.data.actionType)) return;
-const damageType = "lightning";
+if (!["msak", "rsak", "save"].includes(args[0].item.system.actionType)) return;
+//CHANGE DAMAGE TYPE "acid", "fire", "cold", "lightning", "thunder"
+const damageType = "fire";
 
 if (args[0].macroPass === "preItemRoll") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
@@ -29,14 +30,14 @@ if (args[0].macroPass === "preItemRoll") {
 
 } else if (args[0].macroPass === "preambleComplete") {
     const theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;
-    let itemData = theItem.data.data;
+    let itemData = theItem.system;
     const targets = args[0].targets;
 
     // mark all targets that are resistant to this damage type now vulnerable to cancel the resistance
     // replace this later with a .map function  
     for (let i = 0; i < targets.length; i++) {
         let targetActor = targets[i].actor;
-        const match = targetActor.data.data.traits.dr.value.find(element => {
+        const match = targetActor.system.traits.dr.value.find(element => {
             if (element.includes(damageType)) markTargetVulnerable(targetActor, damageType, args[0]);
         });
     }
@@ -71,8 +72,8 @@ if (args[0].macroPass === "preItemRoll") {
     // restore original spell damage and scaling from the backup item
     let backupItem = await getProperty(workflow, "originalItem");
     // replace this later with a .map function 
-    for (let i = 0; i < backupItem.data.data.damage.parts.length; i++) theItem.data.data.damage.parts[i] = backupItem.data.data.damage.parts[i];
-    theItem.data.data.scaling = backupItem.data.data.scaling;
+    for (let i = 0; i < backupItem.system.damage.parts.length; i++) theItem.system.damage.parts[i] = backupItem.system.damage.parts[i];
+    theItem.system.scaling = backupItem.system.scaling;
 
 } return;
 
@@ -93,9 +94,11 @@ async function markTargetVulnerable(target, damageType, args) {
     await MidiQOL.socket().executeAsGM("createEffects", { actorUuid: target.uuid, effects: [effectData] });
 }
 
+//---------------------------------- MY FUNCTIONS -------------------------------------
+
 // Function to test for an effect
 async function findEffect(target, effectName) {
     let effectUuid = null;
-    effectUuid = target?.actor.data.effects.find(ef => ef.data.label === effectName);
+    effectUuid = target?.effects.find(ef => ef.label === effectName);
     return effectUuid;
 }

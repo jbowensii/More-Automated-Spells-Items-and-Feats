@@ -2,67 +2,6 @@
   "name": "Elemental Adept (Cold)",
   "type": "feat",
   "img": "icons/magic/water/projectile-ice-chunk-blue.webp",
-  "data": {
-    "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "unidentified": ""
-    },
-    "source": "Player's Handbook",
-    "activation": {
-      "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": null,
-      "max": "",
-      "per": null
-    },
-    "consume": {
-      "type": "",
-      "target": null,
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
-    },
-    "requirements": "The ability to cast at least one spell",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "attunement": 0
-  },
   "effects": [
     {
       "_id": "JqR0VfQcqj7o2sC4",
@@ -71,14 +10,20 @@
           "key": "flags.midi-qol.onUseMacroName",
           "mode": 0,
           "value": "ItemMacro.Elemental Adept (Cold),all",
-          "priority": "1"
+          "priority": 1
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
-      "icon": "systems/dnd5e/icons/skills/ice_09.jpg",
+      "icon": "icons/magic/water/projectile-ice-chunk-blue.webp",
       "label": "Elemental Adept (Cold)",
       "origin": "Item.7Y7UQFlA6C65Hb7n",
       "transfer": true,
@@ -91,7 +36,9 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [],
-          "transfer": true
+          "transfer": true,
+          "selfTarget": false,
+          "selfTargetAlways": false
         },
         "ActiveAuras": {
           "isAura": false,
@@ -105,10 +52,20 @@
           "displayTemp": false,
           "hostile": false,
           "onlyOnce": false
+        },
+        "effective-transferral": {
+          "transferBlock": {
+            "button": false,
+            "chat": false,
+            "displayCard": false
+          },
+          "transferrable": {
+            "self": true,
+            "target": true
+          }
         }
       },
-      "tint": null,
-      "selectedKey": "flags.midi-qol.onUseMacroName"
+      "tint": null
     }
   ],
   "flags": {
@@ -142,8 +99,8 @@
       "sourceId": "Compendium.world.ddb-feats.spxwZqUg9ypdgEug"
     },
     "scene-packer": {
-      "hash": "9b7bb0bedcb486343d6b814b450bccdb191c20de",
-      "sourceId": "Item.if8IOf9bKgUpIAjw"
+      "hash": "2e5c8e56e8462fdda0c7590999ed825c375a12a1",
+      "sourceId": "Item.cNQkuN0Osk3zRvgB"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -185,14 +142,106 @@
             "default": 0
           },
           "flags": {}
+        },
+        "name": "Elemental Adept (Cold)",
+        "type": "script",
+        "scope": "global",
+        "command": "/*****\nElemental Adept \n\nUSAGE: This is fully automated, just place on a character\n\nworkflow: spell damage\n    - retreive the damage type fromt thew DAE variable = damageType \n    - duplicate the ITEM on the workflow as OriginalItem\n    - search through all damage on the workfolow ITEM for the given damage type\n    - if found add \"min2\" to all damages\n    - test all targets for resistance to damageType\n    - for every target with resistance set vulnerability\n    - CLEANUP: restore the item and remove the vulnerability form all target(s)\n\nv2.0 December 18 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\n// make sure the attempted hit was made with a spell attack of some type\nif (![\"msak\", \"rsak\", \"save\"].includes(args[0].item.system.actionType)) return;\n//CHANGE DAMAGE TYPE \"acid\", \"fire\", \"cold\", \"lightning\", \"thunder\"\nconst damageType = \"cold\";\n\nif (args[0].macroPass === \"preItemRoll\") {\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    const theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;\n\n    // backup the whole original item as a property on the workflow\n    let backupItem = theItem.clone();\n    await setProperty(workflow, \"originalItem\", backupItem);\n\n} else if (args[0].macroPass === \"preambleComplete\") {\n    const theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;\n    let itemData = theItem.system;\n    const targets = args[0].targets;\n\n    // mark all targets that are resistant to this damage type now vulnerable to cancel the resistance\n    // replace this later with a .map function  \n    for (let i = 0; i < targets.length; i++) {\n        let targetActor = targets[i].actor;\n        const match = targetActor.system.traits.dr.value.find(element => {\n            if (element.includes(damageType)) markTargetVulnerable(targetActor, damageType, args[0]);\n        });\n    }\n\n    // strip damage type in [] from the originalDamage if it exists and add \"min2\" and the damage type back in []\n    // replace this later with a .map function \n    for (let i = 0; i < itemData.damage.parts.length; i++) {\n        let oldDamage = itemData.damage.parts[i][1];\n        let oldDice = itemData.damage.parts[i][0];\n        if (oldDamage === damageType) {\n            let index = oldDice.indexOf('[');\n            if (index !== -1) oldDice = oldDice.slice(0, index); // remove everything after the first open bracket '['\n            itemData.damage.parts[i][1] = damageType;\n            itemData.damage.parts[i][0] = oldDice + \"min2\" + \"[\" + damageType + \"]\";\n            itemData.scaling.formula = itemData.scaling.formula + \"min2\";\n        }\n    }\n\n} else if (args[0].macroPass === \"postActiveEffects\") {\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    let theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;\n    const targets = args[0].targets;\n\n    // remove any vulnerability previously set on target(s)\n    // replace this later with a .map function \n    for (let i = 0; i < targets.length; i++) {\n        let targetActor = targets[i].actor;\n        let effect = await findEffect(targets[i], \"EAVulnerability\");\n        if (effect) await MidiQOL.socket().executeAsGM(\"removeEffects\", { actorUuid: targetActor.uuid, effects: [effect.id] });\n    }\n\n    // restore original spell damage and scaling from the backup item\n    let backupItem = await getProperty(workflow, \"originalItem\");\n    // replace this later with a .map function \n    for (let i = 0; i < backupItem.system.damage.parts.length; i++) theItem.system.damage.parts[i] = backupItem.system.damage.parts[i];\n    theItem.system.scaling = backupItem.system.scaling;\n\n} return;\n\n// if the character has resistance to the new damage type, set vulnerability to negate it\nasync function markTargetVulnerable(target, damageType, args) {\n    const effectData = {\n        label: \"EAVulnerability\",\n        icon: \"icons/magic/defensive/barrier-shield-dome-deflect-blue.webp\",\n        origin: args.uuid,\n        changes: [{\n            \"key\": \"data.traits.dv.value\",\n            \"value\": `${damageType}`,\n            \"mode\": 2,\n            \"priority\": 20\n        }],\n        disabled: false\n    }\n    await MidiQOL.socket().executeAsGM(\"createEffects\", { actorUuid: target.uuid, effects: [effectData] });\n}\n\n//---------------------------------- MY FUNCTIONS -------------------------------------\n\n// Function to test for an effect\nasync function findEffect(target, effectName) {\n    let effectUuid = null;\n    effectUuid = target?.effects.find(ef => ef.label === effectName);\n    return effectUuid;\n}",
+        "author": "paMZuKDupk0GHKFn",
+        "_id": null,
+        "img": "icons/svg/dice-target.svg",
+        "folder": null,
+        "sort": 0,
+        "ownership": {
+          "default": 0
+        },
+        "flags": {},
+        "_stats": {
+          "systemId": null,
+          "systemVersion": null,
+          "coreVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null
         }
       }
     },
     "exportSource": {
-      "world": "test",
+      "world": "5e-test-world",
       "system": "dnd5e",
-      "coreVersion": "9.269",
-      "systemVersion": "1.6.1"
+      "coreVersion": "10.291",
+      "systemVersion": "2.0.3"
     }
+  },
+  "system": {
+    "description": {
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "Player's Handbook",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "The ability to cast at least one spell",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.291",
+    "createdTime": 1671193294451,
+    "modifiedTime": 1671413964162,
+    "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

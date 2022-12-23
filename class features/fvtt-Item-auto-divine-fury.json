@@ -2,68 +2,6 @@
   "name": "Auto Divine Fury",
   "type": "feat",
   "img": "icons/magic/fire/projectile-wave-arrow.webp",
-  "data": {
-    "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary>VERSION INFO</summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "XGtE p11",
-    "activation": {
-      "type": "action",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": 0,
-      "max": "0",
-      "per": ""
-    },
-    "consume": {
-      "type": "",
-      "target": "",
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": null
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
-    },
-    "requirements": "Barbarian Zealot Path",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "attunement": null
-  },
   "effects": [
     {
       "_id": "BPyKtcWCBpuwouN9",
@@ -72,12 +10,18 @@
           "key": "flags.dae",
           "mode": 0,
           "value": "autoDivineFury 1",
-          "priority": "10"
+          "priority": 10
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/magic/fire/projectile-wave-arrow.webp",
       "label": "Auto Divine Fury",
@@ -108,8 +52,7 @@
           "onlyOnce": false
         }
       },
-      "tint": null,
-      "selectedKey": "flags.dae"
+      "tint": null
     }
   ],
   "flags": {
@@ -130,31 +73,13 @@
     "favtab": {
       "isFavorite": false
     },
-    "autoanimations": {
-      "killAnim": false,
-      "override": false,
-      "animType": "t1",
-      "animName": "",
-      "hmAnim": "a1",
-      "color": "n1",
-      "dtvar": "dt1",
-      "explosion": false,
-      "explodeVariant": "ev1",
-      "explodeColor": "ec1",
-      "explodeRadius": "0",
-      "explodeLoop": "1",
-      "selfRadius": "5",
-      "animTint": "#ffffff",
-      "auraOpacity": 0.75,
-      "ctaOption": false
-    },
     "cf": null,
     "core": {
       "sourceId": "Compendium.midi-qol.midiqol-sample-items.uvRQayOyn61L6vOV"
     },
     "scene-packer": {
-      "hash": "87f6e0c8af2f545777c2198b415f91dcfe63afbf",
-      "sourceId": "Item.OIwRwEi4Lqpik1qW"
+      "hash": "c389d729fab840cc8e76410eab969d2b61f6ab1e",
+      "sourceId": "Item.rkofBOz9EUgalF4s"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -167,10 +92,81 @@
       }
     },
     "exportSource": {
-      "world": "test",
+      "world": "5e-test-world",
       "system": "dnd5e",
-      "coreVersion": "9.269",
-      "systemVersion": "1.6.1"
+      "coreVersion": "10.291",
+      "systemVersion": "2.0.3"
     }
+  },
+  "system": {
+    "description": {
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary>VERSION INFO</summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "XGtE p11",
+    "activation": {
+      "type": "action",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": "0",
+      "per": "",
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": null
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Barbarian Zealot Path",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.291",
+    "createdTime": 1671193286504,
+    "modifiedTime": 1671384701048,
+    "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

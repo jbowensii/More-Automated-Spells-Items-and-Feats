@@ -5,7 +5,7 @@ USE: Manually triggered Preserve Life to use the available healing pool on the t
 Create a healing pool 
 Store the healing pool on the character in a DAE variable that terminates at the end of the actors turn
 
-v1.0 August 17 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0] === "on") {

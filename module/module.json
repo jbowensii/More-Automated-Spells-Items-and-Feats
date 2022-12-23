@@ -1,95 +1,134 @@
 {
-    "name": "more-automated-spells-items-and-feats",
-    "title": "More Automated Spells Items and Feats",
-    "description": "A FoundryVTT module containing a MASIF (More Automated Spells Items and Feats) amount of automation for D&D 5e.",
-    "author": "jbowens #0415 (Discord)",
-    "version": "1.1.0",
+  "title": "More Automated Spells Items and Feats",
+  "description": "A FoundryVTT module containing a MASIF (More Automated Spells Items and Feats) amount of automation for D&amp;D 5e.",
+  "version": "2.0.0",
+  "packs": [
+    {
+      "name": "More Automated Battle Master Maneuvers",
+      "label": "More Automated Battle Master Maneuvers",
+      "path": "packs/MASIFF-battlemaster.db",
+      "type": "Item",
+      "private": false,
+      "system": "dnd5e",
+      "flags": {}
+    },
+    {
+      "name": "More Automated Class Features",
+      "label": "More Automated Class Features",
+      "path": "packs/MASIF-class-features.db",
+      "type": "Item",
+      "private": false,
+      "system": "dnd5e",
+      "flags": {}
+    },
+    {
+      "name": "More Automated Feats",
+      "label": "More Automated Feats",
+      "path": "packs/MASIF-feats.db",
+      "type": "Item",
+      "private": false,
+      "system": "dnd5e",
+      "flags": {}
+    },
+    {
+      "name": "More Automated Items",
+      "label": "More Automated Items",
+      "path": "packs/MASIF-items.db",
+      "type": "Item",
+      "private": false,
+      "system": "dnd5e",
+      "flags": {}
+    },
+    {
+      "name": "More Automated Other",
+      "label": "More Automated Other",
+      "path": "packs/MASIF-other.db",
+      "type": "Item",
+      "private": false,
+      "system": "dnd5e",
+      "flags": {}
+    },
+    {
+      "name": "More Automated Species Features",
+      "label": "More Automated Species Features",
+      "path": "packs/MASIF-species-features.db",
+      "type": "Item",
+      "private": false,
+      "system": "dnd5e",
+      "flags": {}
+    },
+    {
+      "name": "More Automated Spells",
+      "label": "More Automated Spells",
+      "path": "packs/MASIF-spells.db",
+      "type": "Item",
+      "private": false,
+      "system": "dnd5e",
+      "flags": {}
+    },
+    {
+      "name": "More Automated World Macros",
+      "label": "More Automated World Macros",
+      "path": "packs/MASIF-world-macros",
+      "type": "Macro",
+      "private": false,
+      "system": "dnd5e",
+      "flags": {}
+    }
+  ],
+  "url": "https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git",
+  "manifest": "https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/latest/download/module.json",
+  "download": "https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/latest/download/module.zip",
+  "id": "more-automated-spells-items-and-feats",
+  "authors": [
+    {
+      "name": "jbowens #0415 (Discord)",
+      "flags": {}
+    }
+  ],
+  "relationships": {
+    "requires": [
+      {
+        "id": "dae",
+        "type": "module",
+        "manifest": "https://gitlab.com/tposney/dae/raw/master/package/module.json",
+        "compatibility": {}
+      },
+      {
+        "id": "midi-qol",
+        "type": "module",
+        "manifest": "https://gitlab.com/tposney/midi-qol/raw/master/package/module.json",
+        "compatibility": {}
+      },
+      {
+        "id": "advanced-macros",
+        "type": "module",
+        "manifest": "https://github.com/League-of-Foundry-Developers/fvtt-advanced-macros/releases/latest/download/module.json",
+        "compatibility": {}
+      },
+      {
+        "id": "dfreds-convenient-effects",
+        "type": "module",
+        "manifest": "https://github.com/DFreds/dfreds-convenient-effects/releases/latest/download/module.json",
+        "compatibility": {}
+      },
+      {
+        "id": "warpgate",
+        "type": "module",
+        "manifest": "https://github.com/trioderegion/warpgate/releases/latest/download/module.json",
+        "compatibility": {}
+      }
+    ],
     "systems": [
-        "dnd5e"
-    ],
-    "minimumCoreVersion": "9",
-    "compatibleCoreVersion": "9",
-    "dependencies": [
-        {
-            "name": "dae",
-            "manifest": "https://gitlab.com/tposney/dae/raw/master/package/module.json"
-        },
-        {
-            "name": "midi-qol",
-            "manifest": "https://gitlab.com/tposney/midi-qol/raw/master/package/module.json"
-        },
-        {
-            "name": "advanced-macros",
-            "manifest": "https://github.com/League-of-Foundry-Developers/fvtt-advanced-macros/releases/latest/download/module.json"
-        },
-        {
-            "name": "dfreds-convenient-effects",
-            "manifest": "https://github.com/DFreds/dfreds-convenient-effects/releases/latest/download/module.json"
-        },
-        {
-            "name": "warpgate",
-            "manifest": "https://github.com/trioderegion/warpgate/releases/latest/download/module.json"
-        }
-    ],
-    "packs": [
-        {
-            "name": "More Automated Battle Master Maneuvers",
-            "label": "More Automated Battle Master Maneuvers",
-            "path": "packs/MASIFF-battlemaster.db",
-            "entity": "Item",
-            "module": "More Automated Spells Items and Feats"
-        },
-        {
-            "name": "More Automated Class Features",
-            "label": "More Automated Class Features",
-            "path": "packs/MASIF-class-features.db",
-            "entity": "Item",
-            "module": "More Automated Spells Items and Feats"
-        },
-        {
-            "name": "More Automated Feats",
-            "label": "More Automated Feats",
-            "path": "packs/MASIF-feats.db",
-            "entity": "Item",
-            "module": "More Automated Spells Items and Feats"
-        },
-        {
-            "name": "More Automated Items",
-            "label": "More Automated Items",
-            "path": "packs/MASIF-items.db",
-            "entity": "Item",
-            "module": "More Automated Spells Items and Feats"
-        },
-        {
-            "name": "More Automated Other",
-            "label": "More Automated Other",
-            "path": "packs/MASIF-other.db",
-            "entity": "Item",
-            "module": "More Automated Spells Items and Feats"
-        },
-        {
-            "name": "More Automated Race Features",
-            "label": "More Automated Race Features",
-            "path": "packs/MASIF-race-features.db",
-            "entity": "Item",
-            "module": "More Automated Spells Items and Feats"
-        },
-        {
-            "name": "More Automated Spells",
-            "label": "More Automated Spells",
-            "path": "packs/MASIF-spells.db",
-            "entity": "Item",
-            "module": "More Automated Spells Items and Feats"
-        },
-        {
-            "name": "More Automated World Macros",
-            "label": "More Automated World Macros",
-            "path": "packs/MASIF-world-macros",
-            "entity": "Macro",
-            "module": "More Automated Spells Items and Feats"
-        }
-    ],
-    "url": "https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git",
-    "manifest": "https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/latest/download/module.json",
-    "download": "https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats/releases/latest/download/module.zip"
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {}
+      }
+    ]
+  },
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10"
+  }
 }

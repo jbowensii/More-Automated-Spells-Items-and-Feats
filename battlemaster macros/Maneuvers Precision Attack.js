@@ -6,7 +6,7 @@ This item should be placed on the character that has the Precision Attack Manuev
 This items places an effect on the Actor that allows the rolling of a Superiority Die to 
 be added to the attack Roll before the TO HIT is evaluated.
 
-v1.2 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 Decemeber 17 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
 
@@ -41,7 +41,7 @@ if (args[0].macroPass === "preCheckHits") {
         }
 
         // make sure the attempted hit was made with a weapon attack
-        if (!["mwak", "rwak"].includes(args[0].item.data.actionType)) {
+        if (!["mwak", "rwak"].includes(args[0].item.system.actionType)) {
             ui.notifications.error("Precision Attack only works with a weapon attack");
             return;
         }
@@ -61,7 +61,7 @@ if (args[0].macroPass === "preCheckHits") {
                             callback: () => resolve(true)
                         },
                         two: {
-                            icon: '<p> </p><img src = "systems/dnd5e/icons/skills/weapon_28.jpg" width="60" height="60"></>',
+                            icon: '<p> </p><img src = "icons/svg/cancel.svg" width="60" height="60"></>',
                             label: "<p>No</p>",
                             callback: () => { resolve(false) }
                         }
@@ -75,8 +75,9 @@ if (args[0].macroPass === "preCheckHits") {
         if (!useSuperiorityDie) return;
 
         // if YES subtract a superiorty die
+        let actorDup = duplicate(pcActor);
         await decrimentSheetResource(pcActor, "Superiority Dice", 1);
-
+ 
         // get the live MIDI-QOL workflow so we can make changes
         let newRoll = new Roll(`${workflow.attackRoll.result} + ${superiorityDie}`, workflow.actor.getRollData());
         newRoll = await newRoll.evaluate({ async: true });
@@ -94,17 +95,16 @@ return;
 // Test for available resource
 // Return resource object
 async function findSheetResource(testActor, resourceName) {
-    let resources = Object.values(testActor.data.data.resources);
+    let resources = Object.values(testActor.system.resources);
     let foundResource = resources.find(i => i.label.toLowerCase() === resourceName.toLowerCase());
     return foundResource;
 }
 
 // Decriment available resource
 async function decrimentSheetResource(testActor, resourceName, numValue) {
-    let actorDup = duplicate(testActor);
-    let resources = Object.values(actorDup.data.resources);
-    let foundResource = resources.find(i => i.label.toLowerCase() === resourceName.toLowerCase());
-    foundResource.value = foundResource.value - numValue;
-    await testActor.update(actorDup);
+    const resourceKey = Object.keys(testActor.system.resources).find(k => testActor.system.resources[k].label.toLowerCase() === resourceName.toLowerCase());
+    let newResources = duplicate(testActor.system.resources);
+    newResources[resourceKey].value -= 1;
+    await actor.update({"system.resources": newResources});
     return;
 }

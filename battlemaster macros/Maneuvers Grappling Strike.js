@@ -6,7 +6,7 @@ This Maneuver must be activated AFTER the character makes an attack and knows th
 This will activate any bonuses, saves, effects and extra damage to the TARGET.  
 A Superiority Die will be expended immediately.
 
-v1.2 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 December 17 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "preSave") {
@@ -31,18 +31,19 @@ if (args[0].macroPass === "preSave") {
     }
 
     // Set the DC and setup the saving throw
-    let pcAthSkillTotal = pcActor.data.data.skills["ath"].total;
-    const roll = await(new Roll(`1d20 + ${pcAthSkillTotal} + ${superiorityDie}`)).roll();
-    theItem.data.data.save.dc = roll.total;
-    theItem.data.data.save.scaling = "flat";
+    let pcAthSkillTotal = pcActor.system.skills.ath.total;
+    const roll = await(new Roll(`1d20 + ${pcAthSkillTotal} + ${superiorityDie}`)).evaluate({async: true});
+
+    theItem.system.save.dc = roll.total;
+    theItem.system.save.scaling = "flat";
 
     let skill = "acr";
-    if (targetActor.data.data.skills.ath.passive > targetActor.data.data.skills.acr.passive) skill = "ath";
-    setProperty(theItem.data.flags, "midi-qol.overTimeSkillRoll", skill);
+    if (targetActor.system.skills.ath.passive > targetActor.system.skills.acr.passive) skill = "ath";
+    setProperty(theItem.flags, "midi-qol.overTimeSkillRoll", skill);
 
 } else if (args[0].macroPass === "postActiveEffects") {
     const item = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;
-    item.data.data.save.ability = "str";
+    item.system.save.ability = "str";
 }
 return;
 
@@ -50,12 +51,9 @@ return;
 
 // Increment available resource
 async function incrementResource(testActor, resourceName, numValue) {
-    let actorDup = duplicate(testActor);
-    let resources = Object.values(actorDup.data.resources);
-    let foundResource = resources.find(i => i.label.toLowerCase() === resourceName.toLowerCase());
-    if (foundrResource) {
-        foundResource.value = foundResource.value + numValue;
-        await testActor.update(actorDup);
-    } else ui.notifications.error("You have not setup a Superiority Dice resource.");
+    const resourceKey = Object.keys(testActor.system.resources).find(k => testActor.system.resources[k].label.toLowerCase() === resourceName.toLowerCase());
+    let newResources = duplicate(testActor.system.resources);
+    newResources[resourceKey].value += 1;
+    await actor.update({"system.resources": newResources});
     return;
 }

@@ -6,7 +6,7 @@ USE: use this feature AFTER channel divinity: Preserve Life is triggered to crea
 NOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM "MidiQOL Sample Items" SPELL: LAY ON HANDS
 By Author: Tim Poseney   https://gitlab.com/tposney/midi-qol
 
-v1.0 August 17 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "preItemRoll") {
@@ -25,7 +25,7 @@ if (args[0].macroPass === "preItemRoll") {
     }
 
     // does not work on undead/constructs - not sure if this is RAW but makes sense given Preserve Life 
-    let invalid = ["undead", "construct"].some(type => (theTarget?.actor.data.data.details.type?.value || "").toLowerCase().includes(type));
+    let invalid = ["undead", "construct"].some(type => (theTarget?.actor.system.details.type?.value || "").toLowerCase().includes(type));
     if (invalid) {
         ui.notifications.warn("Preserve Life can't affect undead/constructs")
         return false;
@@ -34,7 +34,7 @@ if (args[0].macroPass === "preItemRoll") {
     let targetToken = await fromUuid(args[0].targetUuids[0]);
     let targetActor = targetToken.actor;
     //Target can only be healed up to half their HP
-    let targetDamage = ((targetActor.data.data.attributes.hp.max / 2) - targetActor.data.data.attributes.hp.value);
+    let targetDamage = ((targetActor.system.attributes.hp.max / 2) - targetActor.system.attributes.hp.value);
 
     if (targetDamage <= 0) {
         ui.notifications.warn("Target is at or above half health");
@@ -49,7 +49,7 @@ if (args[0].macroPass === "preItemRoll") {
                     <p>How many points to use? ${lifehealingpool} left in your Healing Pool<input id="mqlohpoints" type="number" min="0" step="1.0" max="${lifehealingpool}"></input></p>`,
             buttons: {
                 heal: {
-                    icon: '<p></p><img src = "icons/magic/life/heart-cross-blue.webp" width="60" height="60"></>',
+                    icon: '<p></p><img src = "icons/magic/light/orb-beams-green.webp" width="60" height="60"></>',
                     label: "<p>HEAL</p>",
                     callback: (html) => { resolve(Math.clamped(Math.floor(Number(html.find('#mqlohpoints')[0].value) / 2), 0, lifehealingpool)); }
                 },
@@ -62,8 +62,9 @@ if (args[0].macroPass === "preItemRoll") {
             default: "abort",
         }).render(true);
     });
-    const consumed = await d;
+    let consumed = await d;
     if (!consumed) return false;
+    if (consumed > targetDamage) consumed = targetDamage;
 
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const theItem = workflow.item;

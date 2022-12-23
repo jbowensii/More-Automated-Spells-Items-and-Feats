@@ -1,46 +1,46 @@
 {
-  "name": "Stone's Endurance",
+  "name": "Maneuvers: Quick Toss",
   "type": "feat",
-  "img": "icons/magic/earth/strike-fist-stone.webp",
+  "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
   "effects": [
     {
-      "_id": "yT5lftWkScV85E8F",
+      "_id": "yvrty0152p8tpf0a",
       "changes": [
         {
-          "key": "flags.midi-qol.DR.all",
+          "key": "system.bonuses.rwak.damage",
           "mode": 2,
-          "value": "[[1d12 + @abilities.con.mod]]",
+          "value": "@flags.dae.SuperiorityDie",
           "priority": 20
         }
       ],
       "disabled": false,
       "duration": {
+        "rounds": 1,
         "startTime": null,
         "seconds": null,
         "combat": null,
-        "rounds": null,
         "turns": null,
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/magic/earth/strike-fist-stone.webp",
-      "label": "Stones Endurance",
-      "origin": "Item.lrmOph3XI2HvTpjD",
+      "icon": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
+      "label": "Maneuvers: Quick Toss",
+      "origin": "Actor.67GUmdTadYmGXD8W.Item.8ehitphcFmvocZ65",
       "transfer": false,
       "flags": {
+        "core": {
+          "statusId": ""
+        },
         "dae": {
-          "selfTarget": false,
           "stackable": "none",
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [
-            "1Reaction"
+            "1Attack:rwak"
           ],
           "transfer": false,
+          "selfTarget": false,
           "selfTargetAlways": false
-        },
-        "core": {
-          "statusId": ""
         },
         "ActiveAuras": {
           "isAura": false,
@@ -72,27 +72,26 @@
   ],
   "flags": {
     "ddbimporter": {
-      "id": "5119107",
+      "id": "2439086",
       "entityTypeId": "222216831",
-      "action": true,
-      "componentId": 8429487,
-      "componentTypeId": 1960452172,
-      "importId": "sreo7neodrcmv53a"
+      "componentId": 1306902,
+      "componentTypeId": 258900837,
+      "class": "Fighter",
+      "subclass": "Battle Master",
+      "importId": "28pyz8r4w0vt0973"
     },
     "infusions": {
       "infused": false
     },
     "obsidian": {
       "source": {
-        "type": "race"
+        "type": "class",
+        "text": "Fighter"
       }
     },
     "scene-packer": {
-      "hash": "7a8683e28b8603e8b8a8c23181ca1fd79397eab2",
-      "sourceId": "Item.lGzZJFm9nrWDSoNn"
-    },
-    "core": {
-      "sourceId": "Item.lrmOph3XI2HvTpjD"
+      "hash": "53cd454e789875f5f14d6f7c38ed64e781a0e9a4",
+      "sourceId": "Item.te09IsjRSE5O0QVl"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -116,10 +115,7 @@
       "magicdam": false,
       "magiceffect": false,
       "concentration": false,
-      "toggleEffect": false,
-      "autoFailFriendly": false,
-      "offHandWeapon": false,
-      "ignoreTotalCover": false
+      "toggleEffect": false
     },
     "magicitems": {
       "enabled": false,
@@ -135,6 +131,36 @@
       "rechargeUnit": "r1",
       "sorting": "l"
     },
+    "favtab": {
+      "isFavorite": true
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Maneuvers: Brace",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        }
+      }
+    },
+    "core": {
+      "sourceId": "Item.QCt9G1ryLky9enrK"
+    },
+    "cf": {
+      "id": "temp_fgyhz98iq6m",
+      "path": "DDB Override#/CF_SEP/Battlemaster Maneuvers",
+      "color": "#000000"
+    },
     "exportSource": {
       "world": "5e-test-world",
       "system": "dnd5e",
@@ -144,13 +170,13 @@
   },
   "system": {
     "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 August 2 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>USAGE: </strong> <span style=\"color:#169179\">ACTIVATE BEFORE THE ATTACK</span></summary>\n<p>This Maneuver must be activated BEFORE the character makes an attack.  This will set up any bonuses and effects on the TARGET character.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.  This bonus is added to the next ranged weapon attack, it is up to the player/GM to make sure the weapon is thrown and not shot.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "",
+    "source": "TCoE p42",
     "activation": {
-      "type": "reactiondamage",
+      "type": "special",
       "cost": 1,
       "condition": ""
     },
@@ -167,11 +193,11 @@
     "range": {
       "value": null,
       "long": null,
-      "units": "self"
+      "units": ""
     },
     "uses": {
-      "value": 0,
-      "max": "0",
+      "value": null,
+      "max": "",
       "per": "",
       "recovery": ""
     },
@@ -181,7 +207,7 @@
       "amount": 1
     },
     "ability": "",
-    "actionType": "other",
+    "actionType": "",
     "attackBonus": 0,
     "chatFlavor": "",
     "critical": {
@@ -190,8 +216,7 @@
     },
     "damage": {
       "parts": [],
-      "versatile": "",
-      "value": ""
+      "versatile": ""
     },
     "formula": "",
     "save": {
@@ -199,22 +224,19 @@
       "dc": null,
       "scaling": "spell"
     },
-    "requirements": "",
+    "requirements": "Fighter: Battlemaster",
     "recharge": {
       "value": null,
       "charged": false
     },
-    "rarity": "",
-    "identified": true,
-    "weaponType": "simpleR",
-    "attunement": null
+    "attunement": 0
   },
   "_stats": {
     "systemId": "dnd5e",
     "systemVersion": "2.0.3",
     "coreVersion": "10.291",
-    "createdTime": 1671193323345,
-    "modifiedTime": 1671734958898,
+    "createdTime": 1671193288036,
+    "modifiedTime": 1671323714813,
     "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

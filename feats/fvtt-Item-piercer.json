@@ -2,68 +2,6 @@
   "name": "Piercer",
   "type": "feat",
   "img": "icons/skills/ranged/arrow-flying-broadhead-metal.webp",
-  "data": {
-    "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "TCoE p80",
-    "activation": {
-      "type": "special",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "self"
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": null,
-      "max": "",
-      "per": ""
-    },
-    "consume": {
-      "type": "",
-      "target": "",
-      "amount": null
-    },
-    "ability": null,
-    "actionType": "",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
-    },
-    "requirements": "Feat: Piercer",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "attunement": 0
-  },
   "effects": [
     {
       "_id": "5LsTTEo1APQ0w520",
@@ -72,14 +10,20 @@
           "key": "flags.midi-qol.onUseMacroName",
           "mode": 0,
           "value": "ItemMacro.Piercer,all",
-          "priority": "20"
+          "priority": 20
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
-      "icon": "systems/dnd5e/icons/skills/arrow_01.jpg",
+      "icon": "icons/skills/ranged/arrow-flying-broadhead-metal.webp",
       "label": "Piercer",
       "origin": "Item.Aj6rMauKBQFNOrub",
       "transfer": true,
@@ -92,7 +36,9 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [],
-          "transfer": true
+          "transfer": true,
+          "selfTarget": false,
+          "selfTargetAlways": false
         },
         "ActiveAuras": {
           "isAura": false,
@@ -106,16 +52,26 @@
           "displayTemp": false,
           "hostile": false,
           "onlyOnce": false
+        },
+        "effective-transferral": {
+          "transferBlock": {
+            "button": false,
+            "chat": false,
+            "displayCard": false
+          },
+          "transferrable": {
+            "self": true,
+            "target": true
+          }
         }
       },
-      "tint": null,
-      "selectedKey": "flags.midi-qol.onUseMacroName"
+      "tint": null
     }
   ],
   "flags": {
     "scene-packer": {
-      "hash": "e9fbfb6f0fb09b0f96cba1ccfeecf62d1ece05cb",
-      "sourceId": "Item.LPlRoxAiHtniLltL"
+      "hash": "ecb2d8fb551855753971df6e1e7f73a482318361",
+      "sourceId": "Item.x6imhWnhaO8AGJL8"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -157,6 +113,27 @@
             "default": 0
           },
           "flags": {}
+        },
+        "name": "Piercer",
+        "type": "script",
+        "scope": "global",
+        "command": "/*****\nPiercer\n\nUSAGE: Automatic just place on a character \n\nv2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"postDamageRoll\") {\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);\n    const actorUuid = workflow.tokenUuid;\n    const actorToken = canvas.tokens.get(workflow.tokenId);\n    const thisItem = actorToken.actor.items.find(i => i.name === \"Piercer\");\n\n    // make sure the attempted hit was made with a weapon attack\n    if (![\"mwak\", \"rwak\"].includes(args[0].item.system.actionType)) return;\n\n    // damage type must be \"piercing\"    \n    if (workflow.defaultDamageType != \"piercing\") return;\n\n    // breakdown weapon damage to find the base die, if there was a critical, and the lowest die roll\n    let baseDie = null;\n    let lowestDieRoll = 0;\n    for (let i = 0; i < workflow.damageRoll.terms.length; i++)\n        if (workflow.damageRoll.terms[i]?.faces) {\n            baseDie = \"1d\" + workflow.damageRoll.terms[i].faces;\n            lowestDieRoll = workflow.damageRoll.terms[i].results[0].result;\n            for (let j = 0; j < workflow.damageRoll.terms[i].results.length; j++)\n                if (workflow.damageRoll.terms[i].results[j].result < lowestDieRoll) lowestDieRoll = workflow.damageRoll.terms[i].results[j].result;\n        }\n\n    // create a dialog and prompt to re-roll lowest die\n    let dialog = new Promise((resolve) => {\n        new Dialog({\n            // localize this text\n            title: \"Piercer Feat:\",\n            content: `<p>would you like to re-roll your lowest damage die?</p><p>Lowest Die Roll: ${lowestDieRoll}</p>`,\n            buttons: {\n                one: {\n                    icon: '<p> </p><img src = \"icons/skills/ranged/arrow-flying-broadhead-metal.webp\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>Yes</p>\",\n                    callback: () => resolve(true)\n                },\n                two: {\n                    icon: '<p> </p><img src = \"icons/svg/cancel.svg\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>No</p>\",\n                    callback: () => { resolve(false) }\n                }\n            },\n            default: \"two\"\n        }).render(true);\n    });\n    let choice = await dialog;\n\n    if (choice) await setProperty(workflow, \"ReplaceRoll\", choice);\n    await setProperty(workflow, \"LowestRoll\", lowestDieRoll);\n    await setProperty(workflow, \"BaseDie\", baseDie);\n\n    // trigger BonusDamage to apply the extra damage / adjustments outside of the normal damage roll\n    let effectData = {\n        label: \"Piercer reRoll\",\n        changes: [{ key: \"flags.dnd5e.DamageBonusMacro\", mode: 0, value: `ItemMacro.Piercer`, priority: 20 }],\n        icon: thisItem.img,\n        origin: thisItem.uuid,\n        duration: { turns: 1 }\n    };\n    await MidiQOL.socket().executeAsGM(\"createEffects\", { actorUuid: actorUuid, effects: [effectData] });\n    return;\n\n} else if (args[0].tag === \"DamageBonus\") {\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);\n    const actorUuid = workflow.tokenUuid;\n    const actorToken = canvas.tokens.get(workflow.tokenId);\n    const thisItem = actorToken.actor.items.find(i => i.name === \"Piercer\");\n    const targetToken = await fromUuid(args[0].hitTargetUuids[0] ?? \"\");\n    const targetActor = targetToken.actor;\n    let choice = await getProperty(workflow, \"ReplaceRoll\");\n    let lowestDieRoll = await getProperty(workflow, \"LowestRoll\");\n    let baseDie = await getProperty(workflow, \"BaseDie\");\n    let reRoll = null;\n\n    // remove extra damage effect \n    let effect = await findEffect(actorToken.actor, \"Piercer reRoll\");\n    // await MidiQOL.socket().executeAsGM(\"removeEffects\", { actorUuid: actorUuid, effects: [effect.id] });\n\n    // test if critical is true, apply extra damage die\n    if (workflow?.isCritical) {\n        reRoll = await new Roll(baseDie).evaluate({async: true});\n        new MidiQOL.DamageOnlyWorkflow(targetActor, targetToken, reRoll.total, \"piercing\", [targetToken], reRoll, { flavor: \"Piercer Feat: Critical Extra Damage\", itemData: thisItem, itemCardId: \"new\" });\n    }\n\n    // if reRoll was selected figure out the difference and apply adjustment to the target\n    if (choice) {\n        reRoll = await new Roll(baseDie).evaluate({async: true});\n        if (reRoll.result < lowestDieRoll) {\n            // healback difference\n            let difference = lowestDieRoll - reRoll.result;\n            return { damageRoll: `${difference}[healing]`, flavor: \"Piercer Feat: ReRoll Adjustment\" }\n        } else {\n            // damage difference\n            let difference = reRoll.result - lowestDieRoll;\n            return { damageRoll: `${difference}[piercing]`, flavor: \"Piercer Feat: ReRoll Adjustment\" }\n        }\n    }\n    return;\n}\n\n//---------------------------------- MY FUNCTIONS -------------------------------------\n\n// Function to test for an effect\nasync function findEffect(target, effectName) {\n    let effectUuid = null;\n    effectUuid = target?.effects.find(ef => ef.label === effectName);\n    return effectUuid;\n}",
+        "author": "paMZuKDupk0GHKFn",
+        "_id": null,
+        "img": "icons/svg/dice-target.svg",
+        "folder": null,
+        "sort": 0,
+        "ownership": {
+          "default": 0
+        },
+        "flags": {},
+        "_stats": {
+          "systemId": null,
+          "systemVersion": null,
+          "coreVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null
         }
       }
     },
@@ -164,10 +141,10 @@
       "sourceId": "Item.5PUe0GiheEHUomoR"
     },
     "exportSource": {
-      "world": "test",
+      "world": "5e-test-world",
       "system": "dnd5e",
-      "coreVersion": "9.269",
-      "systemVersion": "1.6.1"
+      "coreVersion": "10.291",
+      "systemVersion": "2.0.3"
     },
     "cf": {
       "id": "temp_b676eyusztv"
@@ -175,5 +152,76 @@
     "favtab": {
       "isFavorite": true
     }
+  },
+  "system": {
+    "description": {
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "TCoE p80",
+    "activation": {
+      "type": "special",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": "",
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "ability": null,
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Feat: Piercer",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.291",
+    "createdTime": 1671193294445,
+    "modifiedTime": 1671800590100,
+    "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

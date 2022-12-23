@@ -2,95 +2,40 @@
   "name": "Maneuvers: Tactical Assessment",
   "type": "feat",
   "img": "icons/magic/perception/shadow-stealth-eyes-purple.webp",
-  "data": {
-    "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>USAGE: </strong> <span style=\"color: #169179;\">ACTIVATE ANYTIME</span></summary>\n<p>This is a utility Maneuver and can be used whenever your character can take an action.&nbsp; This will set up any bonuses and effects on the TARGET actor.&nbsp; A <span style=\"text-decoration: underline; color: #236fa1;\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "unidentified": ""
-    },
-    "source": "TCoE p42",
-    "activation": {
-      "type": "special",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "self"
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": null,
-      "max": "",
-      "per": ""
-    },
-    "consume": {
-      "type": "attribute",
-      "target": "",
-      "amount": 1
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
-    },
-    "requirements": "Fighter: Battlemaster",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "attunement": 0
-  },
   "effects": [
     {
       "_id": "8mjpwr1wsce7hnw0",
       "changes": [
         {
-          "key": "data.skills.inv.bonuses.check",
+          "key": "system.skills.inv.bonuses.check",
           "mode": 2,
           "value": "@flags.dae.SuperiorityDie",
-          "priority": "1"
+          "priority": 1
         },
         {
-          "key": "data.skills.his.bonuses.check",
+          "key": "system.skills.his.bonuses.check",
           "mode": 2,
           "value": "@flags.dae.SuperiorityDie",
-          "priority": "1"
+          "priority": 1
         },
         {
-          "key": "data.skills.ins.bonuses.check",
+          "key": "system.skills.ins.bonuses.check",
           "mode": 2,
           "value": "@flags.dae.SuperiorityDie",
-          "priority": "1"
+          "priority": 1
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
-      "icon": "systems/dnd5e/icons/skills/shadow_11.jpg",
+      "icon": "icons/magic/perception/shadow-stealth-eyes-purple.webp",
       "label": "Tactical Assessment",
       "origin": "Actor.67GUmdTadYmGXD8W.Item.0RU6a1fysK70I7Zy",
       "transfer": false,
@@ -107,7 +52,9 @@
             "isSkill.ins",
             "isSkill.inv"
           ],
-          "transfer": false
+          "transfer": false,
+          "selfTarget": false,
+          "selfTargetAlways": false
         },
         "ActiveAuras": {
           "isAura": false,
@@ -121,14 +68,20 @@
           "displayTemp": false,
           "hostile": false,
           "onlyOnce": false
+        },
+        "effective-transferral": {
+          "transferBlock": {
+            "button": false,
+            "chat": false,
+            "displayCard": false
+          },
+          "transferrable": {
+            "self": true,
+            "target": true
+          }
         }
       },
-      "tint": null,
-      "selectedKey": [
-        "data.skills.inv.bonuses.check",
-        "data.skills.his.bonuses.check",
-        "data.skills.ins.bonuses.check"
-      ]
+      "tint": null
     }
   ],
   "flags": {
@@ -151,8 +104,8 @@
       }
     },
     "scene-packer": {
-      "hash": "d20ff21ed5597125d8b0cafa8f2901b90fe741ea",
-      "sourceId": "Item.uv6KR7Us9J1QcKnG"
+      "hash": "045aaecb039a4c168ce26763f9046356b20541f1",
+      "sourceId": "Item.yjxxojTqQSabWTMo"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -223,10 +176,81 @@
       "color": "#000000"
     },
     "exportSource": {
-      "world": "test",
+      "world": "5e-test-world",
       "system": "dnd5e",
-      "coreVersion": "9.269",
-      "systemVersion": "1.6.1"
+      "coreVersion": "10.291",
+      "systemVersion": "2.0.3"
     }
+  },
+  "system": {
+    "description": {
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>USAGE: </strong> <span style=\"color:#169179\">ACTIVATE ANYTIME</span></summary>\n<p>This is a utility Maneuver and can be used whenever your character can take an action.  This will set up any bonuses and effects on the TARGET actor.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "TCoE p42",
+    "activation": {
+      "type": "special",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": "",
+      "recovery": ""
+    },
+    "consume": {
+      "type": "attribute",
+      "target": "",
+      "amount": 1
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Fighter: Battlemaster",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.291",
+    "createdTime": 1671193287989,
+    "modifiedTime": 1671323714816,
+    "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

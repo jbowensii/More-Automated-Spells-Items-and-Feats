@@ -2,90 +2,34 @@
   "name": "Maneuvers: Riposte",
   "type": "feat",
   "img": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
-  "data": {
-    "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>USAGE: </strong> <span style=\"color: #169179;\">ACTIVATE BEFORE ATTACK</span></summary>\n<p>This Maneuver must be activated BEFORE the character makes an attack.&nbsp; This will set up any bonuses and effects on the TARGET character.&nbsp; A <span style=\"text-decoration: underline; color: #236fa1;\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "unidentified": ""
-    },
-    "source": "PHB p74",
-    "activation": {
-      "type": "special",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "self"
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": null,
-      "max": "",
-      "per": ""
-    },
-    "consume": {
-      "type": "attribute",
-      "target": "",
-      "amount": 1
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
-    },
-    "requirements": "Fighter: Battlemaster",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "attunement": null
-  },
   "effects": [
     {
       "_id": "w2qe6rnd1i9b1wch",
       "changes": [
         {
-          "key": "data.bonuses.mwak.damage",
+          "key": "system.bonuses.mwak.damage",
           "mode": 2,
           "value": "@flags.dae.SuperiorityDie",
-          "priority": "20"
+          "priority": 20
         },
         {
-          "key": "data.bonuses.rwak.damage",
+          "key": "system.bonuses.rwak.damage",
           "mode": 2,
           "value": "@flags.dae.SuperiorityDie",
-          "priority": "20"
+          "priority": 20
         }
       ],
       "disabled": false,
       "duration": {
         "startTime": null,
-        "rounds": 1
+        "rounds": 1,
+        "seconds": null,
+        "combat": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
-      "icon": "systems/dnd5e/icons/skills/yellow_37.jpg",
+      "icon": "icons/skills/melee/weapons-crossed-swords-yellow.webp",
       "label": "Maneuvers: Riposte",
       "origin": "Actor.67GUmdTadYmGXD8W.Item.bym5FEbnUSgBlVvn",
       "transfer": false,
@@ -101,7 +45,9 @@
             "1Attack:mwak",
             "1Attack:rwak"
           ],
-          "transfer": false
+          "transfer": false,
+          "selfTarget": false,
+          "selfTargetAlways": false
         },
         "ActiveAuras": {
           "isAura": false,
@@ -115,13 +61,20 @@
           "displayTemp": false,
           "hostile": false,
           "onlyOnce": false
+        },
+        "effective-transferral": {
+          "transferBlock": {
+            "button": false,
+            "chat": false,
+            "displayCard": false
+          },
+          "transferrable": {
+            "self": true,
+            "target": true
+          }
         }
       },
-      "tint": null,
-      "selectedKey": [
-        "data.bonuses.mwak.damage",
-        "data.bonuses.rwak.damage"
-      ]
+      "tint": null
     }
   ],
   "flags": {
@@ -144,8 +97,8 @@
       }
     },
     "scene-packer": {
-      "hash": "a488632eb21cf9607c911fd6fb4166b1799bef98",
-      "sourceId": "Item.sJywZ6yVHMiKuz1s"
+      "hash": "f386402ee80a14825f631bfbb1546d99feaf97c8",
+      "sourceId": "Item.RshIkI99F7fViWIH"
     },
     "favtab": {
       "isFavorite": true
@@ -217,10 +170,81 @@
       "color": "#000000"
     },
     "exportSource": {
-      "world": "test",
+      "world": "5e-test-world",
       "system": "dnd5e",
-      "coreVersion": "9.269",
-      "systemVersion": "1.6.1"
+      "coreVersion": "10.291",
+      "systemVersion": "2.0.3"
     }
+  },
+  "system": {
+    "description": {
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>USAGE: </strong> <span style=\"color:#169179\">ACTIVATE BEFORE ATTACK</span></summary>\n<p>This Maneuver must be activated BEFORE the character makes an attack.  This will set up any bonuses and effects on the TARGET character.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB p74",
+    "activation": {
+      "type": "special",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": "",
+      "recovery": ""
+    },
+    "consume": {
+      "type": "attribute",
+      "target": "",
+      "amount": 1
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Fighter: Battlemaster",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": null
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.291",
+    "createdTime": 1671193288008,
+    "modifiedTime": 1671323714816,
+    "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

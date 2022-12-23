@@ -2,68 +2,6 @@
   "name": "Channel Divinity: Inspiring Smite",
   "type": "feat",
   "img": "icons/magic/holy/barrier-shield-winged-blue.webp",
-  "data": {
-    "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "chat": "",
-      "unidentified": ""
-    },
-    "source": "MOoT p.29",
-    "activation": {
-      "type": "special",
-      "cost": 1,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": "inst"
-    },
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": "self"
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": null,
-      "max": "",
-      "per": ""
-    },
-    "consume": {
-      "type": "charges",
-      "target": "",
-      "amount": null
-    },
-    "ability": "",
-    "actionType": "",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
-    },
-    "requirements": "Paladin: Oath of Glory",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "attunement": null
-  },
   "effects": [
     {
       "_id": "mj8jXTYFLF8zANxn",
@@ -72,13 +10,18 @@
           "key": "macro.itemMacro",
           "mode": 0,
           "value": "ItemMacro",
-          "priority": "50"
+          "priority": 50
         }
       ],
       "disabled": false,
       "duration": {
         "startTime": null,
-        "turns": 1
+        "turns": 1,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "startRound": null,
+        "startTurn": null
       },
       "icon": "icons/magic/life/heart-cross-blue.webp",
       "label": "Inspiring Smite Healing Pool",
@@ -109,14 +52,13 @@
           "onlyOnce": false
         }
       },
-      "tint": null,
-      "selectedKey": "macro.itemMacro"
+      "tint": null
     }
   ],
   "flags": {
     "scene-packer": {
-      "hash": "a241e8a6f6ea1848366926752f1b62ebdef4720c",
-      "sourceId": "Item.tdUK0TMUuxUWLsMo"
+      "hash": "13730490f4301ff9a9880efd4f321f7dd8098c71",
+      "sourceId": "Item.h3C3TVjtPEyRI2jM"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -175,6 +117,27 @@
             "default": 0
           },
           "flags": {}
+        },
+        "name": "Channel Divinity: Inspiring Smite",
+        "type": "script",
+        "scope": "global",
+        "command": "/*****\nChannel Divinity: Inspiring Smite\n\nUSE: Manually triggered after to hit with divine smite\nCreate a healing pool - roll 2d8 + class level\nStore the healing pool on the character in a DAE variable that terminates at the end of the actors turn\n\nv2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0] === \"on\") {\n    const pcActor = await fromUuid(args[args.length - 1].actorUuid);\n\n    // Test Class\n    let pcPaladin = pcActor.getRollData().classes?.paladin;\n    if (pcPaladin === null) {\n        ui.notifications.error(\"You are not a Paladin!\");\n        return;\n    }\n\n    // Test Subclass\n    let pcPaladinSubclass = pcActor.getRollData().classes.paladin?.subclass.identifier;\n    if (pcPaladinSubclass != \"oath-of-glory\") {\n        ui.notifications.error(\"You are not a Oath of Glory Paladin!\");\n        return;\n    }\n\n    //roll 2d8 + pcPaladin.levels and store result in flag.dae.healingPool\n    const roll = await(new Roll(`2d8 + ${pcPaladin.levels}`)).evaluate({async: true});\n    pcActor.setFlag(\"dae\", \"healingpool\", roll.total);\n    return;\n\n} else if (args[0] === \"off\") {\n    const pcActor = await fromUuid(args[args.length - 1].actorUuid);\n    pcActor.unsetFlag(\"dae\", \"healingpool\");\n    return;\n}",
+        "author": "paMZuKDupk0GHKFn",
+        "_id": null,
+        "img": "icons/svg/dice-target.svg",
+        "folder": null,
+        "sort": 0,
+        "ownership": {
+          "default": 0
+        },
+        "flags": {},
+        "_stats": {
+          "systemId": null,
+          "systemVersion": null,
+          "coreVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null
         }
       }
     },
@@ -211,10 +174,81 @@
       "replaced": true
     },
     "exportSource": {
-      "world": "test",
+      "world": "5e-test-world",
       "system": "dnd5e",
-      "coreVersion": "9.269",
-      "systemVersion": "1.6.3"
+      "coreVersion": "10.291",
+      "systemVersion": "2.0.3"
     }
+  },
+  "system": {
+    "description": {
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "MOoT p.29",
+    "activation": {
+      "type": "special",
+      "cost": 1,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": "inst"
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": "",
+      "recovery": ""
+    },
+    "consume": {
+      "type": "charges",
+      "target": "",
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Paladin: Oath of Glory",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.291",
+    "createdTime": 1671193286496,
+    "modifiedTime": 1671380645421,
+    "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

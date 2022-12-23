@@ -6,7 +6,7 @@ USE: Must Manually triggered after channel divinity: Inspiring Smite to distribu
 NOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM "MidiQOL Sample Items" SPELL: LAY ON HANDS
 By Author: Tim Poseney   https://gitlab.com/tposney/midi-qol
 
-v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "preItemRoll") {
@@ -25,7 +25,7 @@ if (args[0].macroPass === "preItemRoll") {
   }
 
   // does not work on undead/constructs - not sure if this is RAW but makes sense given Inspiring Smite 
-  let invalid = ["undead", "construct"].some(type => (theTarget?.actor.data.data.details.type?.value || "").toLowerCase().includes(type));
+  let invalid = ["undead", "construct"].some(type => (theTarget?.actor.system.details.type?.value || "").toLowerCase().includes(type));
   if (invalid) {
     ui.notifications.warn("Inspiring Smite can't affect undead/constructs")
     return false;
@@ -33,7 +33,7 @@ if (args[0].macroPass === "preItemRoll") {
 
   let targetToken = await fromUuid(args[0].targetUuids[0]);
   let targetActor = targetToken.actor;
-  let targetDamage = targetActor.data.data.attributes.hp.max - targetActor.data.data.attributes.hp.value;
+  let targetDamage = targetActor.system.attributes.hp.max - targetActor.system.attributes.hp.value;
 
   // prompt for how much to use...
   let d = new Promise((resolve, reject) => {
@@ -56,8 +56,9 @@ if (args[0].macroPass === "preItemRoll") {
       default: "abort",
     }).render(true);
   });
-  const consumed = await d;
-  if (!consumed) return false;
+  let consumed = await d;
+  if (!consumed) return false; 
+  if (consumed > targetDamage) consumed = targetDamage;
 
   const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
   const theItem = workflow.item;

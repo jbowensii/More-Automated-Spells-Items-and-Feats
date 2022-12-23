@@ -6,10 +6,10 @@ NOTE: I used Tom Posney's MIDI-QOL Sneak Attack / Auto Sneak Attack as a templet
 USEAGE : PASSIVE
 Please place these two items on a Barbarian Zealot the rest is automated
  
-v1.1 August 6 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
-if (["mwak", "rwak"].includes(args[0].item.data.actionType)) {
+if (["mwak", "rwak"].includes(args[0].item.system.actionType)) {
     let pcActor = token.actor;
 
     // Test Class
@@ -27,7 +27,7 @@ if (["mwak", "rwak"].includes(args[0].item.data.actionType)) {
     }
 
     // Test if rage is active
-    let effect = await findEffect(token, "Rage");
+    let effect = await findEffect(pcActor, "Rage");
     if (!effect) {
         ui.notifications.error("You are not Raging!");
         return;
@@ -41,9 +41,8 @@ if (["mwak", "rwak"].includes(args[0].item.data.actionType)) {
     }
 
     // check to see if autoDivineFury is active, if it is skip the prompt
-    let useDivineFury = getProperty(actor.data, "flags.dae.autoDivineFury");
+    let useDivineFury = getProperty(actor.system, "flags.dae.autoDivineFury");
     if (!useDivineFury) {
-        console.log("MACRO | prompt user with dialog to use Divine Fury");
         let dialog = new Promise((resolve, reject) => {
             new Dialog({
                 // localize this text
@@ -83,9 +82,11 @@ if (["mwak", "rwak"].includes(args[0].item.data.actionType)) {
     return { damageRoll: `${baseDice * diceMult}d6 + ${baseBonus}`, flavor: "Divine Fury" };
 }
 
+//---------------------------------- MY FUNCTIONS -------------------------------------
+
 // Function to test for an effect
 async function findEffect(target, effectName) {
     let effectUuid = null;
-    effectUuid = target?.actor.data.effects.find(ef => ef.data.label === effectName);
+    effectUuid = target?.effects.find(ef => ef.label === effectName);
     return effectUuid;
 }

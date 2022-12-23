@@ -1,10 +1,10 @@
 # More Automated Spells Items and Feats
 FoundryVTT More Automated Spells Items and Feats (MASIF amounts of automation) Module
 
-Version 1.1.0 
-- Updates for D&D 5e 1.6.3 compatibility as I prepare for FoundryVTT V10
+Version 2.0.0 
+- Updates for D&D 5e 2.0.3 compatibility as I prepare for FoundryVTT V10
 
-This module has been re-activated in FoundryVTT and is produced for FREE under the Wizard of the Coast Fan Content Policy: https://company.wizards.com/en/legal/fancontentpolicy
+This module is produced for FREE under the Wizard of the Coast Fan Content Policy: https://company.wizards.com/en/legal/fancontentpolicy
 
 This fan work is meant to ease the online gameplay of Wizards of the Coast Dungeons and Dragons 5e game.
 Please use your purchased D&D 5e books and online materials to provide descriptions of the features included in this Fan work.
@@ -25,7 +25,7 @@ This module requires the following modules to function:
 <details>
 <summary> PREAMBLE </summary>
 <p>&nbsp;</p>
-So it has been many years since I have been a practicing developer, and this is my first time writing in javascript. My code is much more verbose than necessary with unnecesary space and descriptive variablenames and comments.  I did this is hopes that folks like me could follow along with the code and understand how it works.  I know that javascript can be much more compact.  When I first looked at javascript it was way more intimidating than writting 68030 assembly back in my early days after college (yes I just dated myself).  Once I have mastered javascript I am sure I will write much more compact code, but I hope this inspires some of you to follow along and try your hand at automating something you really want.  In fact most of my automations are NOT macros at all (javascript).  MIDI-QOL and DAE provide a huge framework to do 90% of everything most people would want without writing a line of javascript code.  
+So it has been many years since I have been a practicing developer, and this is my first time writing in javascript. My code is much more verbose than necessary with unnecesary space and descriptive variable names and comments.  I did this is hopes that folks like me could follow along with the code and understand how it works.  I know that javascript can be much more compact.  When I first looked at javascript it was way more intimidating than writting 68030 assembly back in my early days after college (yes I just dated myself).  Once I have mastered javascript I am sure I will write much more compact code, but I hope this inspires some of you to follow along and try your hand at automating something you really want.  In fact most of my automations are NOT macros at all (javascript).  MIDI-QOL and DAE provide a huge framework to do 90% of everything most people would want without writing a line of javascript code.  
 
 These three videos did a great job explaining how to get started writing foundry macros. I highly recommend them... they were made by spacemandev.
 

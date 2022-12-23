@@ -2,7 +2,121 @@
   "name": "Inspiring Smite",
   "type": "feat",
   "img": "icons/magic/life/heart-cross-blue.webp",
-  "data": {
+  "effects": [],
+  "flags": {
+    "_sheetTab": "description",
+    "entityorder": {
+      "order": 161
+    },
+    "dynamiceffects": {
+      "effects": [],
+      "alwaysActive": false,
+      "equipActive": false
+    },
+    "favtab": {
+      "isFavourite": true,
+      "isFavorite": true
+    },
+    "midi-qol": {
+      "effectActivation": false,
+      "onUseMacroName": "[preItemRoll]ItemMacro"
+    },
+    "midiProperties": {
+      "nodam": false,
+      "halfdam": false,
+      "fulldam": false,
+      "rollOther": false,
+      "critOther": false,
+      "concentration": false,
+      "magicdam": false,
+      "magiceffect": false,
+      "toggleEffect": false,
+      "autoFailFriendly": false,
+      "offHandWeapon": false,
+      "ignoreTotalCover": false
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Inspiring Smite",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "/*****\nInspiring Smite\n\nUSE: Must Manually triggered after channel divinity: Inspiring Smite to distribute healing pool\n\nNOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM \"MidiQOL Sample Items\" SPELL: LAY ON HANDS\nBy Author: Tim Poseney   https://gitlab.com/tposney/midi-qol\n\nv1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"preItemRoll\") {\n  // get healthpool if not available send a notification\n  let healingPool = actor.getFlag(\"dae\", \"healingpool\");\n  if ((!healingPool) || (!healingPool > 0)) {\n    ui.notifications.warn(\"You either have no healing pool left or you have not used Channel Divinity: Inspiring Smite...\");\n    return false;\n  }\n\n  // check to make sure there is a target to heal and only one is selected\n  let theTarget = args[0].targets[0];\n  if ((!theTarget) || (args[0].targets.length > 1)) {\n    ui.notifications.warn(\"Please select a target to heal with Inspiring Smite\");\n    return false;\n  }\n\n  // does not work on undead/constructs - not sure if this is RAW but makes sense given Inspiring Smite \n  let invalid = [\"undead\", \"construct\"].some(type => (theTarget?.actor.data.data.details.type?.value || \"\").toLowerCase().includes(type));\n  if (invalid) {\n    ui.notifications.warn(\"Inspiring Smite can't affect undead/constructs\")\n    return false;\n  }\n\n  let targetToken = await fromUuid(args[0].targetUuids[0]);\n  let targetActor = targetToken.actor;\n  let targetDamage = targetActor.data.data.attributes.hp.max - targetActor.data.data.attributes.hp.value;\n\n  // prompt for how much to use...\n  let d = new Promise((resolve, reject) => {\n    let theDialog = new Dialog({\n      title: \"Inspiring Smite\",\n      content: `<p>Your targets current damage level: ${targetDamage}</p>\n                  <p>How many points to use? ${healingPool} left in your Healing Pool<input id=\"mqlohpoints\" type=\"number\" min=\"0\" step=\"1.0\" max=\"${healingPool}\"></input></p>`,\n      buttons: {\n        heal: {\n          icon: '<p></p><img src = \"icons/magic/life/heart-cross-blue.webp\" width=\"60\" height=\"60\"></>',\n          label: \"<p>HEAL</p>\",\n          callback: (html) => { resolve(Math.clamped(Math.floor(Number(html.find('#mqlohpoints')[0].value)), 0, healingPool)); }\n        },\n        abort: {\n          icon: '<p></p><img src = \"icons/svg/cancel.svg\" width=\"60\" height=\"60\"></>',\n          label: \"<p>CANCEL</p>\",\n          callback: () => { resolve(false) }\n        },\n      },\n      default: \"abort\",\n    }).render(true);\n  });\n  const consumed = await d;\n  if (!consumed) return false;\n\n  const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n  const theItem = workflow.item;\n  let updates;\n  if (consumed > 0) {\n    updates = {\n      \"data.consume.amount\": Math.abs(consumed),\n      \"data.damage.parts\": [[`${Math.max(0, consumed)}`, \"healing\"]],\n      \"data.chatFlavor\": \"Inspiring Smite\"\n    };\n  }\n\n  // remove consumed from pool\n  healingPool = healingPool - consumed;\n  actor.setFlag(\"dae\", \"healingpool\", healingPool);\n\n  return theItem.update(updates);\n}\nreturn true;",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        },
+        "name": "Inspiring Smite",
+        "type": "script",
+        "scope": "global",
+        "command": "/*****\nInspiring Smite\n\nUSE: Must Manually triggered after channel divinity: Inspiring Smite to distribute healing pool\n\nNOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM \"MidiQOL Sample Items\" SPELL: LAY ON HANDS\nBy Author: Tim Poseney   https://gitlab.com/tposney/midi-qol\n\nv2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"preItemRoll\") {\n  // get healthpool if not available send a notification\n  let healingPool = actor.getFlag(\"dae\", \"healingpool\");\n  if ((!healingPool) || (!healingPool > 0)) {\n    ui.notifications.warn(\"You either have no healing pool left or you have not used Channel Divinity: Inspiring Smite...\");\n    return false;\n  }\n\n  // check to make sure there is a target to heal and only one is selected\n  let theTarget = args[0].targets[0];\n  if ((!theTarget) || (args[0].targets.length > 1)) {\n    ui.notifications.warn(\"Please select a target to heal with Inspiring Smite\");\n    return false;\n  }\n\n  // does not work on undead/constructs - not sure if this is RAW but makes sense given Inspiring Smite \n  let invalid = [\"undead\", \"construct\"].some(type => (theTarget?.actor.system.details.type?.value || \"\").toLowerCase().includes(type));\n  if (invalid) {\n    ui.notifications.warn(\"Inspiring Smite can't affect undead/constructs\")\n    return false;\n  }\n\n  let targetToken = await fromUuid(args[0].targetUuids[0]);\n  let targetActor = targetToken.actor;\n  let targetDamage = targetActor.system.attributes.hp.max - targetActor.system.attributes.hp.value;\n\n  // prompt for how much to use...\n  let d = new Promise((resolve, reject) => {\n    let theDialog = new Dialog({\n      title: \"Inspiring Smite\",\n      content: `<p>Your targets current damage level: ${targetDamage}</p>\n                  <p>How many points to use? ${healingPool} left in your Healing Pool<input id=\"mqlohpoints\" type=\"number\" min=\"0\" step=\"1.0\" max=\"${healingPool}\"></input></p>`,\n      buttons: {\n        heal: {\n          icon: '<p></p><img src = \"icons/magic/life/heart-cross-blue.webp\" width=\"60\" height=\"60\"></>',\n          label: \"<p>HEAL</p>\",\n          callback: (html) => { resolve(Math.clamped(Math.floor(Number(html.find('#mqlohpoints')[0].value)), 0, healingPool)); }\n        },\n        abort: {\n          icon: '<p></p><img src = \"icons/svg/cancel.svg\" width=\"60\" height=\"60\"></>',\n          label: \"<p>CANCEL</p>\",\n          callback: () => { resolve(false) }\n        },\n      },\n      default: \"abort\",\n    }).render(true);\n  });\n  let consumed = await d;\n  if (!consumed) return false; \n  if (consumed > targetDamage) consumed = targetDamage;\n\n  const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n  const theItem = workflow.item;\n  let updates;\n  if (consumed > 0) {\n    updates = {\n      \"data.consume.amount\": Math.abs(consumed),\n      \"data.damage.parts\": [[`${Math.max(0, consumed)}`, \"healing\"]],\n      \"data.chatFlavor\": \"Inspiring Smite\"\n    };\n  }\n\n  // remove consumed from pool\n  healingPool = healingPool - consumed;\n  actor.setFlag(\"dae\", \"healingpool\", healingPool);\n\n  return theItem.update(updates);\n}\nreturn true;",
+        "author": "paMZuKDupk0GHKFn",
+        "_id": null,
+        "img": "icons/svg/dice-target.svg",
+        "folder": null,
+        "sort": 0,
+        "ownership": {
+          "default": 0
+        },
+        "flags": {},
+        "_stats": {
+          "systemId": null,
+          "systemVersion": null,
+          "coreVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null
+        }
+      }
+    },
+    "core": {
+      "sourceId": "Item.IM2UCUasJLD5J7Fw"
+    },
+    "scene-packer": {
+      "sourceId": "Item.Muchtk2t9BrhSGfu",
+      "hash": "0b14fb4aae3f621433282aafc587c31989279d0d"
+    },
+    "cf": {
+      "id": "temp_ovon30cu8t"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "exportSource": {
+      "world": "5e-test-world",
+      "system": "dnd5e",
+      "coreVersion": "10.291",
+      "systemVersion": "2.0.3"
+    }
+  },
+  "system": {
     "description": {
       "value": "<p>Immediately after you deal damage to a creature with your Divine Smite feature, you can use your Channel Divinity as a bonus action and distribute temporary hit points to creatures of your choice within 30 feet of you, which can include you. The total number of temporary hit points equals 2d8 + your level in this class, divided among the chosen creatures however you like.</p>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to use Channel Divinity: Inspiring Smite first, after you deal smite damage.</p>\n<p> </p>\n</details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v0.1 April 13 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "",
@@ -33,12 +147,13 @@
       "value": null,
       "max": "",
       "per": "",
+      "recovery": "",
       "type": "lr"
     },
     "consume": {
       "type": "",
       "target": "",
-      "amount": 8
+      "amount": 10
     },
     "ability": "",
     "actionType": "other",
@@ -51,7 +166,7 @@
     "damage": {
       "parts": [
         [
-          "8",
+          "10",
           "healing"
         ]
       ],
@@ -86,94 +201,12 @@
     },
     "attunement": 0
   },
-  "effects": [],
-  "flags": {
-    "_sheetTab": "description",
-    "entityorder": {
-      "order": 161
-    },
-    "dynamiceffects": {
-      "effects": [],
-      "alwaysActive": false,
-      "equipActive": false
-    },
-    "favtab": {
-      "isFavourite": true,
-      "isFavorite": true
-    },
-    "midi-qol": {
-      "effectActivation": false,
-      "onUseMacroName": "[preItemRoll]ItemMacro"
-    },
-    "midiProperties": {
-      "nodam": false,
-      "halfdam": false,
-      "fulldam": false,
-      "rollOther": false,
-      "critOther": false,
-      "concentration": false,
-      "magicdam": false,
-      "magiceffect": false,
-      "toggleEffect": false
-    },
-    "magicitems": {
-      "enabled": false,
-      "equipped": false,
-      "attuned": false,
-      "charges": "0",
-      "chargeType": "c1",
-      "destroy": false,
-      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
-      "rechargeable": false,
-      "recharge": "0",
-      "rechargeType": "t1",
-      "rechargeUnit": "r1",
-      "sorting": "l"
-    },
-    "itemacro": {
-      "macro": {
-        "data": {
-          "_id": null,
-          "name": "Inspiring Smite",
-          "type": "script",
-          "author": "ldRsJ6Yp5qPydWA1",
-          "img": "icons/svg/dice-target.svg",
-          "scope": "global",
-          "command": "/*****\nInspiring Smite\n\nUSE: Must Manually triggered after channel divinity: Inspiring Smite to distribute healing pool\n\nNOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM \"MidiQOL Sample Items\" SPELL: LAY ON HANDS\nBy Author: Tim Poseney   https://gitlab.com/tposney/midi-qol\n\nv1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"preItemRoll\") {\n  // get healthpool if not available send a notification\n  let healingPool = actor.getFlag(\"dae\", \"healingpool\");\n  if ((!healingPool) || (!healingPool > 0)) {\n    ui.notifications.warn(\"You either have no healing pool left or you have not used Channel Divinity: Inspiring Smite...\");\n    return false;\n  }\n\n  // check to make sure there is a target to heal and only one is selected\n  let theTarget = args[0].targets[0];\n  if ((!theTarget) || (args[0].targets.length > 1)) {\n    ui.notifications.warn(\"Please select a target to heal with Inspiring Smite\");\n    return false;\n  }\n\n  // does not work on undead/constructs - not sure if this is RAW but makes sense given Inspiring Smite \n  let invalid = [\"undead\", \"construct\"].some(type => (theTarget?.actor.data.data.details.type?.value || \"\").toLowerCase().includes(type));\n  if (invalid) {\n    ui.notifications.warn(\"Inspiring Smite can't affect undead/constructs\")\n    return false;\n  }\n\n  let targetToken = await fromUuid(args[0].targetUuids[0]);\n  let targetActor = targetToken.actor;\n  let targetDamage = targetActor.data.data.attributes.hp.max - targetActor.data.data.attributes.hp.value;\n\n  // prompt for how much to use...\n  let d = new Promise((resolve, reject) => {\n    let theDialog = new Dialog({\n      title: \"Inspiring Smite\",\n      content: `<p>Your targets current damage level: ${targetDamage}</p>\n                  <p>How many points to use? ${healingPool} left in your Healing Pool<input id=\"mqlohpoints\" type=\"number\" min=\"0\" step=\"1.0\" max=\"${healingPool}\"></input></p>`,\n      buttons: {\n        heal: {\n          icon: '<p></p><img src = \"icons/magic/life/heart-cross-blue.webp\" width=\"60\" height=\"60\"></>',\n          label: \"<p>HEAL</p>\",\n          callback: (html) => { resolve(Math.clamped(Math.floor(Number(html.find('#mqlohpoints')[0].value)), 0, healingPool)); }\n        },\n        abort: {\n          icon: '<p></p><img src = \"icons/svg/cancel.svg\" width=\"60\" height=\"60\"></>',\n          label: \"<p>CANCEL</p>\",\n          callback: () => { resolve(false) }\n        },\n      },\n      default: \"abort\",\n    }).render(true);\n  });\n  const consumed = await d;\n  if (!consumed) return false;\n\n  const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n  const theItem = workflow.item;\n  let updates;\n  if (consumed > 0) {\n    updates = {\n      \"data.consume.amount\": Math.abs(consumed),\n      \"data.damage.parts\": [[`${Math.max(0, consumed)}`, \"healing\"]],\n      \"data.chatFlavor\": \"Inspiring Smite\"\n    };\n  }\n\n  // remove consumed from pool\n  healingPool = healingPool - consumed;\n  actor.setFlag(\"dae\", \"healingpool\", healingPool);\n\n  return theItem.update(updates);\n}\nreturn true;",
-          "folder": null,
-          "sort": 0,
-          "permission": {
-            "default": 0
-          },
-          "flags": {}
-        }
-      }
-    },
-    "core": {
-      "sourceId": "Item.IM2UCUasJLD5J7Fw"
-    },
-    "scene-packer": {
-      "sourceId": "Item.btYfM4eeeuXQ5k45",
-      "hash": "a1ff50a680b24373e8e90b7f5f7cbb760bbaeaed"
-    },
-    "cf": {
-      "id": "temp_ovon30cu8t"
-    },
-    "spellTemplateManager": {
-      "stmData": {
-        "ignoreDuration": false,
-        "spellTexture": "",
-        "useTexture": false,
-        "alpha": 50,
-        "coneOrigin": 1,
-        "loopAnimations": true
-      }
-    },
-    "exportSource": {
-      "world": "test",
-      "system": "dnd5e",
-      "coreVersion": "9.269",
-      "systemVersion": "1.6.1"
-    }
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.291",
+    "createdTime": 1671193286512,
+    "modifiedTime": 1671739560357,
+    "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

@@ -4,12 +4,12 @@ Misty Escape
 NOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM "MIDI-SRD" SPELL: MISTY STEP
 By Author: Kandashi   https://github.com/kandashi/Dynamic-Effects-SRD
 
-v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git
+v2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git
 *****/
 
 if (args[0].macroPass === "preItemRoll") {
     let pcToken = token;
-    let pcActor = token.actor.data.data;
+    let pcActor = token.actor;
     const target = canvas.tokens.get(pcToken.tokenId) || token;
 
     let range = canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [{
@@ -47,7 +47,7 @@ if (args[0].macroPass === "preItemRoll") {
         async function deleteTemplatesAndMove(template) {
             let removeTemplates = canvas.templates.placeables.filter(i => i.data.flags.DAESRD?.MistyEscape?.ActorId === pcActor.id);
             let templateArray = removeTemplates.map(function (w) { return w.id });
-            await target.data.document.update(canvas.grid.getSnappedPosition(template.data.x, template.data.y));
+            await target.document.update(canvas.grid.getSnappedPosition(template.x, template.y));
             if (removeTemplates) await canvas.scene.deleteEmbeddedDocuments("MeasuredTemplate", templateArray);
         };
     });

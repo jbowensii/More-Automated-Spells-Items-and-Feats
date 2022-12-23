@@ -2,67 +2,6 @@
   "name": "Psionic Die",
   "type": "feat",
   "img": "icons/sundries/gaming/dice-runed-brown.webp",
-  "data": {
-    "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "unidentified": ""
-    },
-    "source": "PHB",
-    "activation": {
-      "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": 0,
-      "max": "",
-      "per": ""
-    },
-    "consume": {
-      "type": "",
-      "target": "",
-      "amount": null
-    },
-    "ability": "",
-    "actionType": "other",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
-    },
-    "requirements": "Rogue: Soulknife",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "attunement": 0
-  },
   "effects": [
     {
       "_id": "UgB9349LhJU4nKsd",
@@ -71,14 +10,20 @@
           "key": "macro.itemMacro",
           "mode": 0,
           "value": "",
-          "priority": "20"
+          "priority": 20
         }
       ],
       "disabled": false,
       "duration": {
-        "startTime": null
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
       },
-      "icon": "systems/dnd5e/icons/items/inventory/dice.jpg",
+      "icon": "icons/sundries/gaming/dice-runed-brown.webp",
       "label": "Psionic Die",
       "origin": "Item.H14LgNk3j1O3e3FV",
       "transfer": true,
@@ -91,7 +36,9 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [],
-          "transfer": true
+          "transfer": true,
+          "selfTarget": false,
+          "selfTargetAlways": false
         },
         "ActiveAuras": {
           "isAura": false,
@@ -108,10 +55,20 @@
         },
         "dnd5e-helpers": {
           "rest-effect": "Ignore"
+        },
+        "effective-transferral": {
+          "transferBlock": {
+            "button": false,
+            "chat": false,
+            "displayCard": false
+          },
+          "transferrable": {
+            "self": true,
+            "target": true
+          }
         }
       },
-      "tint": null,
-      "selectedKey": "macro.itemMacro"
+      "tint": null
     }
   ],
   "flags": {
@@ -247,7 +204,10 @@
       "concentration": false,
       "magicdam": false,
       "magiceffect": false,
-      "toggleEffect": false
+      "toggleEffect": false,
+      "autoFailFriendly": false,
+      "offHandWeapon": false,
+      "ignoreTotalCover": false
     },
     "magicitems": {
       "enabled": false,
@@ -264,8 +224,8 @@
       "sorting": "l"
     },
     "scene-packer": {
-      "hash": "52da011d815daac6308e1038a2df07ccb1bc230e",
-      "sourceId": "Item.1SZLgIr42Rn2kwZ1"
+      "hash": "a63bef26fae543de60e06534aedda4b2f97815b2",
+      "sourceId": "Item.dVJQZHHm4wXGABOE"
     },
     "core": {
       "sourceId": "Item.8gdA6c8j5GnkX33K"
@@ -286,14 +246,35 @@
             "default": 0
           },
           "flags": {}
+        },
+        "name": "Psionic Die",
+        "type": "script",
+        "scope": "global",
+        "command": "/*****\nPsionic Power: Psionic Power\n\nUSEAGE : PASSIVE\nThis energy is represented by your Psionic Energy dice, which are each a d6. \nYou have a number of these dice equal to twice your proficiency bonus, and \nthey fuel various psionic powers you have, which are detailed below.\n\nv2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0] === \"on\") {\n    const pcActor = await fromUuid(args[args.length - 1].actorUuid);\n    let rogueLevel = testClass(pcActor, \"rogue\", \"soulknife\", 3)?.system.levels ?? 0;\n    if (!rogueLevel) {\n        ui.notifications.error(\"You are not a Rogue: Soulknife of at least 3rd level.\");\n        return;\n    }\n    let flagData;\n    if (rogueLevel > 16) flagData = \"+ 1d12\";\n    else if (rogueLevel > 10) flagData = \"+ 1d10\";\n    else if (rogueLevel > 4) flagData = \"+ 1d8\";\n    else if (rogueLevel > 0) flagData = \"+ 1d6\";\n    pcActor.setFlag(\"dae\", \"PsionicDie\", flagData)\n\n} else if (args[0] === \"off\") {\n    const pcActor = await fromUuid(args[args.length - 1].actorUuid);\n    pcActor.unsetFlag(\"dae\", \"PsionicDie\");\n}\n\n// Test PC Class, Subclass and Class Level\n// RETURN the class object (TRUE) or null (FALSE)\nfunction testClass(testActor, className, subClassName, levels) {\n    let theClass = testActor.classes.rogue;\n    if (theClass) {\n        if ((levels > 0) && (theClass.system.levels >= levels)) {\n            if (subClassName === null || (theClass.system.subclass.identifier === subClassName)) {\n                return theClass;\n            }\n        }\n    }\n    return null;\n}",
+        "author": "paMZuKDupk0GHKFn",
+        "_id": null,
+        "img": "icons/svg/dice-target.svg",
+        "folder": null,
+        "sort": 0,
+        "ownership": {
+          "default": 0
+        },
+        "flags": {},
+        "_stats": {
+          "systemId": null,
+          "systemVersion": null,
+          "coreVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null
         }
       }
     },
     "exportSource": {
-      "world": "test",
+      "world": "5e-test-world",
       "system": "dnd5e",
-      "coreVersion": "9.269",
-      "systemVersion": "1.6.1"
+      "coreVersion": "10.291",
+      "systemVersion": "2.0.3"
     },
     "favtab": {
       "isFavorite": true
@@ -303,5 +284,76 @@
       "path": "DDB Override#/CF_SEP/Battlemaster Maneuvers",
       "color": "#000000"
     }
+  },
+  "system": {
+    "description": {
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": "",
+      "per": "",
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "other",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Rogue: Soulknife",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.291",
+    "createdTime": 1671193286523,
+    "modifiedTime": 1671407025874,
+    "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

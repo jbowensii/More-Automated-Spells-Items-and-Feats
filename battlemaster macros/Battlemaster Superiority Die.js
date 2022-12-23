@@ -5,12 +5,11 @@ USEAGE : PASSIVE
 This item must be on the character for Manuevers to function.  
 It does not do anything directly but is a helper effect to determine the Battle Master Hit Die (d8, d10, d12) based on level.
  
-v1.3 August 6 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 December 16 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0] === "on") {
     const pcActor = await fromUuid(args[args.length - 1].actorUuid);
-    console.log("MACRO TEST | PC Actor: %O", pcActor);
 
     // Test Class
     let pcFighter = pcActor.getRollData().classes?.fighter;
@@ -28,7 +27,6 @@ if (args[0] === "on") {
 
     //const roll = await(new Roll(`2d8 + ${pcPaladin.levels}`)).roll();
     let fighterLevel = pcFighter.levels;
-    console.log("MACRO TEST | Fighter Levels: %s", fighterLevel);
 
     let flagData;
     if (fighterLevel > 17) flagData = "+ 1d12";

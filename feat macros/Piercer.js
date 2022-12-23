@@ -3,17 +3,17 @@ Piercer
 
 USAGE: Automatic just place on a character 
 
-v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "postDamageRoll") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);
     const actorUuid = workflow.tokenUuid;
     const actorToken = canvas.tokens.get(workflow.tokenId);
-    const thisItem = actorToken.actor.items.find(i => i.name === "Piercer")?.data;
+    const thisItem = actorToken.actor.items.find(i => i.name === "Piercer");
 
     // make sure the attempted hit was made with a weapon attack
-    if (!["mwak", "rwak"].includes(args[0].item.data.actionType)) return;
+    if (!["mwak", "rwak"].includes(args[0].item.system.actionType)) return;
 
     // damage type must be "piercing"    
     if (workflow.defaultDamageType != "piercing") return;
@@ -37,7 +37,7 @@ if (args[0].macroPass === "postDamageRoll") {
             content: `<p>would you like to re-roll your lowest damage die?</p><p>Lowest Die Roll: ${lowestDieRoll}</p>`,
             buttons: {
                 one: {
-                    icon: '<p> </p><img src = "systems/dnd5e/icons/skills/arrow_01.jpg" width="60" height="60"></>',
+                    icon: '<p> </p><img src = "icons/skills/ranged/arrow-flying-broadhead-metal.webp" width="60" height="60"></>',
                     label: "<p>Yes</p>",
                     callback: () => resolve(true)
                 },
@@ -71,7 +71,7 @@ if (args[0].macroPass === "postDamageRoll") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);
     const actorUuid = workflow.tokenUuid;
     const actorToken = canvas.tokens.get(workflow.tokenId);
-    const thisItem = actorToken.actor.items.find(i => i.name === "Piercer")?.data;
+    const thisItem = actorToken.actor.items.find(i => i.name === "Piercer");
     const targetToken = await fromUuid(args[0].hitTargetUuids[0] ?? "");
     const targetActor = targetToken.actor;
     let choice = await getProperty(workflow, "ReplaceRoll");
@@ -80,18 +80,18 @@ if (args[0].macroPass === "postDamageRoll") {
     let reRoll = null;
 
     // remove extra damage effect 
-    let effect = await findEffect(actorToken, "Piercer reRoll");
-    await MidiQOL.socket().executeAsGM("removeEffects", { actorUuid: actorUuid, effects: [effect.id] });
+    let effect = await findEffect(actorToken.actor, "Piercer reRoll");
+    // await MidiQOL.socket().executeAsGM("removeEffects", { actorUuid: actorUuid, effects: [effect.id] });
 
     // test if critical is true, apply extra damage die
     if (workflow?.isCritical) {
-        reRoll = await new Roll(baseDie).roll();
+        reRoll = await new Roll(baseDie).evaluate({async: true});
         new MidiQOL.DamageOnlyWorkflow(targetActor, targetToken, reRoll.total, "piercing", [targetToken], reRoll, { flavor: "Piercer Feat: Critical Extra Damage", itemData: thisItem, itemCardId: "new" });
     }
 
     // if reRoll was selected figure out the difference and apply adjustment to the target
     if (choice) {
-        reRoll = await new Roll(baseDie).roll();
+        reRoll = await new Roll(baseDie).evaluate({async: true});
         if (reRoll.result < lowestDieRoll) {
             // healback difference
             let difference = lowestDieRoll - reRoll.result;
@@ -105,9 +105,11 @@ if (args[0].macroPass === "postDamageRoll") {
     return;
 }
 
+//---------------------------------- MY FUNCTIONS -------------------------------------
+
 // Function to test for an effect
 async function findEffect(target, effectName) {
     let effectUuid = null;
-    effectUuid = target?.actor.data.effects.find(ef => ef.data.label === effectName);
+    effectUuid = target?.effects.find(ef => ef.label === effectName);
     return effectUuid;
 }

@@ -1,7 +1,7 @@
 /*****
 Circle of Mortality
 
-v1.1 August 6 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0].macroPass === "postDamageRoll") {
@@ -11,7 +11,7 @@ if (args[0].macroPass === "postDamageRoll") {
     let targetActor = targetToken.actor;
 
     // if Target HP > 0 return 
-    if (targetActor.data.data.attributes.hp.value != 0) return;
+    if (targetActor.system.attributes.hp.value != 0) return;
 
     // check to make sure only one target is selected
     if ((args[0].targetUuids.length < 1) || (args[0].targetUuids.length > 1)) {

@@ -1,42 +1,44 @@
 {
-  "name": "Eyes of Night",
+  "name": "Maneuvers: Distracting Strike",
   "type": "feat",
-  "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
+  "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
   "effects": [
     {
-      "_id": "WysKNsnpbFv2ZWLB",
+      "_id": "z6c1xhx4agrwbd3z",
       "changes": [
         {
-          "key": "ATL.dimSight",
-          "mode": 2,
-          "value": "300",
-          "priority": 40
+          "key": "flags.midi-qol.grants.advantage.attack.all",
+          "mode": 5,
+          "value": "1",
+          "priority": 20
         }
       ],
       "disabled": false,
       "duration": {
         "startTime": null,
+        "turns": 1,
         "seconds": null,
         "combat": null,
         "rounds": null,
-        "turns": null,
         "startRound": null,
         "startTurn": null
       },
-      "icon": "icons/magic/perception/silhouette-stealth-shadow.webp",
-      "label": "Eyes of Night",
-      "origin": "Item.BsbEEhiIUMijPdYz",
-      "transfer": true,
+      "icon": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
+      "label": "Maneuvers: Distracting Strike",
+      "origin": "Actor.67GUmdTadYmGXD8W.Item.uIJSbACjp9yNcSdf",
+      "transfer": false,
       "flags": {
         "core": {
-          "statusId": ""
+          "statusId": "Convenient Effect: Advantage"
         },
         "dae": {
           "stackable": "none",
           "durationExpression": "",
           "macroRepeat": "none",
-          "specialDuration": [],
-          "transfer": true,
+          "specialDuration": [
+            "isHit"
+          ],
+          "transfer": false,
           "selfTarget": false,
           "selfTargetAlways": false
         },
@@ -70,23 +72,16 @@
   ],
   "flags": {
     "ddbimporter": {
-      "id": "2409717",
+      "id": "53570",
       "entityTypeId": "222216831",
-      "componentId": 2996540,
-      "componentTypeId": 12168134,
-      "class": "Cleric",
-      "subclass": "Twilight Domain",
-      "dndbeyond": {
-        "levelScale": null,
-        "levelScales": [],
-        "limitedUse": [
-          {
-            "level": null,
-            "uses": 1
-          }
-        ]
-      },
-      "importId": "iyl0evwnfwrvm9lh"
+      "componentId": 22,
+      "componentTypeId": 258900837,
+      "class": "Fighter",
+      "subclass": "Battle Master",
+      "importId": "ye6nz9f4x9n3v7lu",
+      "ignoreIcon": true,
+      "ignoreItemImport": true,
+      "retainResourceConsumption": true
     },
     "infusions": {
       "infused": false
@@ -94,12 +89,8 @@
     "obsidian": {
       "source": {
         "type": "class",
-        "text": "Cleric"
+        "text": "Fighter"
       }
-    },
-    "scene-packer": {
-      "hash": "0d263a70e4e09ba8e8186084c6978ebcc0c84a34",
-      "sourceId": "Item.yF7Bf89F7XCG81Y6"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -112,18 +103,22 @@
       }
     },
     "midi-qol": {
-      "effectActivation": false
+      "effectActivation": false,
+      "onUseMacroName": ""
     },
     "midiProperties": {
       "nodam": false,
-      "fulldam": false,
       "halfdam": false,
+      "fulldam": false,
       "rollOther": false,
       "critOther": false,
+      "concentration": false,
       "magicdam": false,
       "magiceffect": false,
-      "concentration": false,
-      "toggleEffect": false
+      "toggleEffect": false,
+      "autoFailFriendly": false,
+      "offHandWeapon": false,
+      "ignoreTotalCover": false
     },
     "magicitems": {
       "enabled": false,
@@ -143,7 +138,7 @@
       "macro": {
         "data": {
           "_id": null,
-          "name": "Eyes of Night",
+          "name": "Maneuvers: Trip Attack",
           "type": "script",
           "author": "ldRsJ6Yp5qPydWA1",
           "img": "icons/svg/dice-target.svg",
@@ -158,10 +153,21 @@
         }
       }
     },
-    "core": {
-      "sourceId": "Item.BsbEEhiIUMijPdYz"
+    "favtab": {
+      "isFavorite": true
     },
-    "cf": null,
+    "scene-packer": {
+      "hash": "d7bdc12f9bea02c05ef48e92d085284fa3e6ce2c",
+      "sourceId": "Item.kLWYDBL7F2nlbTDG"
+    },
+    "core": {
+      "sourceId": "Item.bpSu08y0CydFPHEi"
+    },
+    "cf": {
+      "id": "temp_fgyhz98iq6m",
+      "path": "DDB Override#/CF_SEP/Battlemaster Maneuvers",
+      "color": "#000000"
+    },
     "exportSource": {
       "world": "5e-test-world",
       "system": "dnd5e",
@@ -171,30 +177,30 @@
   },
   "system": {
     "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>USAGE: </strong><span style=\"color:#169179\">ACTIVATE AFTER THE ATTACK</span></summary>\n<p>This Maneuver must be activated AFTER the character makes an attack and knows that a HIT was successful.  This will activate any bonuses, saves, effects, and extra damage to the TARGET.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "TCoE p34",
+    "source": "PHB p74",
     "activation": {
-      "type": "none",
+      "type": "special",
       "cost": null,
       "condition": ""
     },
     "duration": {
       "value": null,
-      "units": ""
+      "units": "inst"
     },
     "target": {
-      "value": null,
+      "value": 1,
       "width": null,
       "units": "",
-      "type": "self"
+      "type": "creature"
     },
     "range": {
       "value": null,
       "long": null,
-      "units": "ft"
+      "units": ""
     },
     "uses": {
       "value": null,
@@ -203,29 +209,34 @@
       "recovery": ""
     },
     "consume": {
-      "type": "",
+      "type": "attribute",
       "target": "",
-      "amount": null
+      "amount": 1
     },
     "ability": "",
-    "actionType": "",
-    "attackBonus": 0,
+    "actionType": "util",
+    "attackBonus": "0",
     "chatFlavor": "",
     "critical": {
       "threshold": null,
       "damage": ""
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        [
+          "0 + @flags.dae.SuperiorityDie[Superiority]",
+          ""
+        ]
+      ],
       "versatile": ""
     },
     "formula": "",
     "save": {
       "ability": "",
       "dc": null,
-      "scaling": "spell"
+      "scaling": "str"
     },
-    "requirements": "Cleric Twilight Domain",
+    "requirements": "Fighter: Battlemaster",
     "recharge": {
       "value": null,
       "charged": false
@@ -236,8 +247,8 @@
     "systemId": "dnd5e",
     "systemVersion": "2.0.3",
     "coreVersion": "10.291",
-    "createdTime": 1671193286508,
-    "modifiedTime": 1671379365727,
+    "createdTime": 1671193288059,
+    "modifiedTime": 1671736000026,
     "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

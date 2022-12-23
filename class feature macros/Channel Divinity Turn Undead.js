@@ -7,17 +7,17 @@ Please remember to setup usage consumption in the itme itself.
 
 This Macro requires a GAME LEVEL MACRO: MAKE DEAD 
 
-v1.4 August 13 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 // if (!game.modules.get("warpgate")?.active) return ui.notifications.error("Turn Undead requires warpgate module");
 
 if (args[0].macroPass === "preambleComplete") {
     let workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     // I am stealing the activation condition as a string for the creature type I want to hit
-    const activationCondition = args[0].itemData.data.activation.condition.toLowerCase();
+    const activationCondition = args[0].itemData.system.activation.condition.toLowerCase();
     let immunity = ["Turn Immunity"];
     for (let target of workflow.targets) {
-        let creatureType = target.actor.data.data.details.type;
+        let creatureType = target.actor.system.details.type;
         // remove targets that are not creatures (aka PCs etc)
         if ((creatureType === null) || (creatureType === undefined)) {
             workflow.targets.delete(target);
@@ -46,7 +46,7 @@ if (args[0].macroPass === "preambleComplete") {
 
     let crDestroy = 0.0;
     if (workflow.targets.size === 0) return;
-    let actorClass = pcActor.classes.cleric.data.data.levels;
+    let actorClass = pcActor.classes.cleric.system.levels;
     if (actorClass > 16) crDestroy = 4;
     else if (actorClass > 13) crDestroy = 3;
     else if (actorClass > 10) crDestroy = 2;
@@ -55,9 +55,9 @@ if (args[0].macroPass === "preambleComplete") {
 
     // set HP = 0 for all targets of the CR or less that have been turned
     for (let target of workflow.failedSaves) {
-        if (target.actor.data.data.details.cr < crDestroy) {
+        if (target.actor.system.details.cr < crDestroy) {
             //let target = failedSave.actor;
-            let maxHP = Number(target.actor.data.data.attributes.hp.max);
+            let maxHP = Number(target.actor.system.attributes.hp.max);
             let updates = {
                 actor: { "data.attributes.hp.value": 0, "data.attributes.hp.max": maxHP }
             };

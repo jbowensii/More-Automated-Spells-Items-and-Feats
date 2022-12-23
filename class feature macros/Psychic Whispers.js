@@ -4,7 +4,7 @@ Psionic Power: Psychic Whispers
 USEAGE : AUTOMATED
 This item should be placed on the character that has Psionic Power: Psychic Whispers  
  
-v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v1.5 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 // make sure between 1 and 3 targets are selected

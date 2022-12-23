@@ -2,67 +2,6 @@
   "name": "Superiority Die",
   "type": "feat",
   "img": "icons/sundries/gaming/dice-runed-brown.webp",
-  "data": {
-    "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>USAGE: </strong> <span style=\"color: #169179;\">PASSIVE</span></summary>\n<p>This item must be on the character for Manuevers to function.&nbsp; It does not do anything directly but is a helper effect to determine the Battle Master Hit Die (d8, d10, d12) based on level.</p>\n</details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "unidentified": ""
-    },
-    "source": "PHB p74",
-    "activation": {
-      "type": "",
-      "cost": 0,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": ""
-    },
-    "target": {
-      "value": null,
-      "width": null,
-      "units": "",
-      "type": ""
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": 0,
-      "max": "",
-      "per": ""
-    },
-    "consume": {
-      "type": "",
-      "target": "",
-      "amount": null
-    },
-    "ability": "",
-    "actionType": "other",
-    "attackBonus": 0,
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "",
-      "dc": null,
-      "scaling": "spell"
-    },
-    "requirements": "Fighter: Battlemaster",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "attunement": 0
-  },
   "effects": [
     {
       "_id": "UgB9349LhJU4nKsd",
@@ -71,16 +10,20 @@
           "key": "macro.itemMacro",
           "mode": 0,
           "value": "",
-          "priority": "20"
+          "priority": 20
         }
       ],
       "disabled": false,
       "duration": {
         "startTime": null,
-        "startRound": 121,
-        "startTurn": 3
+        "startRound": null,
+        "startTurn": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null
       },
-      "icon": "systems/dnd5e/icons/items/inventory/dice.jpg",
+      "icon": "icons/sundries/gaming/dice-runed-brown.webp",
       "label": "Superiority Die",
       "origin": "Item.H14LgNk3j1O3e3FV",
       "transfer": true,
@@ -93,7 +36,9 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [],
-          "transfer": true
+          "transfer": true,
+          "selfTarget": false,
+          "selfTargetAlways": false
         },
         "ActiveAuras": {
           "isAura": false,
@@ -110,10 +55,20 @@
         },
         "dnd5e-helpers": {
           "rest-effect": "Ignore"
+        },
+        "effective-transferral": {
+          "transferBlock": {
+            "button": false,
+            "chat": false,
+            "displayCard": false
+          },
+          "transferrable": {
+            "self": true,
+            "target": false
+          }
         }
       },
-      "tint": null,
-      "selectedKey": "macro.itemMacro"
+      "tint": null
     }
   ],
   "flags": {
@@ -249,7 +204,10 @@
       "concentration": false,
       "magicdam": false,
       "magiceffect": false,
-      "toggleEffect": false
+      "toggleEffect": false,
+      "autoFailFriendly": false,
+      "offHandWeapon": false,
+      "ignoreTotalCover": false
     },
     "magicitems": {
       "enabled": false,
@@ -266,8 +224,8 @@
       "sorting": "l"
     },
     "scene-packer": {
-      "hash": "fdd2fca14e7ce77218ee31a72597dacdddc4f649",
-      "sourceId": "Item.WuaASVFGs1dzHW8x"
+      "hash": "6994b431d8ab0466b40911193d24181fa0a849da",
+      "sourceId": "Item.Q3m6hRxQLGBg4hSw"
     },
     "core": {
       "sourceId": "Item.8gdA6c8j5GnkX33K"
@@ -288,14 +246,35 @@
             "default": 0
           },
           "flags": {}
+        },
+        "name": "Superiority Die",
+        "type": "script",
+        "scope": "global",
+        "command": "/*****\nFighter Battlemaster : Superiority Die\n\nUSEAGE : PASSIVE\nThis item must be on the character for Manuevers to function.  \nIt does not do anything directly but is a helper effect to determine the Battle Master Hit Die (d8, d10, d12) based on level.\n \nv2.0 December 16 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0] === \"on\") {\n    const pcActor = await fromUuid(args[args.length - 1].actorUuid);\n\n    // Test Class\n    let pcFighter = pcActor.getRollData().classes?.fighter;\n    if (pcFighter === null) {\n        ui.notifications.error(\"You are not a Fighter!\");\n        return;\n    }\n\n    // Test Subclass\n    let pcFighterSubclass = pcActor.getRollData().classes.fighter?.subclass.identifier;\n    if (pcFighterSubclass != \"battle-master\") {\n        ui.notifications.error(\"You are not a Fighter Battlemaster!\");\n        return;\n    }\n\n    //const roll = await(new Roll(`2d8 + ${pcPaladin.levels}`)).roll();\n    let fighterLevel = pcFighter.levels;\n\n    let flagData;\n    if (fighterLevel > 17) flagData = \"+ 1d12\";\n    else if (fighterLevel > 9) flagData = \"+ 1d10\";\n    else if (fighterLevel > 0) flagData = \"+ 1d8\";\n    pcActor.setFlag(\"dae\", \"SuperiorityDie\", flagData)\n\n} else if (args[0] === \"off\") {\n    const pcActor = await fromUuid(args[args.length - 1].actorUuid);\n    pcActor.unsetFlag(\"dae\", \"SuperiorityDie\");\n}",
+        "author": "paMZuKDupk0GHKFn",
+        "_id": null,
+        "img": "icons/svg/dice-target.svg",
+        "folder": null,
+        "sort": 0,
+        "ownership": {
+          "default": 0
+        },
+        "flags": {},
+        "_stats": {
+          "systemId": null,
+          "systemVersion": null,
+          "coreVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null
         }
       }
     },
     "exportSource": {
-      "world": "test",
+      "world": "5e-test-world",
       "system": "dnd5e",
-      "coreVersion": "9.269",
-      "systemVersion": "1.6.3"
+      "coreVersion": "10.291",
+      "systemVersion": "2.0.3"
     },
     "favtab": {
       "isFavorite": true
@@ -305,5 +284,76 @@
       "path": "DDB Override#/CF_SEP/Battlemaster Maneuvers",
       "color": "#000000"
     }
+  },
+  "system": {
+    "description": {
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>USAGE: </strong> <span style=\"color:#169179\">PASSIVE</span></summary>\n<p>This item must be on the character for Manuevers to function.  It does not do anything directly but is a helper effect to determine the Battle Master Hit Die (d8, d10, d12) based on level.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB p74",
+    "activation": {
+      "type": "",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": ""
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": 0,
+      "max": "",
+      "per": "",
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": "",
+      "amount": null
+    },
+    "ability": "",
+    "actionType": "other",
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Fighter: Battlemaster",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.291",
+    "createdTime": 1671193288018,
+    "modifiedTime": 1671323714816,
+    "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

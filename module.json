@@ -3,12 +3,12 @@
     "title": "More Automated Spells Items and Feats",
     "description": "A FoundryVTT module containing a MASIF (More Automated Spells Items and Feats) amount of automation for D&D 5e.",
     "author": "jbowens #0415 (Discord)",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "systems": [
         "dnd5e"
     ],
-    "minimumCoreVersion": "9",
-    "compatibleCoreVersion": "9",
+    "minimumCoreVersion": "10",
+    "compatibleCoreVersion": "10",
     "dependencies": [
         {
             "name": "dae",

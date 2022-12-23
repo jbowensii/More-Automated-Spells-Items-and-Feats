@@ -1,8 +1,122 @@
 {
   "name": "Preserve Life",
   "type": "feat",
-  "img": "systems/dnd5e/icons/skills/green_09.jpg",
-  "data": {
+  "img": "icons/magic/light/orb-beams-green.webp",
+  "effects": [],
+  "flags": {
+    "_sheetTab": "description",
+    "entityorder": {
+      "order": 161
+    },
+    "dynamiceffects": {
+      "effects": [],
+      "alwaysActive": false,
+      "equipActive": false
+    },
+    "favtab": {
+      "isFavourite": true,
+      "isFavorite": true
+    },
+    "midi-qol": {
+      "effectActivation": false,
+      "onUseMacroName": "[preItemRoll]ItemMacro"
+    },
+    "midiProperties": {
+      "nodam": false,
+      "halfdam": false,
+      "fulldam": false,
+      "rollOther": false,
+      "critOther": false,
+      "concentration": false,
+      "magicdam": false,
+      "magiceffect": false,
+      "toggleEffect": false,
+      "autoFailFriendly": false,
+      "offHandWeapon": false,
+      "ignoreTotalCover": false
+    },
+    "magicitems": {
+      "enabled": false,
+      "equipped": false,
+      "attuned": false,
+      "charges": "0",
+      "chargeType": "c1",
+      "destroy": false,
+      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
+      "rechargeable": false,
+      "recharge": "0",
+      "rechargeType": "t1",
+      "rechargeUnit": "r1",
+      "sorting": "l"
+    },
+    "itemacro": {
+      "macro": {
+        "data": {
+          "_id": null,
+          "name": "Preserve Life",
+          "type": "script",
+          "author": "ldRsJ6Yp5qPydWA1",
+          "img": "icons/svg/dice-target.svg",
+          "scope": "global",
+          "command": "/*****\nPreserve Life\n\nUSE: use this feature AFTER channel divinity: Preserve Life is triggered to create a healing pool\n\nNOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM \"MidiQOL Sample Items\" SPELL: LAY ON HANDS\nBy Author: Tim Poseney   https://gitlab.com/tposney/midi-qol\n\nv1.0 August 17 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"preItemRoll\") {\n    // get healthpool if not available send a notification\n    let lifehealingpool = actor.getFlag(\"dae\", \"lifehealingpool\");\n    if ((!lifehealingpool) || (!lifehealingpool > 0)) {\n        ui.notifications.warn(\"You either have no healing pool left or you have not used Channel Divinity: Preserve Life...\");\n        return false;\n    }\n\n    // check to make sure there is a target to heal and only one is selected\n    let theTarget = args[0].targets[0];\n    if ((!theTarget) || (args[0].targets.length > 1)) {\n        ui.notifications.warn(\"Please select a target to heal with Preserve Life\");\n        return false;\n    }\n\n    // does not work on undead/constructs - not sure if this is RAW but makes sense given Preserve Life \n    let invalid = [\"undead\", \"construct\"].some(type => (theTarget?.actor.data.data.details.type?.value || \"\").toLowerCase().includes(type));\n    if (invalid) {\n        ui.notifications.warn(\"Preserve Life can't affect undead/constructs\")\n        return false;\n    }\n\n    let targetToken = await fromUuid(args[0].targetUuids[0]);\n    let targetActor = targetToken.actor;\n    //Target can only be healed up to half their HP\n    let targetDamage = ((targetActor.data.data.attributes.hp.max / 2) - targetActor.data.data.attributes.hp.value);\n\n    if (targetDamage <= 0) {\n        ui.notifications.warn(\"Target is at or above half health\");\n        return false;    \n    }\n\n    // prompt for how much to use...\n    let d = new Promise((resolve, reject) => {\n        let theDialog = new Dialog({\n            title: \"Preserve Life\",\n            content: `<p>Your targets current damage level: ${targetDamage}</p>\n                    <p>How many points to use? ${lifehealingpool} left in your Healing Pool<input id=\"mqlohpoints\" type=\"number\" min=\"0\" step=\"1.0\" max=\"${lifehealingpool}\"></input></p>`,\n            buttons: {\n                heal: {\n                    icon: '<p></p><img src = \"icons/magic/life/heart-cross-blue.webp\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>HEAL</p>\",\n                    callback: (html) => { resolve(Math.clamped(Math.floor(Number(html.find('#mqlohpoints')[0].value) / 2), 0, lifehealingpool)); }\n                },\n                abort: {\n                    icon: '<p></p><img src = \"icons/svg/cancel.svg\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>CANCEL</p>\",\n                    callback: () => { resolve(false) }\n                },\n            },\n            default: \"abort\",\n        }).render(true);\n    });\n    const consumed = await d;\n    if (!consumed) return false;\n\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    const theItem = workflow.item;\n    let updates;\n    if (consumed > 0) {\n        updates = {\n            \"data.consume.amount\": Math.abs(consumed),\n            \"data.damage.parts\": [[`${Math.max(0, consumed)}`, \"healing\"]],\n            \"data.chatFlavor\": \"Preserve Life\"\n        };\n    }\n\n    // remove consumed from pool\n    lifehealingpool = lifehealingpool - consumed;\n    actor.setFlag(\"dae\", \"lifehealingpool\", lifehealingpool);\n\n    return theItem.update(updates);\n}\nreturn true;",
+          "folder": null,
+          "sort": 0,
+          "permission": {
+            "default": 0
+          },
+          "flags": {}
+        },
+        "name": "Preserve Life",
+        "type": "script",
+        "scope": "global",
+        "command": "/*****\nPreserve Life\n\nUSE: use this feature AFTER channel divinity: Preserve Life is triggered to create a healing pool\n\nNOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM \"MidiQOL Sample Items\" SPELL: LAY ON HANDS\nBy Author: Tim Poseney   https://gitlab.com/tposney/midi-qol\n\nv2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"preItemRoll\") {\n    // get healthpool if not available send a notification\n    let lifehealingpool = actor.getFlag(\"dae\", \"lifehealingpool\");\n    if ((!lifehealingpool) || (!lifehealingpool > 0)) {\n        ui.notifications.warn(\"You either have no healing pool left or you have not used Channel Divinity: Preserve Life...\");\n        return false;\n    }\n\n    // check to make sure there is a target to heal and only one is selected\n    let theTarget = args[0].targets[0];\n    if ((!theTarget) || (args[0].targets.length > 1)) {\n        ui.notifications.warn(\"Please select a target to heal with Preserve Life\");\n        return false;\n    }\n\n    // does not work on undead/constructs - not sure if this is RAW but makes sense given Preserve Life \n    let invalid = [\"undead\", \"construct\"].some(type => (theTarget?.actor.system.details.type?.value || \"\").toLowerCase().includes(type));\n    if (invalid) {\n        ui.notifications.warn(\"Preserve Life can't affect undead/constructs\")\n        return false;\n    }\n\n    let targetToken = await fromUuid(args[0].targetUuids[0]);\n    let targetActor = targetToken.actor;\n    //Target can only be healed up to half their HP\n    let targetDamage = ((targetActor.system.attributes.hp.max / 2) - targetActor.system.attributes.hp.value);\n\n    if (targetDamage <= 0) {\n        ui.notifications.warn(\"Target is at or above half health\");\n        return false;\n    }\n\n    // prompt for how much to use...\n    let d = new Promise((resolve, reject) => {\n        let theDialog = new Dialog({\n            title: \"Preserve Life\",\n            content: `<p>Your targets current damage level: ${targetDamage}</p>\n                    <p>How many points to use? ${lifehealingpool} left in your Healing Pool<input id=\"mqlohpoints\" type=\"number\" min=\"0\" step=\"1.0\" max=\"${lifehealingpool}\"></input></p>`,\n            buttons: {\n                heal: {\n                    icon: '<p></p><img src = \"icons/magic/light/orb-beams-green.webp\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>HEAL</p>\",\n                    callback: (html) => { resolve(Math.clamped(Math.floor(Number(html.find('#mqlohpoints')[0].value) / 2), 0, lifehealingpool)); }\n                },\n                abort: {\n                    icon: '<p></p><img src = \"icons/svg/cancel.svg\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>CANCEL</p>\",\n                    callback: () => { resolve(false) }\n                },\n            },\n            default: \"abort\",\n        }).render(true);\n    });\n    let consumed = await d;\n    if (!consumed) return false;\n    if (consumed > targetDamage) consumed = targetDamage;\n\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    const theItem = workflow.item;\n    let updates;\n    if (consumed > 0) {\n        updates = {\n            \"data.consume.amount\": Math.abs(consumed),\n            \"data.damage.parts\": [[`${Math.max(0, consumed)}`, \"healing\"]],\n            \"data.chatFlavor\": \"Preserve Life\"\n        };\n    }\n\n    // remove consumed from pool\n    lifehealingpool = lifehealingpool - consumed;\n    actor.setFlag(\"dae\", \"lifehealingpool\", lifehealingpool);\n\n    return theItem.update(updates);\n}\nreturn true;",
+        "author": "paMZuKDupk0GHKFn",
+        "_id": null,
+        "img": "icons/svg/dice-target.svg",
+        "folder": null,
+        "sort": 0,
+        "ownership": {
+          "default": 0
+        },
+        "flags": {},
+        "_stats": {
+          "systemId": null,
+          "systemVersion": null,
+          "coreVersion": null,
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null
+        }
+      }
+    },
+    "core": {
+      "sourceId": "Item.IM2UCUasJLD5J7Fw"
+    },
+    "scene-packer": {
+      "sourceId": "Item.EOsMVAAneGunFjeW",
+      "hash": "a74fbcc0f02d99bb88f8450121f08346f5bd54a5"
+    },
+    "cf": {
+      "id": "temp_ovon30cu8t"
+    },
+    "spellTemplateManager": {
+      "stmData": {
+        "ignoreDuration": false,
+        "spellTexture": "",
+        "useTexture": false,
+        "alpha": 50,
+        "coneOrigin": 1,
+        "loopAnimations": true
+      }
+    },
+    "exportSource": {
+      "world": "5e-test-world",
+      "system": "dnd5e",
+      "coreVersion": "10.291",
+      "systemVersion": "2.0.3"
+    }
+  },
+  "system": {
     "description": {
       "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<p><strong>SETUP:</strong></p>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<p> </p>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 August 17 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "",
@@ -33,12 +147,13 @@
       "value": null,
       "max": "",
       "per": "",
+      "recovery": "",
       "type": "lr"
     },
     "consume": {
       "type": "",
       "target": "",
-      "amount": 5
+      "amount": 2
     },
     "ability": "",
     "actionType": "other",
@@ -51,7 +166,7 @@
     "damage": {
       "parts": [
         [
-          "5",
+          "2",
           "healing"
         ]
       ],
@@ -86,94 +201,12 @@
     },
     "attunement": 0
   },
-  "effects": [],
-  "flags": {
-    "_sheetTab": "description",
-    "entityorder": {
-      "order": 161
-    },
-    "dynamiceffects": {
-      "effects": [],
-      "alwaysActive": false,
-      "equipActive": false
-    },
-    "favtab": {
-      "isFavourite": true,
-      "isFavorite": true
-    },
-    "midi-qol": {
-      "effectActivation": false,
-      "onUseMacroName": "[preItemRoll]ItemMacro"
-    },
-    "midiProperties": {
-      "nodam": false,
-      "halfdam": false,
-      "fulldam": false,
-      "rollOther": false,
-      "critOther": false,
-      "concentration": false,
-      "magicdam": false,
-      "magiceffect": false,
-      "toggleEffect": false
-    },
-    "magicitems": {
-      "enabled": false,
-      "equipped": false,
-      "attuned": false,
-      "charges": "0",
-      "chargeType": "c1",
-      "destroy": false,
-      "destroyFlavorText": "reaches 0 charges: it crumbles into ashes and is destroyed.",
-      "rechargeable": false,
-      "recharge": "0",
-      "rechargeType": "t1",
-      "rechargeUnit": "r1",
-      "sorting": "l"
-    },
-    "itemacro": {
-      "macro": {
-        "data": {
-          "_id": null,
-          "name": "Preserve Life",
-          "type": "script",
-          "author": "ldRsJ6Yp5qPydWA1",
-          "img": "icons/svg/dice-target.svg",
-          "scope": "global",
-          "command": "/*****\nPreserve Life\n\nUSE: use this feature AFTER channel divinity: Preserve Life is triggered to create a healing pool\n\nNOTE: PARTS OF THIS AUTOMATION WERE TAKEN FROM \"MidiQOL Sample Items\" SPELL: LAY ON HANDS\nBy Author: Tim Poseney   https://gitlab.com/tposney/midi-qol\n\nv1.0 August 17 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git \n*****/\n\nif (args[0].macroPass === \"preItemRoll\") {\n    // get healthpool if not available send a notification\n    let lifehealingpool = actor.getFlag(\"dae\", \"lifehealingpool\");\n    if ((!lifehealingpool) || (!lifehealingpool > 0)) {\n        ui.notifications.warn(\"You either have no healing pool left or you have not used Channel Divinity: Preserve Life...\");\n        return false;\n    }\n\n    // check to make sure there is a target to heal and only one is selected\n    let theTarget = args[0].targets[0];\n    if ((!theTarget) || (args[0].targets.length > 1)) {\n        ui.notifications.warn(\"Please select a target to heal with Preserve Life\");\n        return false;\n    }\n\n    // does not work on undead/constructs - not sure if this is RAW but makes sense given Preserve Life \n    let invalid = [\"undead\", \"construct\"].some(type => (theTarget?.actor.data.data.details.type?.value || \"\").toLowerCase().includes(type));\n    if (invalid) {\n        ui.notifications.warn(\"Preserve Life can't affect undead/constructs\")\n        return false;\n    }\n\n    let targetToken = await fromUuid(args[0].targetUuids[0]);\n    let targetActor = targetToken.actor;\n    //Target can only be healed up to half their HP\n    let targetDamage = ((targetActor.data.data.attributes.hp.max / 2) - targetActor.data.data.attributes.hp.value);\n\n    if (targetDamage <= 0) {\n        ui.notifications.warn(\"Target is at or above half health\");\n        return false;    \n    }\n\n    // prompt for how much to use...\n    let d = new Promise((resolve, reject) => {\n        let theDialog = new Dialog({\n            title: \"Preserve Life\",\n            content: `<p>Your targets current damage level: ${targetDamage}</p>\n                    <p>How many points to use? ${lifehealingpool} left in your Healing Pool<input id=\"mqlohpoints\" type=\"number\" min=\"0\" step=\"1.0\" max=\"${lifehealingpool}\"></input></p>`,\n            buttons: {\n                heal: {\n                    icon: '<p></p><img src = \"icons/magic/life/heart-cross-blue.webp\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>HEAL</p>\",\n                    callback: (html) => { resolve(Math.clamped(Math.floor(Number(html.find('#mqlohpoints')[0].value) / 2), 0, lifehealingpool)); }\n                },\n                abort: {\n                    icon: '<p></p><img src = \"icons/svg/cancel.svg\" width=\"60\" height=\"60\"></>',\n                    label: \"<p>CANCEL</p>\",\n                    callback: () => { resolve(false) }\n                },\n            },\n            default: \"abort\",\n        }).render(true);\n    });\n    const consumed = await d;\n    if (!consumed) return false;\n\n    const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);\n    const theItem = workflow.item;\n    let updates;\n    if (consumed > 0) {\n        updates = {\n            \"data.consume.amount\": Math.abs(consumed),\n            \"data.damage.parts\": [[`${Math.max(0, consumed)}`, \"healing\"]],\n            \"data.chatFlavor\": \"Preserve Life\"\n        };\n    }\n\n    // remove consumed from pool\n    lifehealingpool = lifehealingpool - consumed;\n    actor.setFlag(\"dae\", \"lifehealingpool\", lifehealingpool);\n\n    return theItem.update(updates);\n}\nreturn true;",
-          "folder": null,
-          "sort": 0,
-          "permission": {
-            "default": 0
-          },
-          "flags": {}
-        }
-      }
-    },
-    "core": {
-      "sourceId": "Item.IM2UCUasJLD5J7Fw"
-    },
-    "scene-packer": {
-      "sourceId": "Item.HePne854VLqVSgFW",
-      "hash": "128eb698f864f3a80f13b96a9727479364862ea6"
-    },
-    "cf": {
-      "id": "temp_ovon30cu8t"
-    },
-    "spellTemplateManager": {
-      "stmData": {
-        "ignoreDuration": false,
-        "spellTexture": "",
-        "useTexture": false,
-        "alpha": 50,
-        "coneOrigin": 1,
-        "loopAnimations": true
-      }
-    },
-    "exportSource": {
-      "world": "test",
-      "system": "dnd5e",
-      "coreVersion": "9.269",
-      "systemVersion": "1.6.3"
-    }
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.291",
+    "createdTime": 1671193286532,
+    "modifiedTime": 1671739561487,
+    "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

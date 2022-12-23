@@ -1,16 +1,16 @@
 {
-  "name": "Wrath of the Storm",
+  "name": "Channel Divinity: Radiance of the Dawn",
   "type": "feat",
-  "img": "icons/magic/lightning/bolts-forked-large-orange.webp",
+  "img": "icons/magic/holy/barrier-shield-winged-blue.webp",
   "effects": [],
   "flags": {
     "ddbimporter": {
-      "id": "1018",
+      "id": "53344",
       "entityTypeId": "222216831",
-      "componentId": 149,
+      "componentId": 138,
       "componentTypeId": 12168134,
       "class": "Cleric",
-      "subclass": "Tempest Domain",
+      "subclass": "Light Domain",
       "dndbeyond": {
         "levelScale": null,
         "levelScales": [],
@@ -21,7 +21,7 @@
           }
         ]
       },
-      "importId": "sqffc9kk1ucpsf5y",
+      "importId": "cjwzq7lf48igj2ev",
       "ignoreIcon": false,
       "ignoreItemImport": false,
       "retainResourceConsumption": true
@@ -35,12 +35,9 @@
         "text": "Cleric"
       }
     },
-    "link-item-resource-5e": {
-      "resource-link": ""
-    },
     "scene-packer": {
-      "hash": "098b061e75706819b634868f5bedeee27f7a7ec3",
-      "sourceId": "Item.Etup7yiq6E7lMV3e"
+      "hash": "664e3ab71a0b3f569b23dea8e4e71bece5e2a1ef",
+      "sourceId": "Item.bko6opAomW9diM8u"
     },
     "spellTemplateManager": {
       "stmData": {
@@ -85,7 +82,7 @@
       "sorting": "l"
     },
     "core": {
-      "sourceId": "Item.Fvl2VJyfemTViUHw"
+      "sourceId": "Item.BvxA3rBt3nvjgMti"
     },
     "exportSource": {
       "world": "5e-test-world",
@@ -96,35 +93,35 @@
   },
   "system": {
     "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.0 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
       "chat": "",
       "unidentified": ""
     },
-    "source": "PHB p62",
+    "source": "PHB p61",
     "activation": {
-      "type": "reaction",
+      "type": "action",
       "cost": 1,
       "condition": ""
     },
     "duration": {
       "value": null,
-      "units": "inst"
+      "units": ""
     },
     "target": {
-      "value": 1,
+      "value": null,
       "width": null,
       "units": "",
       "type": "enemy"
     },
     "range": {
-      "value": 5,
+      "value": 30,
       "long": null,
       "units": "ft"
     },
     "uses": {
-      "value": 2,
-      "max": "2",
-      "per": "lr",
+      "value": null,
+      "max": "",
+      "per": "",
       "recovery": ""
     },
     "consume": {
@@ -143,19 +140,20 @@
     "damage": {
       "parts": [
         [
-          "2d8[lightning]",
-          "lightning"
+          "2d10[radiant] + @classes.cleric.levels",
+          "radiant"
         ]
       ],
-      "versatile": ""
+      "versatile": "",
+      "value": ""
     },
     "formula": "",
     "save": {
-      "ability": "dex",
+      "ability": "con",
       "dc": null,
       "scaling": "spell"
     },
-    "requirements": "Cleric: Tempest",
+    "requirements": "Cleric: Light",
     "recharge": {
       "value": null,
       "charged": false
@@ -166,8 +164,8 @@
     "systemId": "dnd5e",
     "systemVersion": "2.0.3",
     "coreVersion": "10.291",
-    "createdTime": 1671193286454,
-    "modifiedTime": 1671735747488,
+    "createdTime": 1671193286534,
+    "modifiedTime": 1671735624738,
     "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }

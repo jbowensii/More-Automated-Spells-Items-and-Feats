@@ -19,16 +19,12 @@ v1.0 May 7 2022  jbowens #0415 (Discord) https://github.com/jbowensii/More-Autom
 // make sure the attempted hit was made with a spell attack of some type
 if (!["msak", "rsak", "save"].includes(args[0].item.data.actionType)) return;
 
-console.log("MACRO TEST | MACROPASS %s", args[0].macroPass);
-
 if (args[0].macroPass === "preItemRoll") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;
     let itemData = theItem.data.data;
     const pcActor = token.actor.data.data;
     const targets = args[0].targets;
-
-    //console.log("MACRO TEST | PRE ITEM workflow %O",workflow);
 
     // setup buttons with all elemental types known on the character sheet 
     let buttonData = {};
@@ -104,9 +100,6 @@ if (args[0].macroPass === "preItemRoll") {
     }
 
     // remember original damage and damage type so we can put them back later
-    //console.log("MACRO TEST | THE ITEM: %O",theItem);
-    console.log("MACRO TEST | ITEM DATA: %O", itemData);
-
     // strip damage type from the originalDamage if it exists and add "min2" and the new damage type
     let justDice = itemData.damage.parts[0][0];
     let index = justDice.indexOf('[');
@@ -115,10 +108,6 @@ if (args[0].macroPass === "preItemRoll") {
     let newScalingDamage = itemData.scaling.formula + "min2";
 
     // set the item with the new values, remember top add min2 to scaling as well
-    //itemData.damage.parts[0][0] = newDamage;
-    //itemData.damage.parts[0][1] = newDamageType;
-    //itemData.scaling.formula    = newScalingDamage;
-
     await setProperty(workflow, "originalDamage", itemData.damage.parts[0][0]);
     await setProperty(workflow, "originalDamageType", itemData.damage.parts[0][1]);
     await setProperty(workflow, "originalScalingDamage", itemData.scaling.formula);
@@ -130,8 +119,6 @@ if (args[0].macroPass === "preItemRoll") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;
     let itemData = theItem.data.data;
-    console.log("MACRO TEST | TEMPLATE ITEM DATA: %O", itemData);
-    // console.log("MACRO TEST | TEMPLATE workflow %O",workflow);
 
     // set the item with the new values, remember top add min2 to scaling as well
     itemData.damage.parts[0][0] = getProperty(workflow, "newDamage");
@@ -142,8 +129,6 @@ if (args[0].macroPass === "preItemRoll") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;
     let itemData = theItem.data.data;
-    console.log("MACRO TEST | TEMPLATE ITEM DATA: %O", itemData);
-    //console.log("MACRO TEST | TEMPLATE workflow %O",workflow);
 
     // set the item with the new values, remember top add min2 to scaling as well
     itemData.damage.parts[0][0] = getProperty(workflow, "newDamage");
@@ -154,43 +139,31 @@ if (args[0].macroPass === "preItemRoll") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;
     let itemData = theItem.data.data;
-    console.log("MACRO TEST | TEMPLATE ITEM DATA: %O", itemData);
-    //console.log("MACRO TEST | TEMPLATE workflow %O",workflow);
 
 } else if (args[0].macroPass === "preCheckHits") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;
     let itemData = theItem.data.data;
-    console.log("MACRO TEST | TEMPLATE ITEM DATA: %O", itemData);
-    //console.log("MACRO TEST | TEMPLATE workflow %O",workflow);
 
 } else if (args[0].macroPass === "postAttackRoll") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;
     let itemData = theItem.data.data;
-    console.log("MACRO TEST | TEMPLATE ITEM DATA: %O", itemData);
-    //console.log("MACRO TEST | TEMPLATE workflow %O",workflow);
 
 } else if (args[0].macroPass === "preDamageRoll") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;
     let itemData = theItem.data.data;
-    console.log("MACRO TEST | TEMPLATE ITEM DATA: %O", itemData);
-    //console.log("MACRO TEST | TEMPLATE workflow %O",workflow);
 
 } else if (args[0].macroPass === "postDamageRoll") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;
     let itemData = theItem.data.data;
-    console.log("MACRO TEST | TEMPLATE ITEM DATA: %O", itemData);
-    //console.log("MACRO TEST | TEMPLATE workflow %O",workflow);
 
 } else if (args[0].macroPass === "preSave") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const theItem = MidiQOL.Workflow.getWorkflow(args[0].uuid).item;
     let itemData = theItem.data.data;
-    console.log("MACRO TEST | TEMPLATE ITEM DATA: %O", itemData);
-    //console.log("MACRO TEST | TEMPLATE workflow %O",workflow);
 
 } else if (args[0].macroPass === "postSave") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);

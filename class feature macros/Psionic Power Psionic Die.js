@@ -6,12 +6,12 @@ This energy is represented by your Psionic Energy dice, which are each a d6.
 You have a number of these dice equal to twice your proficiency bonus, and 
 they fuel various psionic powers you have, which are detailed below.
 
-v1.0 May 7 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
+v2.0 December 18 2022 jbowens #0415 (Discord) https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git 
 *****/
 
 if (args[0] === "on") {
     const pcActor = await fromUuid(args[args.length - 1].actorUuid);
-    let rogueLevel = testClass(pcActor, "rogue", "Soulknife", 3)?.levels ?? 0;
+    let rogueLevel = testClass(pcActor, "rogue", "soulknife", 3)?.system.levels ?? 0;
     if (!rogueLevel) {
         ui.notifications.error("You are not a Rogue: Soulknife of at least 3rd level.");
         return;
@@ -31,10 +31,10 @@ if (args[0] === "on") {
 // Test PC Class, Subclass and Class Level
 // RETURN the class object (TRUE) or null (FALSE)
 function testClass(testActor, className, subClassName, levels) {
-    let theClass = testActor.data.data.classes[className];
+    let theClass = testActor.classes.rogue;
     if (theClass) {
-        if ((levels > 0) && (theClass.levels >= levels)) {
-            if (subClassName === null || (theClass.subclass === subClassName)) {
+        if ((levels > 0) && (theClass.system.levels >= levels)) {
+            if (subClassName === null || (theClass.system.subclass.identifier === subClassName)) {
                 return theClass;
             }
         }

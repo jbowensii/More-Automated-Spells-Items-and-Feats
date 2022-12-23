@@ -2,72 +2,6 @@
   "name": "Maneuvers: Menacing Attack",
   "type": "feat",
   "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
-  "data": {
-    "description": {
-      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p>&nbsp;</p>\n<details>\n<summary><strong>USAGE: </strong> <span style=\"color: #169179;\">ACTIVATE AFTER THE ATTACK</span></summary>\n<p>This Maneuver must be activated AFTER the character makes an attack and knows that a HIT was successful.&nbsp; This will activate any bonuses, saves, effects, and extra damage to the TARGET.&nbsp; A <span style=\"text-decoration: underline; color: #236fa1;\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p>&nbsp;</p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
-      "unidentified": ""
-    },
-    "source": "PHB p74",
-    "activation": {
-      "type": "special",
-      "cost": null,
-      "condition": ""
-    },
-    "duration": {
-      "value": null,
-      "units": "inst"
-    },
-    "target": {
-      "value": 1,
-      "width": null,
-      "units": "",
-      "type": "creature"
-    },
-    "range": {
-      "value": null,
-      "long": null,
-      "units": ""
-    },
-    "uses": {
-      "value": null,
-      "max": "",
-      "per": ""
-    },
-    "consume": {
-      "type": "attribute",
-      "target": "",
-      "amount": 1
-    },
-    "ability": "str",
-    "actionType": "save",
-    "attackBonus": "0",
-    "chatFlavor": "",
-    "critical": {
-      "threshold": null,
-      "damage": ""
-    },
-    "damage": {
-      "parts": [
-        [
-          "0 + @flags.dae.SuperiorityDie[Superiority]",
-          ""
-        ]
-      ],
-      "versatile": ""
-    },
-    "formula": "",
-    "save": {
-      "ability": "wis",
-      "dc": null,
-      "scaling": "str"
-    },
-    "requirements": "Fighter: Battlemaster",
-    "recharge": {
-      "value": null,
-      "charged": false
-    },
-    "attunement": 0
-  },
   "effects": [
     {
       "_id": "z6c1xhx4agrwbd3z",
@@ -76,21 +10,26 @@
           "key": "flags.midi-qol.disadvantage.attack.all",
           "mode": 0,
           "value": "1",
-          "priority": "0"
+          "priority": 0
         },
         {
           "key": "flags.midi-qol.disadvantage.ability.check.all",
           "mode": 0,
           "value": "1",
-          "priority": "0"
+          "priority": 0
         }
       ],
       "disabled": false,
       "duration": {
         "startTime": null,
-        "turns": 1
+        "turns": 1,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "startRound": null,
+        "startTurn": null
       },
-      "icon": "modules/dfreds-convenient-effects/images/frightened.svg",
+      "icon": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
       "label": "Frightened",
       "origin": "Actor.67GUmdTadYmGXD8W.Item.uIJSbACjp9yNcSdf",
       "transfer": false,
@@ -103,7 +42,9 @@
           "durationExpression": "",
           "macroRepeat": "none",
           "specialDuration": [],
-          "transfer": false
+          "transfer": false,
+          "selfTarget": false,
+          "selfTargetAlways": false
         },
         "ActiveAuras": {
           "isAura": false,
@@ -117,13 +58,20 @@
           "displayTemp": false,
           "hostile": false,
           "onlyOnce": false
+        },
+        "effective-transferral": {
+          "transferBlock": {
+            "button": false,
+            "chat": false,
+            "displayCard": false
+          },
+          "transferrable": {
+            "self": true,
+            "target": true
+          }
         }
       },
-      "tint": null,
-      "selectedKey": [
-        "flags.midi-qol.disadvantage.attack.all",
-        "flags.midi-qol.disadvantage.ability.check.all"
-      ]
+      "tint": null
     }
   ],
   "flags": {
@@ -171,7 +119,10 @@
       "concentration": false,
       "magicdam": false,
       "magiceffect": false,
-      "toggleEffect": false
+      "toggleEffect": false,
+      "autoFailFriendly": false,
+      "offHandWeapon": false,
+      "ignoreTotalCover": false
     },
     "magicitems": {
       "enabled": false,
@@ -210,8 +161,8 @@
       "isFavorite": true
     },
     "scene-packer": {
-      "hash": "cc38c65496f8a24758fd84f340bb931c3171cd45",
-      "sourceId": "Item.g4DTflm66Vux1lKT"
+      "hash": "46fb8b11470ed9817699f0e88aa79679ebb633ee",
+      "sourceId": "Item.oxZRFhfPKJyOgAOT"
     },
     "core": {
       "sourceId": "Item.bpSu08y0CydFPHEi"
@@ -222,10 +173,86 @@
       "color": "#000000"
     },
     "exportSource": {
-      "world": "test",
+      "world": "5e-test-world",
       "system": "dnd5e",
-      "coreVersion": "9.269",
-      "systemVersion": "1.6.1"
+      "coreVersion": "10.291",
+      "systemVersion": "2.0.3"
     }
+  },
+  "system": {
+    "description": {
+      "value": "<p>[PLACE YOUR DESCRIPTION HERE]</p>\n<p> </p>\n<details>\n<summary><strong>USAGE: </strong> <span style=\"color:#169179\">ACTIVATE AFTER THE ATTACK</span></summary>\n<p>This Maneuver must be activated AFTER the character makes an attack and knows that a HIT was successful.  This will activate any bonuses, saves, effects, and extra damage to the TARGET.  A <span style=\"text-decoration:underline;color:#236fa1\">Superiority Die </span>will be expended immediately.</p>\n</details>\n<p> </p>\n<details>\n<summary><strong>SETUP:</strong></summary>\n<p>Please remember to link the use of this ability to a character sheet resource under the item details Resource Consumption dropdown.</p>\n<img src=\"https://user-images.githubusercontent.com/76136571/161775726-fb67bb97-5fd1-45c5-8301-bbb17e2d0f1d.png\" width=\"569\" /></details>\n<p> </p>\n<details>\n<summary><strong>VERSION INFO</strong></summary>\n<p>v1.2 May 7 2022</p>\n<p>jbowens #0415 (Discord)</p>\n<p>https://github.com/jbowensii/More-Automated-Spells-Items-and-Feats.git</p>\n</details>",
+      "chat": "",
+      "unidentified": ""
+    },
+    "source": "PHB p74",
+    "activation": {
+      "type": "special",
+      "cost": null,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": "inst"
+    },
+    "target": {
+      "value": 1,
+      "width": null,
+      "units": "",
+      "type": "creature"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": ""
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": "",
+      "recovery": ""
+    },
+    "consume": {
+      "type": "attribute",
+      "target": "",
+      "amount": 1
+    },
+    "ability": "str",
+    "actionType": "save",
+    "attackBonus": "0",
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [
+        [
+          "0 + @flags.dae.SuperiorityDie[Superiority]",
+          ""
+        ]
+      ],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "wis",
+      "dc": null,
+      "scaling": "str"
+    },
+    "requirements": "Fighter: Battlemaster",
+    "recharge": {
+      "value": null,
+      "charged": false
+    },
+    "attunement": 0
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.0.3",
+    "coreVersion": "10.291",
+    "createdTime": 1671193287984,
+    "modifiedTime": 1671735997800,
+    "lastModifiedBy": "paMZuKDupk0GHKFn"
   }
 }
