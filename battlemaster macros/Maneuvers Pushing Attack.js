@@ -21,6 +21,7 @@ if (args[0].macroPass === "postSave") {
     // setup common variables
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].uuid);
     const target = await fromUuid(args[0].targetUuids[0]);
+    const targetDoc = args[0].hitTargets[0];
     const diagonalRule = canvas.grid.diagonRule;
 
     // If save failed
@@ -66,8 +67,9 @@ if (args[0].macroPass === "postSave") {
         canvas.grid.diagonalRule = diagonalRule;
 
         // update the canvas to move the token
-        //await target.document.update(canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y));
-        await target.update(canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y));
+        const newCenter = canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y);
+        const mutationData = { token: {x: newCenter.x, y: newCenter.y}};
+        await warpgate.mutate(targetDoc, mutationData, {}, {permanent: true});
     }
 }
 return;

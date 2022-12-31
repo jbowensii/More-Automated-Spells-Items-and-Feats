@@ -41,7 +41,6 @@ if (args[0].macroPass === "preActiveEffects") {
     }
 
     // Roll superiority die for AC Bonus result
-    //const surge = await new Roll("1d20").evaluate({async: true});
     const acBonusRoll = await(new Roll(`${superiorityDie}`)).evaluate({async: true});
 
     //prompt for who gets the AC bonus
@@ -103,26 +102,30 @@ async function SwapTokens(pcMoveToken, targetMoveToken, thisCanvas) {
     thisCanvas.grid.diagonalRule = "EUCL";
     const diagonalRule = canvas.grid.diagonRule;
 
-    // Move Actor to OLD Target Location
+    // Move Actor to Target Location
     let travelRay = new Ray(pcCenter, targetCenter); //  create a ray to measure the angle to travel
     let angle = travelRay.angle;
     travelRay = Ray.fromAngle(pcMoveToken.x, pcMoveToken.y, angle, travelRay.distance);
     snappedPosition = canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y);
     canvas.grid.diagonalRule = diagonalRule;
-    await pcMoveToken.document.update(canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y));
+    // move Actor token
+    const mutationActorData = { token: {x: snappedPosition.x, y: snappedPosition.y}};
+    let actorDoc = token.document;
+    await warpgate.mutate(actorDoc, mutationActorData, {}, {permanent: true});
 
-    // Move Target to OLD Actor Location
+    // Move Target to Actor Location
     travelRay = new Ray(targetCenter, pcCenter); //  create a ray to measure the angle to travel
     angle = travelRay.angle;
     travelRay = Ray.fromAngle(targetMoveToken.x, targetMoveToken.y, angle, travelRay.distance);
     snappedPosition = canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y);
     canvas.grid.diagonalRule = diagonalRule;
-    await targetMoveToken.update(canvas.grid.getSnappedPosition(travelRay.B.x, travelRay.B.y));
+    // move Target token 
+    const mutationTargetData = { token: {x: snappedPosition.x, y: snappedPosition.y}};
+    let targetDoc = args[0].hitTargets[0];
+    await warpgate.mutate(targetDoc, mutationTargetData, {}, {permanent: true});
 
     return;
 }
-
-//---------------------------------- MY FUNCTIONS -------------------------------------------
 
 // Increment available resource
 async function incrementResource(testActor, resourceName, numValue) {
