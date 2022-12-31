@@ -11,6 +11,9 @@ if (args[0].macroPass === "postDamageRoll") {
     const actorUuid = workflow.tokenUuid;
     const actorToken = canvas.tokens.get(workflow.tokenId);
     const thisItem = actorToken.actor.items.find(i => i.name === "Piercer");
+    let baseDie = null;
+    let lowestDieRoll = 0;
+    let choice = false; 
 
     // make sure the attempted hit was made with a weapon attack
     if (!["mwak", "rwak"].includes(args[0].item.system.actionType)) return;
@@ -18,9 +21,7 @@ if (args[0].macroPass === "postDamageRoll") {
     // damage type must be "piercing"    
     if (workflow.defaultDamageType != "piercing") return;
 
-    // breakdown weapon damage to find the base die, if there was a critical, and the lowest die roll
-    let baseDie = null;
-    let lowestDieRoll = 0;
+    // breakdown weapon damage to find the base weapon damage die and the lowest die roll
     for (let i = 0; i < workflow.damageRoll.terms.length; i++)
         if (workflow.damageRoll.terms[i]?.faces) {
             baseDie = "1d" + workflow.damageRoll.terms[i].faces;
@@ -29,45 +30,55 @@ if (args[0].macroPass === "postDamageRoll") {
                 if (workflow.damageRoll.terms[i].results[j].result < lowestDieRoll) lowestDieRoll = workflow.damageRoll.terms[i].results[j].result;
         }
 
-    // create a dialog and prompt to re-roll lowest die
-    let dialog = new Promise((resolve) => {
-        new Dialog({
-            // localize this text
-            title: "Piercer Feat:",
-            content: `<p>would you like to re-roll your lowest damage die?</p><p>Lowest Die Roll: ${lowestDieRoll}</p>`,
-            buttons: {
-                one: {
-                    icon: '<p> </p><img src = "icons/skills/ranged/arrow-flying-broadhead-metal.webp" width="60" height="60"></>',
-                    label: "<p>Yes</p>",
-                    callback: () => resolve(true)
-                },
-                two: {
-                    icon: '<p> </p><img src = "icons/svg/cancel.svg" width="60" height="60"></>',
-                    label: "<p>No</p>",
-                    callback: () => { resolve(false) }
-                }
-            },
-            default: "two"
-        }).render(true);
-    });
-    let choice = await dialog;
+    // check if piercer reroll was already used this turn, if true skip dialog prompt 
+    if (game.combat) {
+        const combatTime = `${game.combat.id}-${game.combat.round + game.combat.turn /100}`;
+        const lastTime = actor.getFlag("midi-qol", "Piercer reRoll");
+        
+        if (combatTime === lastTime) {
+            console.log("Piercer reRoll: Already done a Piercer reRoll this turn");
+        }
+        else {
+            // create a dialog and prompt to re-roll lowest die
+            let dialog = new Promise((resolve) => {
+                new Dialog({
+                    // localize this text
+                    title: "Piercer Feat:",
+                    content: `<p>would you like to re-roll your lowest damage die?</p><p>Lowest Die Roll: ${lowestDieRoll}</p>`,
+                    buttons: {
+                        one: {
+                            icon: '<p> </p><img src = "icons/skills/ranged/arrow-flying-broadhead-metal.webp" width="60" height="60"></>',
+                            label: "<p>Yes</p>",
+                            callback: () => resolve(true)
+                        },
+                        two: {
+                            icon: '<p> </p><img src = "icons/svg/cancel.svg" width="60" height="60"></>',
+                            label: "<p>No</p>",
+                            callback: () => { resolve(false) }
+                        }
+                    },
+                    default: "two"
+                }).render(true);
+            });
+            choice = await dialog;
+        }
+    }
 
-    if (choice) await setProperty(workflow, "ReplaceRoll", choice);
+    await setProperty(workflow, "ReplaceRoll", choice);
     await setProperty(workflow, "LowestRoll", lowestDieRoll);
     await setProperty(workflow, "BaseDie", baseDie);
 
-    // trigger BonusDamage to apply the extra damage / adjustments outside of the normal damage roll
-    let effectData = {
-        label: "Piercer reRoll",
-        changes: [{ key: "flags.dnd5e.DamageBonusMacro", mode: 0, value: `ItemMacro.Piercer`, priority: 20 }],
-        icon: thisItem.img,
-        origin: thisItem.uuid,
-        duration: { turns: 1 }
-    };
-    await MidiQOL.socket().executeAsGM("createEffects", { actorUuid: actorUuid, effects: [effectData] });
+    if (game.combat) {
+        const combatTime = `${game.combat.id}-${game.combat.round + game.combat.turn /100}`;
+        const lastTime = actor.getFlag("midi-qol", "Piercer reRoll");
+        if (combatTime !== lastTime) {
+           await actor.setFlag("midi-qol", "Piercer reRoll", combatTime);
+        }
+      }
     return;
+} 
 
-} else if (args[0].tag === "DamageBonus") {
+if (args[0].tag === "DamageBonus") {
     const workflow = MidiQOL.Workflow.getWorkflow(args[0].itemUuid);
     const actorUuid = workflow.tokenUuid;
     const actorToken = canvas.tokens.get(workflow.tokenId);
@@ -77,39 +88,43 @@ if (args[0].macroPass === "postDamageRoll") {
     let choice = await getProperty(workflow, "ReplaceRoll");
     let lowestDieRoll = await getProperty(workflow, "LowestRoll");
     let baseDie = await getProperty(workflow, "BaseDie");
+    
+    //let diff = await getProperty(workflow, "Difference");
     let reRoll = null;
+    let critRoll = null;
 
-    // remove extra damage effect 
-    let effect = await findEffect(actorToken.actor, "Piercer reRoll");
-    // await MidiQOL.socket().executeAsGM("removeEffects", { actorUuid: actorUuid, effects: [effect.id] });
-
-    // test if critical is true, apply extra damage die
+    // test if critical is true, roll extra damage die
     if (workflow?.isCritical) {
-        reRoll = await new Roll(baseDie).evaluate({async: true});
-        new MidiQOL.DamageOnlyWorkflow(targetActor, targetToken, reRoll.total, "piercing", [targetToken], reRoll, { flavor: "Piercer Feat: Critical Extra Damage", itemData: thisItem, itemCardId: "new" });
+        critRoll = await new Roll(baseDie).evaluate({async: true});
     }
 
     // if reRoll was selected figure out the difference and apply adjustment to the target
     if (choice) {
         reRoll = await new Roll(baseDie).evaluate({async: true});
-        if (reRoll.result < lowestDieRoll) {
+        let difference = reRoll.result - lowestDieRoll;
+        if (difference < 0) {
             // healback difference
-            let difference = lowestDieRoll - reRoll.result;
-            return { damageRoll: `${difference}[healing]`, flavor: "Piercer Feat: ReRoll Adjustment" }
-        } else {
+            // let difference = lowestDieRoll - reRoll.result;
+            //await setProperty(workflow, "Difference", difference);
+            if (workflow?.isCritical)
+                return { damageRoll: `${difference}[healing] + ${critRoll.total}[piercing]`, flavor: "Piercer Feat: ReRoll was lower + critical bonus" }
+            else 
+                return { damageRoll: `${difference}[healing]`, flavor: "Piercer Feat: ReRoll was lower" }
+        } else if (difference > 0) {
             // damage difference
-            let difference = reRoll.result - lowestDieRoll;
-            return { damageRoll: `${difference}[piercing]`, flavor: "Piercer Feat: ReRoll Adjustment" }
+            // let difference = reRoll.result - lowestDieRoll;
+            //await setProperty(workflow, "Difference", difference);
+            if (workflow?.isCritical)
+                return { damageRoll: `${difference}[piercing] + ${critRoll.total}[piercing]`, flavor: "Piercer Feat: ReRoll was higher + critical bonus" }
+            else 
+                return { damageRoll: `${difference}[piercing]`, flavor: "Piercer Feat: ReRoll was higher" }
         }
+    }  
+    else {    // add critical damage if it is a critcal reguardless of reroll
+        if (workflow?.isCritical)
+            return { damageRoll: `${critRoll.total}[piercing]`, flavor: "Piercer Feat: Critical bonus" }
+        else 
+            return;   
     }
     return;
-}
-
-//---------------------------------- MY FUNCTIONS -------------------------------------
-
-// Function to test for an effect
-async function findEffect(target, effectName) {
-    let effectUuid = null;
-    effectUuid = target?.effects.find(ef => ef.label === effectName);
-    return effectUuid;
 }
