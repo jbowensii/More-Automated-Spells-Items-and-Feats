@@ -1,6 +1,16 @@
 # More Automated Spells Items and Feats
 FoundryVTT More Automated Spells Items and Feats (MASIF amounts of automation) Module
 
+
+
+
+NEW UPDATE: I have been talking to Chris (Chris#8375 on discord) great guy and a fantastic module... when he finishes absorbing the automations in my module I will be closing this module down.  
+
+https://github.com/chrisk123999/chris-premades
+
+
+
+
 Version 2.0.0
 
 Updates for D&D 5e 2.0.3 and FoundryVTT V10 Complete
