@@ -1,8 +1,6 @@
 ****************************************************************************************
-* NEW UPDATE: I have been talking to Chris (Chris#8375 on discord) great guy and a     
-* fantastic module... when he finishes absorbing the automations in my module          
-* I will be closing this module down.                                                  
-* https://github.com/chrisk123999/chris-premades                                       
+* NEW UPDATE: I have been talking to Chris (Chris#8375 on discord) great guy and a fantastic module...  
+* I will be closing this module down and highly suggest you migrate to Chir's module... https://github.com/chrisk123999/chris-premades                                   
 ****************************************************************************************
 
 # More Automated Spells Items and Feats
